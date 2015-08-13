@@ -177,34 +177,34 @@ function roleSelect()
 }
 
 function getNewParentWin(){
+	taskTreeNode={};
 	var func=function(id){
 		taskTreeNode.name=Edo.get('name').text;
 		taskTreeNode.des=Edo.get('des').text;
 		taskTreeNode.url=Edo.get('url').text;
 		taskTreeNode.code=Edo.get('code').text;
-		taskTreeNode.orderid=Edo.get('orderid').text;
-		alert(taskTreeNode.orderid)
 		var r=role.getSelected();
 		taskTreeNode.role=r.id;
 		var data= cims201.utils.getData(basepathh+'/tasktree/tasktree!saveTaskTreeNode.action',{taskTreeNode:taskTreeNode});
 	    new roleSelect();
 	    taskTreeNode={};
+	    
 		  
 		
  	}
 	    var content=new departNodedef(true,null);
 	    var toolbar=new gettoolbar(null,func);
- 	    var win=cims201.utils.getWin(400,320,'填写根节点信息',[content,toolbar]);
+ 	    var win=getmywin(400,320,'填写根节点信息',[content,toolbar]);
 	    win.show('center', 'middle', true);
 	
 }
 function getNewChildWin(){
+	taskTreeNode={};
 	var func=function(id){
 		taskTreeNode.name=Edo.get('name').text;
 		taskTreeNode.des=Edo.get('des').text;
 		taskTreeNode.url=Edo.get('url').text;
 		taskTreeNode.code=Edo.get('code').text;
-		taskTreeNode.orderid=Edo.get('orderid').text;
 		var r=tasktree.getSelected();
 		taskTreeNode.parent=r.id;
 		var r2=role.getSelected();
@@ -217,17 +217,17 @@ function getNewChildWin(){
  	}
 	    var content=new departNodedef(false,null);
 	    var toolbar=new gettoolbar(null,func);
- 	    var win=cims201.utils.getWin(400,320,'填写子节点信息',[content,toolbar]);
+ 	    var win=getmywin(400,320,'填写子节点信息',[content,toolbar]);
 	    win.show('center', 'middle', true);
 	
 }
 function getModifyNodeWin(r){
+	taskTreeNode={};
 	var func=function(id){
 		taskTreeNode.name=Edo.get('name').text;
 		taskTreeNode.des=Edo.get('des').text;
 		taskTreeNode.url=Edo.get('url').text;
 		taskTreeNode.code=Edo.get('code').text;
-		taskTreeNode.orderid=Edo.get('orderid').text;
 		taskTreeNode.id=r.id;
 		var data= cims201.utils.getData(basepathh+'/tasktree/tasktree!saveTaskTreeNode.action',{taskTreeNode:taskTreeNode});
 		new roleSelect();
@@ -238,7 +238,7 @@ function getModifyNodeWin(r){
 	    var content=new departNodedef(false,r);
 	   // Edo.get('name').set('text',r.name);
 	    var toolbar=new gettoolbar(null,func);
- 	    var win=cims201.utils.getWin(400,320,'修改部门信息',[content,toolbar]);
+ 	    var win=getmywin(400,320,'修改信息',[content,toolbar]);
 	    win.show('center', 'middle', true);
 	    
 	
@@ -249,27 +249,334 @@ function departNodedef(isParent,r){
 	    {type: 'ct',id:'nodewincontent',width: '100%',height:'70%',border: [0,0,0,0],padding: [0,0,0,0],layout: 'vertical', autoChange: true,
        	    children: [
        	    //				           
-       	    {	type : 'formitem',label : '模块名称:',labelWidth : 150,labelAlign : 'right',
-       	    children : [{type : 'text',id:'name'}]
+       	    {	type : 'formitem',label : '模块名称:',labelWidth : 150,width:'100%',labelAlign : 'right',
+       	    children : [{type : 'text',id:'name',width:200}]
        	    },
-       	    {	type : 'formitem',label : '执行url:',labelWidth : 150,labelAlign : 'right',
-           	    children : [{type : 'text',id:'url'}]
+       	    {	type : 'formitem',label : '执行url:',labelWidth : 150,width:'100%',labelAlign : 'right',
+           	    children : [{type : 'text',id:'url',width:200}]
        	    },
-       	    {	type : 'formitem',label : '编码:',labelWidth : 150,labelAlign : 'right',
-           	    children : [{type : 'text',id:'code'}]
+       	    {	type : 'formitem',label : '编码:',labelWidth : 150,width:'100%',labelAlign : 'right',
+           	    children : [{type : 'text',id:'code',width:200}]
        	    },
-       	    {	type : 'formitem',label : '执行序号:',labelWidth : 150,labelAlign : 'right',
-           	    children : [{type : 'text',id:'orderid'}]
+       	    {	type : 'formitem',label : '输入参数',labelWidth : 150,width:'100%',labelAlign : 'right',
+           	    children : [{type : 'text',id:'inputparam',width:200},
+           	         	{
+					type : 'button',
+					text : '编辑输入参数',
+					onclick : function(e) {
+						var box = Edo.create({
+									type : 'box',
+									width : '100%',
+									height : '100%',
+									layout : 'vertical',
+									children : [ 
+									            {type : 'box',
+													width : '100%',
+													height : '30%',
+													layout : 'horizontal',
+													padding : [ 0, 0,0, 0 ],
+													border:[ 0, 0,0, 0 ],
+													children : [ 
+															{	type : 'formitem',label : '输入参数:',labelWidth : 80,width:'40%',labelAlign : 'right',
+																    children : [{type : 'text',id:'paramname'}]
+															   },
+																{	type : 'formitem',label : '说明:',labelWidth : 80,width:'40%',labelAlign : 'right',
+															   	    children : [{type : 'text',id:'paramdescri'}]
+															   },
+																{
+																type : 'button',
+																text : '添加',
+																onclick : function(e) {
+																	var paramname = Edo.get(
+																	'paramname').text;
+																	var paramdescri = Edo.get(
+																	'paramdescri').text;
+																	Edo.get(
+																	'paramname').set('text','');
+																	Edo.get(
+																	'paramdescri').set('text','');
+																	inputtable.data.insert(0, {name:paramname,descri:paramdescri});
+																	 
+																}
+																}
+									            ]},
+									            {
+													type : 'button',
+													text : '删除',
+													onclick : function(e) {
+														var rows = Edo.get(
+														'inputtable')
+														.getSelecteds();
+														for ( var i = 0; i < rows.length; i++) {
+															inputtable.data
+																	.remove(rows[i]);
+														}
+														 
+													}
+												},
+								           		{
+													id : 'inputtable',
+													type : 'table',
+													width : '100%',
+													height : '100%',
+													padding : [ 0, 0,0, 0 ],
+													border:[ 0, 0,0, 0 ],
+													rowSelectMode : 'multi',
+													columns : [
+															{
+																headerText : '',
+																align : 'center',
+																width : 10,
+																enableSort : false,
+																enableDragDrop : true,
+																enableColumnDragDrop : false,
+																style : 'cursor:move;',
+																renderer : function(
+																		v,
+																		r,
+																		c,
+																		i,
+																		data,
+																		t) {
+																	return i + 1;
+																}
+															},
+															Edo.lists.Table
+																	.createMultiColumn(),
+															{
+																header : '名称',
+																dataIndex : 'name',
+																width : 200,
+																headerAlign : 'center',
+																align : 'center'
+															},
+															{
+																header : '说明',
+																dataIndex : 'descri',
+																width : 200,
+																headerAlign : 'center',
+																align : 'center'
+															}
+															]
+												
+												}
+							               	    
+							               	    
+								           	    
+						             ]
+								});
+						inputtable.set('data',taskTreeNode.Inparamlist);
+						var func = function() {
+							var rows = Edo.get(
+									'inputtable')
+									.data.source;
+							var inputparams = '';
+							var Inparamlist = new Array();
+							for ( var i = 0; i < rows.length; i++) {
+								var paramobj={};
+								paramobj.name=rows[i].name;
+								paramobj.descri=rows[i].descri;
+								Inparamlist.push(paramobj);
+								inputparams = inputparams
+										+ rows[i].name+':'+rows[i].descri
+										+ ";"
+							}
+							inputparams = inputparams
+									.substr(0,inputparams.length - 1)
+							Edo.get('inputparam').set(
+									'text', inputparams);
+							taskTreeNode.Inparamlist=Inparamlist;
+						}
+						var toolbar = new gettoolbar(null,
+								func);
+						var winfm = getmywin(600, 400,
+								'编辑输入参数', [ box, toolbar ]);
+						winfm.show('center', 'middle',
+										true);
+					}
+				} ]
        	    },
-       	    {	type : 'formitem',label : '模块说明:',labelWidth : 150,labelAlign : 'right',
+       	    {	type : 'formitem',label : '输出参数',labelWidth : 150,width:'100%',labelAlign : 'right',
+           	    children : [{type : 'text',id:'outputparam',width:200},
+           	             {
+					type : 'button',
+					text : '编辑输出参数',
+					onclick : function(e) {
+						var box = Edo.create({
+									type : 'box',
+									width : '100%',
+									height : '100%',
+									layout : 'vertical',
+									padding : [ 0, 0,0, 0 ],
+									border:[ 0, 0,0, 0 ],
+									children : [ 
+									            {type : 'box',
+													width : '100%',
+													height : '30%',
+													padding : [ 0, 0,0, 0 ],
+													border:[ 0, 0,0, 0 ],
+													layout : 'horizontal',
+													children : [ 
+															{	type : 'formitem',label : '输出参数:',labelWidth : 80,width:'40%',labelAlign : 'right',
+																    children : [{type : 'text',id:'paramname'}]
+															   },
+																{	type : 'formitem',label : '说明:',labelWidth : 80,width:'40%',labelAlign : 'right',
+															   	    children : [{type : 'text',id:'paramdescri'}]
+															   },
+																{
+																type : 'button',
+																text : '添加',
+																onclick : function(e) {
+																	var paramname = Edo.get(
+																	'paramname').text;
+																	var paramdescri = Edo.get(
+																	'paramdescri').text;
+																	Edo.get(
+																	'paramname').set('text','');
+																	Edo.get(
+																	'paramdescri').set('text','');
+																	outputtable.data.insert(0, {name:paramname,descri:paramdescri});
+																	 
+																}
+																}
+									            ]},
+									            {
+													type : 'button',
+													text : '删除',
+													onclick : function(e) {
+														var rows = Edo.get(
+														'outputtable')
+														.getSelecteds();
+														for ( var i = 0; i < rows.length; i++) {
+															outputtable.data
+																	.remove(rows[i]);
+														}
+														 
+													}
+												},
+								           		{
+													id : 'outputtable',
+													type : 'table',
+													width : '100%',
+													height : '100%',
+													padding : [ 0, 0,0, 0 ],
+													border:[ 0, 0,0, 0 ],
+													rowSelectMode : 'multi',
+													columns : [
+															{
+																headerText : '',
+																align : 'center',
+																width : 10,
+																enableSort : false,
+																enableDragDrop : true,
+																enableColumnDragDrop : false,
+																style : 'cursor:move;',
+																renderer : function(
+																		v,
+																		r,
+																		c,
+																		i,
+																		data,
+																		t) {
+																	return i + 1;
+																}
+															},
+															Edo.lists.Table
+																	.createMultiColumn(),
+															{
+																header : '名称',
+																dataIndex : 'name',
+																width : 200,
+																headerAlign : 'center',
+																align : 'center'
+															},
+															{
+																header : '说明',
+																dataIndex : 'descri',
+																width : 200,
+																headerAlign : 'center',
+																align : 'center'
+															}
+															]
+												
+												}
+							               	    
+							               	    
+								           	    
+						             ]
+								});
+						outputtable.set('data',taskTreeNode.Outparamlist);
+						var func = function() {
+							var rows = Edo.get('outputtable').data
+									.source;
+							var outputparams = '';
+							var Outparamlist = new Array();
+							for ( var i = 0; i < rows.length; i++) {
+								var paramobj={};
+								paramobj.name=rows[i].name;
+								paramobj.descri=rows[i].descri;
+								Outparamlist.push(paramobj);
+								outputparams = outputparams
+										+ rows[i].name+':'+rows[i].descri
+										+ ";"
+							}
+							outputparams = outputparams
+									.substr(0,outputparams.length - 1)
+							Edo.get('outputparam').set(
+									'text', outputparams);
+							taskTreeNode.Outparamlist=Outparamlist;
+						}
+						var toolbar = new gettoolbar(null,
+								func);
+						var winfm = getmywin(600, 400,
+								'编辑输出参数', [ box, toolbar ]);
+						winfm.show('center', 'middle',
+										true);
+					}
+				} ]
+       	    },
+       	    {	type : 'formitem',label : '模块说明:',labelWidth : 150,width:'100%',labelAlign : 'right',
            	    children : [{type : 'text',id:'des'}]
        	    }
-       	    
-       	    
        	    ]
 	       	});
 	if(r!=null){
 		nodewincontent.setForm(r);
+		var rows=r.Inparamlist;
+		var inputparams = '';
+		var Inparamlist = new Array();
+		for ( var i = 0; i < rows.length; i++) {
+			var paramobj={};
+			paramobj.name=rows[i].name;
+			paramobj.descri=rows[i].descri;
+			Inparamlist.push(paramobj);
+			inputparams = inputparams
+					+ rows[i].name+':'+rows[i].descri
+					+ ";"
+		}
+		inputparams = inputparams
+				.substr(0,inputparams.length - 1);
+		Edo.get('inputparam').set(
+				'text', inputparams);
+		taskTreeNode.Inparamlist=Inparamlist;
+		
+		var rows2=r.Outparamlist;
+		var outputparams = '';
+		var Outparamlist = new Array();
+		for ( var i = 0; i < rows2.length; i++) {
+			var paramobj={};
+			paramobj.name=rows2[i].name;
+			paramobj.descri=rows2[i].descri;
+			Outparamlist.push(paramobj);
+			outputparams = outputparams
+					+ rows2[i].name+':'+rows2[i].descri
+					+ ";"
+		}
+		outputparams = outputparams
+				.substr(0,outputparams.length - 1);
+		Edo.get('outputparam').set(
+				'text', outputparams);
+		taskTreeNode.Outparamlist=Outparamlist;
 	}else{
 		if(!isParent){
 			var r=tasktree.getSelected();
@@ -318,4 +625,30 @@ function gettoolbar(id,func){
     ]
 });
 return toolbar;
+}
+function getmywin(width, height, title, children) {
+	var win = new Edo.containers.Window();
+	var win = new Edo.containers.Window();
+	win.set('title', title);
+	win.set('titlebar', [ //头部按钮栏
+	{
+		cls : 'e-titlebar-close',
+		onclick : function(e) {
+			//this是按钮
+			//this.parent是按钮的父级容器, 就是titlebar对象
+			//this.parent.owner就是窗体
+			this.parent.owner.destroy();
+			//deleteMask();
+		}
+	} ]);
+
+	win.addChild({
+		type : 'box',
+		width : width,
+		height : height,
+		style : 'border:0;',
+		padding : 0,
+		children : children
+	});
+	return win;
 }

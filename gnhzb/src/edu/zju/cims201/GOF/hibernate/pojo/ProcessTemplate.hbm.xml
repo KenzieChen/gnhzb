@@ -5,7 +5,7 @@
 <hibernate-mapping>
 	<!-- edu.zju.cims201.GOF.hibernate.pojo.Author root -->
 	<class name="edu.zju.cims201.GOF.hibernate.pojo.ProcessTemplate" table="ProcessTemplate">
-		<id name="id" type="int" column="id">
+		<id name="id" type="long" column="id">
 			<generator class="increment"/>
 		</id>
 	    <property name="name" column="name" type="string"/>
@@ -24,13 +24,22 @@
 			class="edu.zju.cims201.GOF.hibernate.pojo.PdmModule">
 			</many-to-one>
 			<many-to-one name="tasktreenode" class="edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode" column="tasktreenodeid"></many-to-one>
-			<property name="input" column="input" type="string"/>
-			<property name="output" column="output" type="string"/>
-			<property name="orderid" column="orderid" type="int"/>
+			<!-- <property name="orderid" column="orderid" type="int"/> -->
+            <property name="parentmoduleid" column="parentmoduleid" type="string"/>
+            <property name="parentmodulename" column="parentmodulename" type="string"/>
+            <property name="levelmoduleid" column="levelmoduleid" type="string"/>
+            <property name="prevlevelmodulename" column="prevlevelmodulename" type="string"/>
+            <property name="prevlevelmoduleid" column="prevlevelmoduleid" type="string"/>
+            <property name="nextlevelmoduleid" column="nextlevelmoduleid" type="string"/>
+            <property name="nextlevelmodulename" column="nextlevelmodulename" type="string"/>
 			<set name="relatedmodels" table="caltks.RelatedModel" lazy="false" cascade="save-update,persist" inverse="false">
             <key column="pdmprocessTemplateid"/>
             <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.RelatedModel" />
-         </set>
+         	</set>
+         	<set name="params" table="ProcessTemplateIOParam" lazy="false" cascade="save-update,persist" inverse="false">
+            <key column="processtemplateid"/>
+            <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.pdm.ProcessTemplateIOParam" />
+         	</set>
 		</joined-subclass>
 	</class>
 </hibernate-mapping>

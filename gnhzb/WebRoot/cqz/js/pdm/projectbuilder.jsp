@@ -89,6 +89,15 @@
 				konwledge:null,
 				input:null,
 				output:null,
+				inputdescrip:null,
+				outputdescrip:null,
+				parentmoduleid:level.parentmoduleid,
+				parentmodulename:level.parentmodulename,
+				moduleid:level.levelid+'_'+cell.getId(),
+				prevmoduleid:null,
+				prevmodulename:null,
+				nextmoduleid:null,
+				nextmodulename:null,
 				starttime:null,
 				finishtime:null,
 				processpersonid:null,
@@ -113,8 +122,11 @@
 		alllevel.prototype.alllevels=new Array();
 		alllevel.prototype.setrootlevel=function(rootlevel){
 			this.rootlevel=rootlevel;
-			rootlevel.levelid='level_0';
+			rootlevel.levelid='level_top';
 			rootlevel.parentlevelid=0;
+			rootlevel.parentcellid=0;
+		    rootlevel.parentmoduleid=0;
+	        rootlevel.parentmodulename=0;
 			this.alllevels.add(rootlevel);
 		};
 		alllevel.prototype.getcurrentlevel=function(){
@@ -126,25 +138,32 @@
 		alllevel.prototype.addlevel=function(levelmodule){
 			var newlevel=new level();
 			var parentlevel=this.getcurrentlevel();
+			newlevel.parentmoduleid=levelmodule.levelmoduleobject.moduleid;
+			newlevel.parentmodulename=levelmodule.levelmoduleobject.processname;
 			newlevel.setparentlevel(parentlevel);
+			newlevel.parentcellid=levelmodule.levelmoduleobject.cellid;
 			levelmodule.childlevel=newlevel;
 			newlevel.levelid=parentlevel.levelid+'_'+levelmodule.levelmoduleobject.cellid;
 			newlevel.parentlevelid=parentlevel.levelid;
 			this.alllevels.add(newlevel);
 			this.setcurrentlevel(newlevel);
+			return newlevel;
 		 
 		};
 		alllevel.prototype.addlevelmodule=function(cell){
 			return this.currentlevel.addlevelmodule(cell);
 		};
 		function level(){
-		this.levelmodules=new Array();
-		this.cells=null;
-		this.levelid=null;
-		this.parentlevelid=null;
-		this.parentlevel=null;
-		this.xml=null;
-		this.type=null;
+		  	this.parentmoduleid=null;
+	        this.parentmodulename=null;
+		    this.parentcellid=null;
+			this.levelmodules=new Array();
+			this.cells=null;
+			this.levelid=null;
+			this.parentlevelid=null;
+			this.parentlevel=null;
+			this.xml=null;
+			this.type=null;
 		}
 		level.prototype.constructor = level;
 		level.prototype.addlevelmodule=function(cell){
@@ -794,7 +813,7 @@
 						 }
 						 parent.resetmoduledefineContainer();
 						 drawchoosencells(choosencells)
-						 wholelevel.getcurrentlevel().type='realmoduelevel';
+						 wholelevel.getcurrentlevel().type='realmodulelevel';
 						});
 				var outln = new mxOutline(graph, outline);
 				var menubar= Edo.create({
@@ -1160,6 +1179,7 @@
 			}
 		   initgraph();
      	   var parentlevel=level3.getparentlevel();
+     	   currentmoduleid=parentlevel.levelmodules[0].levelmoduleobject.pdmmoduleid;
           /*  var modules1=parentlevel.levelmodules;
            var cells=new Array();
             for(var i=0;i<modules1.length;i++){
@@ -1206,7 +1226,7 @@
 		    if (cell != null)  
 		    {   
 		        if (model.isVertex(cell))  
-		        {       if(level.type=='realmodulelevel')
+		        {       if(level.type=='tasklevel')
 		        		{
 				        	 menu.addItem('指定人员和时间', null, function()  
 							{
@@ -1228,7 +1248,6 @@
 								             editor.graph.addCells(childlevel.cells);
 								             wholelevel.setcurrentlevel(childlevel);
 								            }else{
-								               wholelevel.addlevel(modules[i]);
 								               var processid=cell.getId();
 										       var parentmoduleid=currentmoduleid;
 										       Edo.util.Ajax.request({
@@ -1245,6 +1264,8 @@
 								                    return null;
 								                    }
 								                    savecells();
+							                        var newlevel=wholelevel.addlevel(modules[i]);
+								               		newlevel.type='tasklevel';
 								                    var data = Edo.util.Json.decode(text);
 								                    var moduleid=data;
 								                    showmodule(moduleid);
@@ -1270,7 +1291,6 @@
 									       var modules=level.levelmodules;
 									       for(var i=0;i<modules.length;i++){
 										       if(modules[i].levelmoduleobject.cellid==cell.getId()){
-										    	   alert('存在cell')
 												    parent.showdetail(cell,modules[i],currentmoduleid);
 												    return null;
 										    	}
@@ -1696,9 +1716,20 @@
 	            levelmodule.levelmoduleobject.knowledgecategoryid=Edo.get('category').getValue();*/
 	      	    levelmodule.levelmoduleobject.tasktreenodeid=data.tasktreenodeid;
 	      	    levelmodule.levelmoduleobject.tasktreenodename=data.tasktreenodename;
-	      	    levelmodule.levelmoduleobject.input=data.input;
+	      	   /*  levelmodule.levelmoduleobject.input=data.input;
 	      	    levelmodule.levelmoduleobject.output=data.output;
+	      	    levelmodule.levelmoduleobject.inputdescrip=data.inputdescrip;
+	      	    levelmodule.levelmoduleobject.outputdescrip=data.outputdescrip; */
+	      	    levelmodule.levelmoduleobject.Inparamlist = data.Inparamlist;
+				levelmodule.levelmoduleobject.Outparamlist = data.Outparamlist;
+	      	    levelmodule.levelmoduleobject.parentmoduleid=data.parentmoduleid;
+	      	    levelmodule.levelmoduleobject.moduleid=data.moduleid;
+	      	    levelmodule.levelmoduleobject.prevmoduleid=data.prevmoduleid;
+	      	    levelmodule.levelmoduleobject.prevmodulename=data.prevmodulename;
+	      	    levelmodule.levelmoduleobject.nextmoduleid=data.nextmoduleid;
+	      	    levelmodule.levelmoduleobject.nextmodulename=data.nextmodulename;
 	      	  	levelmodule.levelmoduleobject.categorynames=data.categorynames;
+	      	  	levelmodule.levelmoduleobject.pdmmoduleid=currentmoduleid;
              	levelmodule.levelmoduleobject.type=style;
 	            var label =  graph.convertValueToString(cells[i]);
 	     		var nodelabel =  label.slice(0,label.length);

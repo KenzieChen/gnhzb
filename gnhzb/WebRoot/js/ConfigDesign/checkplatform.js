@@ -1,4 +1,8 @@
 function createCheckplatform(){
+	//luweijiang
+	function checkplatformTask(platformManageId){
+		checkplatform_CheckPlatChooseTable.set('data',cims201.utils.getData('platform/platform-manage!getPlatform2CheckById.action',{id:platformManageId}));  	 
+	}
 	var panel =Edo.create({
 		id:'checkplatform_topPanel',
 		type:'panel',title:'<span style="color:red;">请先选择要进行审核的配置平台</span>',width:'100%',height:'100%',
@@ -15,7 +19,8 @@ function createCheckplatform(){
 			        {type:'button',id:'checkplatform_platChooseBtn',text:'选择配置平台',onclick:function(e){
 			        	if(checkplatform_platChooseBtn.text=='选择配置平台'){
 				        	 showPlat2CheckWin();	
-				        	 checkplatform_CheckPlatChooseTable.set('data',cims201.utils.getData('platform/platform-manage!getPlatform2Check.action'));  	 
+				        	 checkplatformTask(3147);
+				        	 //checkplatform_CheckPlatChooseTable.set('data',cims201.utils.getData('platform/platform-manage!getPlatform2Check.action'));  	 
 			        	}
 			        	if(checkplatform_platChooseBtn.text=='取消该配置平台审核'){
 			        		checkplatform_plat2CheckWin.destroy();

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quartz xmlns="http://www.opensymphony.com/quartz/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        overwrite-existing-jobs="true">
+
+	<job>
+	<job-detail>
+			<name>StatisticweekJob</name>
+			<group>statistic</group>
+			<job-class>edu.zju.cims201.GOF.service.statistic.job.StatisticweekJob</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>StatisticweekTrigger</name>
+				<group>statistic</group>
+				<job-name>StatisticweekJob</job-name>
+				<job-group>statistic</job-group>
+				<!-- 每周日 凌晨0点01秒执行该任务 -->
+				<!-- <cron-expression>0 */1 * * * ?</cron-expression>每一分钟-->
+				 <cron-expression>01 0 0 ? * L</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	<job>
+		<job-detail>
+			<name>StatisticmonthJob</name>
+			<group>statistic</group>
+			<job-class>edu.zju.cims201.GOF.service.statistic.job.StatisticmonthJob</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>StatisticmonthTrigger</name>
+				<group>statistic</group>
+				<job-name>StatisticmonthJob</job-name>
+				<job-group>statistic</job-group>
+				<!-- 每月1日 凌晨0点20秒执行该任务 -->
+				<cron-expression>20 0 0 1 * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	<job>
+		<job-detail>
+			<name>StatisticyearJob</name>
+			<group>statistic</group>
+			<job-class>edu.zju.cims201.GOF.service.statistic.job.StatisticyearJob</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>StatisticyearTrigger</name>
+				<group>statistic</group>
+				<job-name>StatisticyearJob</job-name>
+				<job-group>statistic</job-group>
+				<!-- 每年1月1日 凌晨0点40秒执行该任务 -->
+				<cron-expression>40 0 0 1 1 ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+		<job>
+		<job-detail>
+			<name>QualityKnowledgeServiceJob</name>
+			<group>Quality</group>
+			<job-class>edu.zju.cims201.GOF.service.webservice.qualityservice.job.QualityKnowledgeServiceJob</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>QualityKnowledgeServiceTrigger</name>
+				<group>Quality</group>
+				<job-name>QualityKnowledgeServiceJob</job-name>
+				<job-group>Quality</job-group>
+				<!-- 每天凌晨1点0秒执行该任务 -->
+				<cron-expression>30 27 23 * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	
+	
+	<job>
+		<job-detail>
+			<name>HySpiderJob</name>
+			<group>Spider</group>
+			<job-class>
+				edu.zju.cims201.spider.grabnews.uggdhy.HySpiderJob
+			</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>HySpiderTrigger</name>
+				<group>Spider</group>
+				<job-name>HySpiderJob</job-name>
+				<job-group>Spider</job-group>
+				<cron-expression>30 0 0 ? * *</cron-expression>
+			</cron>
+		</trigger>
+     </job>
+     <job>
+		<job-detail>
+			<name>RDSpiderJob</name>
+			<group>Spider</group>
+			<job-class>
+				edu.zju.cims201.spider.grabnews.uggdrd.RDSpiderJob
+			</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>RDSpiderTrigger</name>
+				<group>Spider</group>
+				<job-name>RDSpiderJob</job-name>
+				<job-group>Spider</job-group>
+				<cron-expression>30 2 0 ? * *</cron-expression>
+			</cron>
+		</trigger>
+</job>
+
+ <job>
+		<job-detail>
+			<name>QYSpiderJob</name>
+			<group>Spider</group>
+			<job-class>
+				edu.zju.cims201.spider.grabnews.uggdqy.QySpiderJob
+			</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>QYSpiderTrigger</name>
+				<group>Spider</group>
+				<job-name>QYSpiderJob</job-name>
+				<job-group>Spider</job-group>
+				<cron-expression>30 3 0 ? * *</cron-expression>
+			</cron>
+		</trigger>
+</job>
+
+<job>
+		<job-detail>
+			<name>RJSpiderJob</name>
+			<group>Spider</group>
+			<job-class>
+				edu.zju.cims201.spider.grabnews.uggdrj.RJSpiderJob
+			</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>RJSpiderTrigger</name>
+				<group>Spider</group>
+				<job-name>RJSpiderJob</job-name>
+				<job-group>Spider</job-group>
+				<cron-expression>30 4 0 ? * *</cron-expression>
+			</cron>
+		</trigger>
+</job>
+
+<job>
+		<job-detail>
+			<name>YJSpiderJob</name>
+			<group>Spider</group>
+			<job-class>
+				edu.zju.cims201.spider.grabnews.uggdyj.YJSpiderJob
+			</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>YJSpiderTrigger</name>
+				<group>Spider</group>
+				<job-name>YJSpiderJob</job-name>
+				<job-group>Spider</job-group>
+				<cron-expression>30 5 0 ? * *</cron-expression>
+			</cron>
+		</trigger>
+</job>
+
+<job>
+		<job-detail>
+			<name>ZHSpiderJob</name>
+			<group>Spider</group>
+			<job-class>
+				edu.zju.cims201.spider.grabnews.uggdzh.ZHSpiderJob
+			</job-class>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>ZHSpiderTrigger</name>
+				<group>Spider</group>
+				<job-name>ZHSpiderJob</job-name>
+				<job-group>Spider</job-group>
+				<cron-expression>30 6 0 ? * *</cron-expression>
+			</cron>
+		</trigger>
+</job>
+	
+	
+</quartz>

@@ -1,4 +1,8 @@
 function createNeworder(){
+	//luweijiang
+	function neworderTask(orderManageId){
+		neworder_NewOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderManageId}));
+	}
 	var panel =Edo.create({
 			id:'neworder_topPanel',
 			type:'panel',
@@ -18,8 +22,9 @@ function createNeworder(){
 				        {type: 'button',id:'neworder_OrderChooseButton',text: '选择配置需求',onclick:function(e){
 				        	if(neworder_OrderChooseButton.text=='选择配置需求'){
 				        		showNewOrderChooseWin();
-					        	neworder_NewOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
-					        	
+				        		//neworderTask(orderManageId);
+				        		neworderTask(3121);
+					        	//neworder_NewOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
 					        	neworder_NewOrderChooseTable.data.filter(function(o, i){
 					                if(o.statusName =='待录入') return true;
 					                else return false;

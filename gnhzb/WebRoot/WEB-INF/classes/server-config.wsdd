@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+    <deployment xmlns="http://xml.apache.org/axis/wsdd/"  
+        xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">  
+      <handler type="java:org.apache.axis.handlers.http.URLMapper" name="URLMapper"/>  
+        
+      <service name="knowledgeWebService" provider="java:RPC">  
+        <parameter name="className" value="edu.zju.cims201.GOF.service.webservice.KnowledgeWebServiceImpl"/>  
+        <parameter name="allowedMethods" value="*"/>  
+      </service>  
+      
+      <!-- jiangdingding 2013-6-28 -->
+      <service name = "mobileWebService" provider = "java:RPC">
+      	 <parameter name="className" value="edu.zju.cims201.GOF.service.webservice.MobileWebServiceImpl"/>  
+         <parameter name="allowedMethods" value="*"/>
+      </service>
+        
+      <transport name="http">  
+        <requestFlow>  
+            <handler type="URLMapper"/>  
+        </requestFlow>  
+      </transport>  
+    </deployment>  

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +20,6 @@ import edu.zju.cims201.GOF.hibernate.pojoA.CodeClass;
 @Service
 @Transactional
 public class CodeClassServiceImpl implements CodeClassService{
-	
 	private CodeClassDao codeClassDao;
 	private ClassificationTreeDao classificationTreeDao; 
 	
@@ -289,5 +291,29 @@ public class CodeClassServiceImpl implements CodeClassService{
 		}
 		codeClassDao.save(cc);
 	}
+
+	
+	public List<CodeClass> findById(long id){
+		List<CodeClass> cc = codeClassDao.findBy("id", id);
+		return cc;
+	}
+
+	/**
+	 * luweijiang
+	 */
+	public CodeClass findUnConstructedCodeClassById(long id) {
+		// TODO Auto-generated method stub
+		CodeClass cc=codeClassDao.findUniqueBy("id", id);
+		
+		return cc;
+	}
+
+	public CodeClass findCodeClassById(long id) {
+		// TODO Auto-generated method stub
+		CodeClass cc=codeClassDao.findUniqueBy("id", id);
+		return cc;
+	}
+
+
 
 }

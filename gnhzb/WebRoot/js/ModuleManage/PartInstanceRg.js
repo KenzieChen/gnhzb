@@ -70,8 +70,11 @@ function createPartInstanceRg(){
 		]
 	});
 	
-	PartInstanceRgClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
-	
+	//PartInstanceRgClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//luweijiang
+	function partInstanceRgTask(classficationTreeId){
+		PartInstanceRgClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+	}
 	var rgPanel =Edo.create({
 		type:'ct',
 		height:'100%',
@@ -358,5 +361,5 @@ function createPartInstanceRg(){
 	this.getRgPanel = function(){
 		return rgPanel;
 	};
-
+	partInstanceRgTask(3041);
 }

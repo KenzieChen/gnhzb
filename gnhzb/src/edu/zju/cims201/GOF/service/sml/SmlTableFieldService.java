@@ -23,5 +23,7 @@ public interface SmlTableFieldService {
 	public String getMsgForEditPartSMLForm(String tableName, String tableHead);
 
 	public String modifyPartSML(String tableName,long id,String tableHead, String smlValue,String dataType);
+
+	public void changeOutput(long id, int output);
 	
 }

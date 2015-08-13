@@ -21,7 +21,12 @@ public class PlatStructConfiRule {
 	
 	private Part part;
 	private Part partSelected;
-	
+	 /**
+	  * 规则的状态
+	  * 1：必选
+	  * 2：可选
+	  * 3：排除
+	  */
 	private int status;
 	private String info;
 	

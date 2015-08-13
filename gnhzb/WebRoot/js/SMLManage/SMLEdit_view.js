@@ -68,9 +68,13 @@ function createSMLEdit_view(){
 		   }
 		]
 	});
-	SMLEdit_viewClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//SMLEdit_viewClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//luweijiang
+	function SMLEdit_viewTask(classficationTreeId){
+		SMLEdit_viewClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+	}
 	this.getCodeClassChoose=function(){
 		return CodeClassChoose;
 	};
-
+	SMLEdit_viewTask(3041);
 }

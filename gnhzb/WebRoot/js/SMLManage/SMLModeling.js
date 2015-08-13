@@ -103,8 +103,12 @@ function createSMLModeling(){
 		]
 	});
 	
-	SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
-	
+	//SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//luweijiang
+	function SMLModelingTask(classficationTreeId){
+		SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+	}
+
 	var smlModeling =Edo.create({
 		id:'SMLModeling_ct',
 		type:'ct',
@@ -124,9 +128,10 @@ function createSMLModeling(){
         	             {type:'split'},
         	             {type:'button',id:'SMLModeling_DeleteSML',text:'删除事物特性'},
         	             {type:'split'},
-        	             {type:'button',text:'更改输出项'},
+        	             {type:'button',text:'查看接口'},
         	             {type:'split'},
-        	             {type:'button',text:'查看接口'}
+        	             {type:'button',id:'SMLModeling_Output',text:'更改输出项'}
+        	             
 		        	   ]
 		           },
 		           {
@@ -275,6 +280,39 @@ function createSMLModeling(){
 		});
 	});
 	
+	
+	SMLModeling_Output.on('click',function(e){
+		var length = SMLModeling_SMLTableField.selecteds.length;
+		var selected = SMLModeling_SMLTableField.selected;
+		if(length!=1 || selected.tableHead =='partname' || selected.tableHead =='partnumber'){
+			Edo.MessageBox.alert('提示','没有选择或该项不可选，请重新选择');
+			return;
+		}
+		var id = selected.id;
+		var output = selected.output;
+		if(output == 1){
+			output =0;
+		}else{
+			output=1;
+		}
+		Edo.util.Ajax.request({
+			    url: 'sml/sml-table-field!changeOutput.action',
+			    type: 'post',
+			    params:{id:id,output:output},
+			    onSuccess: function(text){
+			    		Edo.MessageBox.alert("提示",text);
+			    		var tableName=SMLModelingTree.selected.code;
+			    		SMLModeling_SMLTableField.set('data',
+			    				cims201.utils.getData('sml/sml-table-field!getSmlTableField.action?tableName='+tableName));
+			    	
+			    },
+			    onFail: function(code){
+			        //code是网络交互错误码,如404,500之类
+			        Edo.MessageBox.alert("提示", "操作失败"+code);
+			    }
+		});
+		
+	});
 	
 	function showAddSMLForm(){	
 	    if(!Edo.get('SMLModeling_AddSMLForm')) {
@@ -426,5 +464,5 @@ function createSMLModeling(){
 		return smlModeling;
 	};
 
-
+	SMLModelingTask(3041);
 }

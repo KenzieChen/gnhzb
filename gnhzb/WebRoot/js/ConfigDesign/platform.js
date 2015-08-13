@@ -76,6 +76,7 @@ function createPlatform(){
 					    	 platform_platTable.set('data',cims201.utils.getData('platform/platform-manage!getAllPlatform.action'));
 				    	}
 				    	 Edo.MessageBox.alert('提示',text);
+				    	 Edo.get("paltform_createPlatForm").set('enable',true);
 				    },
 				    onFail: function(code){
 				        //code是网络交互错误码,如404,500之类
@@ -145,6 +146,7 @@ function createPlatform(){
 										    	}
 										    	 Edo.MessageBox.alert('提示',text);
 										    	 platform_platTable.set('data',cims201.utils.getData('platform/platform-manage!getAllPlatform.action'));
+										    	 Edo.get("paltform_createPlatForm").set('enable',false);
 										    },
 										    onFail: function(code){
 										        //code是网络交互错误码,如404,500之类

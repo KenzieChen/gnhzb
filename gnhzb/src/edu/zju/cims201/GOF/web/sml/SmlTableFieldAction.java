@@ -16,6 +16,7 @@ import edu.zju.cims201.GOF.service.sml.SmlTableFieldService;
 import edu.zju.cims201.GOF.util.JSONUtil;
 
 public class SmlTableFieldAction extends ActionSupport implements ServletResponseAware{
+	
 	private HttpServletResponse response;
 	private SmlTableFieldService smlTableFieldService;
 	PrintWriter out;
@@ -30,6 +31,14 @@ public class SmlTableFieldAction extends ActionSupport implements ServletRespons
 	private String headShow;
 	private String smlValue;
 	private String dataType;
+	
+	private int output;
+	
+	public void changeOutput() throws IOException{
+		smlTableFieldService.changeOutput(id,output);
+		out = response.getWriter();
+		out.print("更新成功!");
+	}
 	
 	public void getSmlTableField() throws IOException{
 		
@@ -78,9 +87,6 @@ public class SmlTableFieldAction extends ActionSupport implements ServletRespons
 	
 	public void getSmlTableByTableName() throws IOException{
 		String msg=smlTableFieldService.getSmlTableByTableName(tableName);
-		System.out.println("获得事物特性表的数据：");
-		System.out.println(tableName);
-		System.out.println(msg);
 		out = response.getWriter();
 		out.print(msg);
 	}
@@ -175,6 +181,17 @@ public class SmlTableFieldAction extends ActionSupport implements ServletRespons
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+
+
+	public int getOutput() {
+		return output;
+	}
+
+
+	public void setOutput(int output) {
+		this.output = output;
 	}
 
 

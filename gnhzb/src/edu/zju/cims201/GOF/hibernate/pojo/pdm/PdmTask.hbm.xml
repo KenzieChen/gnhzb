@@ -10,26 +10,37 @@
 		</id>
 	    <property name="name" column="name" type="string"/>
 	    <property name="status" column="status" type="string"/>
+        <property name="taskid" column="taskid" type="string"/>
+        <property name="prevtaskid" column="prevtaskid" type="string"/>
+        <property name="nexttaskid" column="nexttaskid" type="string"/>
+        <property name="parenttaskid" column="parenttaskid" type="string"/>
+        <property name="istail" column="istail" type="int"/>
+        <property name="istop" column="istop" type="int"/>
 	    <many-to-one name="checkperson" column="checkpersonID" 
 			class="edu.zju.cims201.GOF.hibernate.pojo.pdm.Employee">
 		</many-to-one>
-		<many-to-one name="carrier" column="carrierID" not-null="true"
+		<many-to-one name="carrier" column="carrierID" 
 			class="edu.zju.cims201.GOF.hibernate.pojo.pdm.Employee">
 		</many-to-one>
 		
 		<property name="mainFileName" column="mainFileName" type="string" length="200" />
+		<property name="taskindex" column="taskindex" type="string" length="200" />
 		<property name="starttime" column="starttime" type="timestamp"/>
 		<property name="endtime" column="endtime" type="timestamp"/>
 		<many-to-one name="pdmprocessTemplate" class="edu.zju.cims201.GOF.hibernate.pojo.PdmProcessTemplate" column="pdmprocesstemplateid"></many-to-one>
 		<many-to-one name="pdmModule" class="edu.zju.cims201.GOF.hibernate.pojo.PdmModule" column="pdmModuleid"></many-to-one>
 		<many-to-one name="pdmProject" class="edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmProject" column="pdmProjectid"></many-to-one>
 	     <set name="subPdmTasks" table="PdmTask" lazy="false" cascade="all">
-                        <key column="parentId"/>
-                        <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmTask"/>
-                </set>
-                 <many-to-one name="parentPdmTask" column="parentId" 
-					class="edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmTask">
-				</many-to-one>
+                  <key column="parentId"/>
+                  <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmTask"/>
+         </set>
+         <set name="params" table="TaskIOParam" lazy="false" cascade="all">
+                   <key column="taskid"/>
+                   <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskIOParam"/>
+         </set>
+         <many-to-one name="parentPdmTask" column="parentId" 
+			class="edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmTask">
+		 </many-to-one>
 	</class>
 </hibernate-mapping>
 

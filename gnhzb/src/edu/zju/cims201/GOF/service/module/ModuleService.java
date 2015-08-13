@@ -19,6 +19,7 @@ import edu.zju.cims201.GOF.hibernate.pojo.PdmModule;
 import edu.zju.cims201.GOF.hibernate.pojo.PdmProcessTemplate;
 import edu.zju.cims201.GOF.hibernate.pojo.ProcessTemplate;
 import edu.zju.cims201.GOF.hibernate.pojo.SystemUser;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.ProcessTemplateIOParam;
 
 
 public interface ModuleService {
@@ -46,7 +47,7 @@ public interface ModuleService {
 	public List<Nodecategory> getnodecategorylist();
 	public List<Node> getNodeListByType(String nodetype,String nodecategory);
 	public Page<ProcessTemplate> getMyProcesses(SystemUser user,Page<ProcessTemplate> page);
-	public ProcessTemplate getNodebyModuleandProcess(String moduleid, String processid);
+	public ProcessTemplate getProcessTemplatebyModuleandProcess(String moduleid, String processid);
 	public List getmodulelistsbycomponnet(String id);
 	public LcaModule getModulebyparentandprocess(String parentlevelid,
 			String processid,String parentmoduleid);
@@ -55,6 +56,7 @@ public interface ModuleService {
 			String processid,String parentmoduleid);
 	public  ProcessTemplate getprocess(String processid, int moduleid);
 	public  List getprocesslists(int moduleid);
+	public List getProcessTemplateParamsByProcessTemplate(long id);
 	
 	
 

@@ -21,16 +21,16 @@ function getprojectdef(){
 	    {type: 'box',width: '100%',border: [0,0,0,0],padding: [0,0,0,0],layout: 'vertical',
        	    children: [
        	    //				           
-       	    {	type : 'formitem',label : '项目名称:',labelWidth : 150,labelAlign : 'right',
+       	    {	type : 'formitem',label : '项目名称:',width: '100%',labelWidth : 150,labelAlign : 'right',
        	    children : [{type : 'text',width : 200,id : 'pjname'}]
        	    },
-       	    {	type : 'formitem',label : '项目备注:',labelWidth : 150,labelAlign : 'right',
+       	    {	type : 'formitem',label : '项目备注:',width: '100%',labelWidth : 150,labelAlign : 'right',
        	    children : [{type : 'text',width : 200,id : 'pjdetail'}]
        	    },
-       	    {	type : 'formitem',label : '开始时间:',labelWidth : 150,labelAlign : 'right',
+       	    {	type : 'formitem',label : '开始时间:',width: '100%',labelWidth : 150,labelAlign : 'right',
            	    children : [{type : 'date',width : 200,id : 'starttime'}]
        	    },
-       	    {	type : 'formitem',label : '结束时间:',labelWidth : 150,labelAlign : 'right',
+       	    {	type : 'formitem',label : '结束时间:',width: '100%',labelWidth : 150,labelAlign : 'right',
            	    children : [{type : 'date',width : 200,id : 'finishtime'}]
        	    }
        	   
@@ -40,37 +40,62 @@ function getprojectdef(){
        	
        	}
 function savepdmproject(){
-	alert('sss')
-	var level=wholelevel.rootlevel;
-		       var modules=level.levelmodules;
-		       if(modules.length==0){
-		    	   alert('aa')
-		       }else{
-			       for(var i=0;i<modules.length;i++){
-				       if( modules[i].levelmoduleobject.type=='process'){
-				            var cell={};
-				      		cell.starttime= modules[i].levelmoduleobject.starttime;
-				      		cell.processname= modules[i].levelmoduleobject.processname;
-				        	cell.finishtime= modules[i].levelmoduleobject.finishtime;
-				            cell.id=modules[i].levelmoduleobject.cellid;
-				            cell.processpersonid= modules[i].levelmoduleobject.processpersonid;
-				            cell.processcheckpersonid= modules[i].levelmoduleobject.processcheckpersonid;
-				            cellcollection.push(cell);
-				            
-		       	   		}
-	       	 		}
-			       alert(cellcollection.length)
-	       	 	   var levelid=level.levelid;
-		       	   var parentlevelid=level.parentlevelid;
-		       	   var xmldata = level.xml;
-			       var data= cims201.utils.getData(basepathh+'/project/project!saveproject.action',{projecttype:'Pdm',projectobjectdefine:projectobject,cellcollection:cellcollection
-				});
+   alert('sss')
+   var alllevels=wholelevel.alllevels;
+   if(alllevels.length==0){
+	   
+   }else{
+       
+	   var projectid= cims201.utils.getData(basepathh+'/project/project!saveproject.action',{projecttype:'Pdm',projectobjectdefine:projectobject
+		});
+   }
+   var tasksdata={};
+	for ( var j = 0; j < alllevels.length; j++) {
+		var level = alllevels[j];
+		var modules = level.levelmodules;
+		if (modules.length == 0) {
+			
+		} else {
+			for ( var i = 0; i < modules.length; i++) {
+				if (modules[i].levelmoduleobject.type == 'process') {
+					var cell = {};
+					cell.processname = modules[i].levelmoduleobject.processname;
+					cell.processnote = modules[i].levelmoduleobject.processnote;
+					cell.id = modules[i].levelmoduleobject.cellid;
+					cell.knowledge = modules[i].levelmoduleobject.knowledge;
+//					cell.input = modules[i].levelmoduleobject.input;
+//					cell.output = modules[i].levelmoduleobject.output;
+//					cell.inputdescrip = modules[i].levelmoduleobject.inputdescrip;
+//					cell.outputdescrip = modules[i].levelmoduleobject.outputdescrip;
+					cell.Inparamlist = modules[i].levelmoduleobject.Inparamlist;
+					cell.Outparamlist = modules[i].levelmoduleobject.Outparamlist;
+					cell.parentmoduleid = modules[i].levelmoduleobject.parentmoduleid;
+					cell.parentmodulename = modules[i].levelmoduleobject.parentmodulename;
+					cell.moduleid = modules[i].levelmoduleobject.moduleid;
+					cell.pdmmoduleid= modules[i].levelmoduleobject.pdmmoduleid;
+					cell.prevmoduleid = modules[i].levelmoduleobject.prevmoduleid;
+					cell.prevmodulename = modules[i].levelmoduleobject.prevmodulename;
+					cell.nextmoduleid = modules[i].levelmoduleobject.nextmoduleid;
+					cell.nextmodulename = modules[i].levelmoduleobject.nextmodulename;
+					cell.tasktreenodeid = modules[i].levelmoduleobject.tasktreenodeid;
+					
+					cell.starttime= modules[i].levelmoduleobject.starttime;
+		        	cell.finishtime= modules[i].levelmoduleobject.finishtime;
+		            cell.processpersonid= modules[i].levelmoduleobject.processpersonid;
+		            cell.processcheckpersonid= modules[i].levelmoduleobject.processcheckpersonid;
+					cellcollection.push(cell);
+				}
+			}
 		}
-
+		
+	}
+	tasksdata.alltasks=cellcollection;
+	var data = cims201.utils.getData(basepathh
+			+ '/project/project!saveTasks.action', {tasksdata:tasksdata,projectid:projectid
+	});
 	if(data==null){
 	  	alert('保存成功！');
 	}
-	cellcollection=null;
 	cellcollection=new Array;
 }
 
@@ -150,16 +175,16 @@ function gettaskdefinebox(cell){
                    	    children: [
                    	    //				           
                    	    
-                   	    {	type : 'formitem',label : '流程执行人:',labelWidth : 150,labelAlign : 'right',
+                   	    {	type : 'formitem',label : '流程执行人:',width:'100%',labelWidth : 150,labelAlign : 'right',
                    	    children : [{type : 'text',width : 200,id : 'processpersonname',text:levelmodule.levelmoduleobject.processpersonname,onclick:function(e){getcarrier('carrier'); }},{type : 'text',width : 200,id : 'processpersonid',text:levelmodule.levelmoduleobject.processpersonid,visible:false}]
                    	    },
-                   	    {	type : 'formitem',label : '流程审核人:',labelWidth : 150,labelAlign : 'right',
+                   	    {	type : 'formitem',label : '流程审核人:',width:'100%',labelWidth : 150,labelAlign : 'right',
                        	    children : [{type : 'text',width : 200,id : 'processcheckpersonname',text:levelmodule.levelmoduleobject.processcheckpersonname,onclick:function(e){getcarrier('check'); }},{type : 'text',width : 200,id : 'processcheckpersonid',text:levelmodule.levelmoduleobject.processcheckpersonid,visible:false}]
                        	    },
-                   	    {	type : 'formitem',label : '开始时间:',labelWidth : 150,labelAlign : 'right',
+                   	    {	type : 'formitem',label : '开始时间:',width:'100%',labelWidth : 150,labelAlign : 'right',
                        	    children : [{type : 'date',width : 200,id : 'starttime',text:levelmodule.levelmoduleobject.starttime}]
                    	    },
-                   	    {	type : 'formitem',label : '结束时间:',labelWidth : 150,labelAlign : 'right',
+                   	    {	type : 'formitem',label : '结束时间:',width:'100%',labelWidth : 150,labelAlign : 'right',
                        	    children : [{type : 'date',width : 200,id : 'finishtime',text:levelmodule.levelmoduleobject.finishtime}]
                    	    }
                    	    ]}

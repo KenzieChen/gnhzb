@@ -7,6 +7,8 @@ import edu.zju.cims201.GOF.hibernate.pojo.pdm.Employee;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.OperationRoles;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.Privilege;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.PrivilegeOperationRole;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.ProcessTemplateIOParam;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeIOParam;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode;
 
 public interface DepartmentService {
@@ -58,6 +60,18 @@ public interface DepartmentService {
 	public void deleteTaskTreeNodes(String nodeid);
 
 	public List<TaskTreeNode> getTaskTreebyparentid(String parentid);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	public List<TaskTreeIOParam> getTaskTreeParamsByTaskTreeNode(
+			Long id);
+
+	/**
+	 * @param id
+	 */
+	public void deleteTaskTreeIOParamByTaskTree(Long id);
 
 
 

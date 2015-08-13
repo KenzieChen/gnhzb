@@ -1,4 +1,17 @@
 function createCodeClassRuleManage(){
+	//luweijiang
+	function codeClassRuleManageTask(codeClassId){
+		var data=cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClassById.action',{id:codeClassId});
+		 if(data.isSuccess == '1'){
+			 ClassNameCombo.set('data',data.result);
+		 }else{
+			 ClassNameCombo.set('data',
+					 cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
+			 );
+		 }
+		Edo.MessageBox.alert(data.message);
+		
+	}
 	var topbar = Edo.create({
 		
 			type:'box',width: '100%',height: '40',cls: 'e-toolbar',
@@ -330,5 +343,5 @@ function createCodeClassRuleManage(){
 	this.getRuleTree = function(){
 		return ruleTree;
 	};
-	
+	codeClassRuleManageTask(1822);
 }

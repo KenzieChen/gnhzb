@@ -61,7 +61,6 @@ public class ClassificationTreeServiceImpl implements ClassificationTreeService{
 	 * 获得所有大类结构
 	 */
 	
-	
 	public List<ClassificationTree> getClassStruct() {
 		// TODO Auto-generated method stub
 		List<ClassificationTree> childrenRe =new ArrayList<ClassificationTree>();

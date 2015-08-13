@@ -212,6 +212,7 @@
 <script src="<%=basePath%>js/CodeClass/CodeClassManage.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/CodeClass/CodeClassRuleManage.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/CodeClass/CodeClassStructManage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/CodeClass/codeclassdefi_check.js" type="text/javascript"></script>
 
 <!-- 模块管理系统 陈谦庄 -->
 <script src="<%=basePath%>js/ModuleManage/DocTypeManage.js" type="text/javascript"></script>
@@ -232,6 +233,7 @@
 <script src="<%=basePath%>js/SMLManage/SMLParamPool.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLPoolManage_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLPoolManage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/SMLManage/VariantDesign.js" type="text/javascript"></script>
 
 <!-- 配置需求管理 陈谦庄 -->
 <script src="<%=basePath%>js/ConfigDemandManage/checkorder.js" type="text/javascript"></script>

@@ -1,4 +1,12 @@
 function createPlatformStruct(){
+	//luweijiang
+	function platformStructlbdhTreeTask(classficationTreeId){
+		var lbdhTreeData =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
+		for(var i =0;i<lbdhTreeData.length;i++){
+			lbdhTreeData[i].icon='e-tree-folder';
+		}
+		return lbdhTreeData;
+	}
 	var panel =Edo.create({
 			type: 'panel', id:'', title:'<h3><font color="blue">建立分类结构</font></h3>', padding: [0,0,0,0],
 			width:'100%', height:'100%', verticalGap: 0,
@@ -28,7 +36,7 @@ function createPlatformStruct(){
 						    	}else{
 						    		e.selectedItem.icon='e-tree-folder';
 						    	}
-						    	console.log(e.selectedItem);
+						    	//console.log(e.selectedItem);
 						    	platformStruct_gridtree.set('data',e.selectedItem);
 						    	
 						    }
@@ -108,11 +116,18 @@ function createPlatformStruct(){
 
 	});
 	
-	platformStruct_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
-	
+	//platformStruct_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
+	//luweijiang
+	function platformStructTask(platStructTreeId){
+		platformStruct_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platStructTreeId}));
+	}
 	platformStruct_addNode.on('click',function(e){
 		showAddNodeWin();
 	});
+	//luweijiang
+	function platformStruct_addNodeTask(codeClassId){
+		
+	}
 	platformStruct_deleteNode.on('click',function(e){
 		if(platformStruct_gridtree.selecteds.length != 1 ){
 			Edo.MessageBox.alert('提示','请选择要删除的节点');
@@ -428,10 +443,13 @@ function createPlatformStruct(){
 	            ]
 			});
 		}
-		var lbdhTreeData = cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
+		
+		/*var lbdhTreeData = cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
 		for(var i=0;i<lbdhTreeData.length;i++){
 			lbdhTreeData[i].icon ='e-tree-folder';
-		}
+		}*/
+		var lbdhTreeData = platformStructlbdhTreeTask(3041);
+		console.log(lbdhTreeData);
 		platformStruct_LbdhTree.set("data",lbdhTreeData);
 		platformStruct_addNodeWin.show('center','middle',true);
 		return platformStruct_addNodeWin;
@@ -542,4 +560,5 @@ function createPlatformStruct(){
 	this.getPanel =function(){
 		return panel;
 	};
+	platformStructTask(3148);
 }

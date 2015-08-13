@@ -143,7 +143,7 @@ public class BomServiceImpl implements BomService {
 	}
 
 	
-
+	
 
 	public List<BomDTO> getBom2Check() {
 		// TODO Auto-generated method stub
@@ -163,6 +163,26 @@ public class BomServiceImpl implements BomService {
 			bomDTOList.add(bd);
 		}
 		return bomDTOList;
+	}
+	//luweijiang
+	public List<BomDTO> getBom2CheckById(long bomId) {
+		// TODO Auto-generated method stub
+		//将int转换为long，否则会出错。
+				List<Bom> bomList = bomDao.find("from Bom bom where bom.bomStatus.id =? and bom.id=?",(long)1,bomId);
+				List<BomDTO> bomDTOList = new ArrayList<BomDTO>();
+				for(Bom b: bomList){
+					BomDTO bd = new BomDTO();
+					bd.setBomName(b.getBomName());
+					bd.setBomStatus(b.getBomStatus().getStatusName());
+					bd.setBomStatusId(b.getBomStatus().getId());
+					bd.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:m").format(b.getCreateTime()));
+					bd.setId(b.getId());
+					bd.setOrderId(b.getOrder().getId());
+					bd.setOrderName(b.getOrder().getOrderNumber());
+					bd.setPlatName(b.getPlat().getPlatName());
+					bomDTOList.add(bd);
+				}
+				return bomDTOList;
 	}
 	
 	public List<BomDTO> getAllBom(){
@@ -268,7 +288,7 @@ public class BomServiceImpl implements BomService {
 						 BomDetailDTO node = new BomDetailDTO();
 						 node.setBomId(bomId);
 						 node.setModuleCode(tempNode.getCode());
-						 node.setModuleId(tempNode.getId());
+						 node.setModuleId(tempNode.getId()); 
 						 node.setModuleName(tempNode.getText());
 						 nodes.add(node);
 						 //停止循环,跳到flag1标志的循环外面
@@ -409,4 +429,6 @@ public class BomServiceImpl implements BomService {
 			bomDao.save(bom);
 		}
 	}
+
+	
 }

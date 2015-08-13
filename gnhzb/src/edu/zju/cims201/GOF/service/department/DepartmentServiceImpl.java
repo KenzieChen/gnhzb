@@ -13,6 +13,9 @@ import edu.zju.cims201.GOF.hibernate.pojo.pdm.Employee;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.OperationRoles;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.Privilege;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.PrivilegeOperationRole;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.ProcessTemplateIOParam;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskIOParam;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeIOParam;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode;
 
 @Service
@@ -130,7 +133,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 	public void saveTaskTreeNode(TaskTreeNode taskTreeNode) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().save(taskTreeNode);
+		sessionFactory.getCurrentSession().saveOrUpdate(taskTreeNode);
 		
 	}
 	public List<TaskTreeNode> getTaskTreebyRole(String role) {
@@ -153,6 +156,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public Employee getEmployeebyuserid(long userid) {
 		// TODO Auto-generated method stub
 		return (Employee)sessionFactory.getCurrentSession().createQuery("from Employee e where e.user.id=?").setParameter(0, userid).list().get(0);
+	}
+	public List<TaskTreeIOParam> getTaskTreeParamsByTaskTreeNode(
+			Long id) {
+		return sessionFactory.getCurrentSession().createQuery("from TaskTreeIOParam p where p.node.id=?").setParameter(0, id).list();
+
+	}
+	
+	public void deleteTaskTreeIOParamByTaskTree(Long id) {
+		sessionFactory.getCurrentSession().createQuery(" delete from TaskTreeIOParam p where p.node.id="+id).executeUpdate();
+		
 	}
 
 }

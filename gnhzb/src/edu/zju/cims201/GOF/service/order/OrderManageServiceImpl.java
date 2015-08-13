@@ -18,7 +18,7 @@ import edu.zju.cims201.GOF.rs.dto.OrderManageDTO;
 @Transactional
 public class OrderManageServiceImpl implements OrderManageService {
 	private OrderManageDao orderManageDao;
-
+	
 	
 	
 	public String addOrder(String orderNumber, String info){
@@ -99,6 +99,36 @@ public class OrderManageServiceImpl implements OrderManageService {
 		
 		return omDTOList;
 	}
+	//luweijiang
+	public List<OrderManageDTO> getAllOrderById(long id) {
+		OrderManage omList = orderManageDao.findUniqueBy("id", id);
+		List<OrderManageDTO> omDTOList = new ArrayList<OrderManageDTO>();
+			
+			OrderManageDTO omDTO = new OrderManageDTO();
+			Status status =omList.getStatus();
+			Date beginDate =omList.getBeginDate();
+			if(beginDate !=null && !beginDate.equals("")){
+				omDTO.setBeginDate(new SimpleDateFormat("yyyy-MM-dd").format(beginDate));
+			}
+			
+			omDTO.setCheckinfo(omList.getCheckinfo());
+			Date endDate = omList.getEndDate();
+			if(endDate !=null && !endDate.equals("")){
+				omDTO.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(endDate));
+			}
+		    
+			omDTO.setId(omList.getId());
+			omDTO.setInfo(omList.getInfo());
+			omDTO.setMingxi(omList.getMingxi());
+			omDTO.setOrderNumber(omList.getOrderNumber());
+			omDTO.setStatusId(status.getId());
+			omDTO.setStatusName(status.getStatusName());
+			
+			omDTOList.add(omDTO);
+		
+		return omDTOList;
+	}
+	
 	
 	public String change2CheckStatus(long id){
 		OrderManage order=orderManageDao.get(id);
@@ -140,7 +170,23 @@ public class OrderManageServiceImpl implements OrderManageService {
 		return omDTOList;
 	
 	}
-	
+	/**
+	 * luweijiang
+	 */
+	public List<OrderManageDTO> getOrder4ConfiById(long orderId) {
+		// TODO Auto-generated method stub
+		List<OrderManage> omList = orderManageDao.find("from OrderManage om where om.status.statusName='待配置' and om.id="+orderId);
+		List<OrderManageDTO> omDTOList = new ArrayList<OrderManageDTO>();
+		for(OrderManage om : omList){
+			OrderManageDTO omDTO = new OrderManageDTO();
+			omDTO.setId(om.getId());
+			omDTO.setOrderNumber(om.getOrderNumber());
+			omDTO.setInfo(om.getInfo());
+			omDTOList.add(omDTO);
+		}
+		return omDTOList;
+	}
+
 	public OrderManageDao getOrderManageDao() {
 		return orderManageDao;
 	}
@@ -148,6 +194,8 @@ public class OrderManageServiceImpl implements OrderManageService {
 	public void setOrderManageDao(OrderManageDao orderManageDao) {
 		this.orderManageDao = orderManageDao;
 	}
+
+	
 	
 	
 	

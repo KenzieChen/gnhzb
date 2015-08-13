@@ -1,5 +1,22 @@
 function createCodeClassDefi(){
 	//菜单栏
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		return null;
+	}
 	var Menu =Edo.create({
         		    type: 'group',
         		    width: '100%',
@@ -65,7 +82,10 @@ function createCodeClassDefi(){
 	CodeClassDefi_addbtn.on('click', function(e){
 	    var form = showAddForm();
 	    form.reset();
+		//createCodeClassDefi_check(1822);
 	});
+	
+	
 	CodeClassDefi_rebtn.on('click', function(e){
 		codeclassdefiTb.set("data",
     			cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
@@ -106,7 +126,7 @@ function createCodeClassDefi(){
 				    params:{id:record.id},
 				    onSuccess: function(text){
 				    	 Edo.MessageBox.alert("提示", "删除成功！");
-				    	 
+				    	 Edo.get("CodeClassDefi_addbtn").set('enable',true);
 				    },
 				    onFail: function(code){
 				        Edo.MessageBox.alert("提示", "删除失败"+code);
@@ -175,10 +195,23 @@ function createCodeClassDefi(){
 										    type: 'post',
 										    params:o,
 										    onSuccess: function(text){
-										    	Edo.MessageBox.alert("提示", text);
+										    	var data=Edo.util.Json.decode(text);
+										    	Edo.MessageBox.alert("提示", data.message);
+										    	if(data.isSuccess=='1'){
+										    		var resultlist=data.resultlist;
+										    		for(var i=0;i<resultlist.length;i++){
+											    		for (var j=0;j<outputparam.length;j++){
+															if(outputparam[j].name == resultlist[i].name){
+																outputparam[j].value=resultlist[i].value;
+															}
+														}
+										    		}
+										    	}
 										    	codeclassdefiTb.set("data",
 			                                			cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
+			                                			
 			                                	);
+										    	Edo.get("CodeClassDefi_addbtn").set('enable',false);
 										    	 
 										    	 
 										    },
@@ -207,6 +240,8 @@ function createCodeClassDefi(){
 	    return addForm;
 
 	};
+	
+	
 	
 	function showEditForm(){
 	    if(!Edo.get('editForm')) {

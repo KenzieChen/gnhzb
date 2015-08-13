@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,12 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.util.CollectionUtils;
 
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.OperationRoles;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.ProcessTemplateIOParam;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskIOParam;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeIOParam;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode;
 import edu.zju.cims201.GOF.service.department.DepartmentService;
 import edu.zju.cims201.GOF.util.JSONUtil;
@@ -57,7 +62,24 @@ private static final long serialVersionUID = 8683878162525847072L;
 			rootMap.put("des", parentnode.getNodeDescription());	
 			rootMap.put("url", parentnode.getUrl());
 			rootMap.put("code", parentnode.getCode());	
-			rootMap.put("orderid", parentnode.getOrderid());	
+			//rootMap.put("orderid", parentnode.getOrderid());	
+			List<TaskTreeIOParam> params=departmentService.getTaskTreeParamsByTaskTreeNode(parentnode.getId());
+			List<HashMap<String, String>> Inparamlist=new ArrayList<HashMap<String, String>>();
+			List<HashMap<String, String>> Outparamlist=new ArrayList<HashMap<String, String>>();
+			for(TaskTreeIOParam param:params){
+				HashMap<String, String> parammap=new HashMap<String, String>();
+				parammap.put("descri", param.getDescri());
+				parammap.put("name", param.getName());
+				if(param.getIotype()==1){
+					parammap.put("type", "1");
+					Inparamlist.add(parammap);
+				}else{
+					parammap.put("type", "0");
+					Outparamlist.add(parammap);
+				}
+			}
+			rootMap.put("Inparamlist", Inparamlist);
+			rootMap.put("Outparamlist", Outparamlist);
 			rootMap.put("children", getsubNode(parentnode));
 			nodes.add(rootMap);
 			
@@ -77,7 +99,24 @@ private static final long serialVersionUID = 8683878162525847072L;
 				subMap.put("des", subnode.getNodeDescription());	
 				subMap.put("url", subnode.getUrl());
 				subMap.put("code", subnode.getCode());	
-				subMap.put("orderid", subnode.getOrderid());	
+				//subMap.put("orderid", subnode.getOrderid());	
+				List<TaskTreeIOParam> params=departmentService.getTaskTreeParamsByTaskTreeNode(subnode.getId());
+				List<HashMap<String, String>> Inparamlist=new ArrayList<HashMap<String, String>>();
+				List<HashMap<String, String>> Outparamlist=new ArrayList<HashMap<String, String>>();
+				for(TaskTreeIOParam param:params){
+					HashMap<String, String> parammap=new HashMap<String, String>();
+					parammap.put("descri", param.getDescri());
+					parammap.put("name", param.getName());
+					if(param.getIotype()==1){
+						parammap.put("type", "1");
+						Inparamlist.add(parammap);
+					}else{
+						parammap.put("type", "0");
+						Outparamlist.add(parammap);
+					}
+				}
+				subMap.put("Inparamlist", Inparamlist);
+				subMap.put("Outparamlist", Outparamlist);
 				subMap.put("children", getsubNode(subnode));
 				subnodelist.add(subMap);
 				
@@ -86,6 +125,13 @@ private static final long serialVersionUID = 8683878162525847072L;
 		}
 		return subnodelist;
 	}
+	
+	
+	
+	
+	
+	
+	
 	public void saveTaskTreeNode(){
 		HashMap projectmap=(HashMap)getJSONvalueObject(taskTreeNode);
 		Object id=projectmap.get("id");
@@ -94,8 +140,16 @@ private static final long serialVersionUID = 8683878162525847072L;
     	String descri=projectmap.get("des").toString();
     	Object role=projectmap.get("role");
     	String code=projectmap.get("code").toString();
-    	String orderid=projectmap.get("orderid").toString();
+//    	String input=projectmap.get("input").toString();
+//    	String inputdescrip=projectmap.get("inputdescrip").toString();
+//    	String output=projectmap.get("output").toString();
+//    	String outputdescrip=projectmap.get("outputdescrip").toString();
+    	//String orderid=projectmap.get("orderid").toString();
     	String url=projectmap.get("url").toString();
+    	List<HashMap> InList = (List<HashMap>) projectmap
+				.get("Inparamlist");
+    	List<HashMap> OutList = (List<HashMap>) projectmap
+				.get("Outparamlist");
     	if(id==null){
     	
 	    	if(object==null){
@@ -107,7 +161,31 @@ private static final long serialVersionUID = 8683878162525847072L;
 	    		taskTreeNode.setParentNode(null);
 	    		taskTreeNode.setUrl(url);
 	    		taskTreeNode.setCode(code);
-	    		taskTreeNode.setOrderid(orderid);
+	    		//taskTreeNode.setOrderid(orderid);
+	    		Set<TaskTreeIOParam> params=new HashSet<TaskTreeIOParam>();
+	    		if(!CollectionUtils.isEmpty(InList)){
+	    			for(HashMap h1:InList){
+						String hname=String.valueOf(h1.get("name"));
+						String hdescri=String.valueOf(h1.get("descri"));
+						TaskTreeIOParam param=new TaskTreeIOParam();
+						param.setDescri(hdescri);
+						param.setName(hname);
+						param.setIotype(1);
+						params.add(param);
+					}
+	    		}
+	    		if(!CollectionUtils.isEmpty(OutList)){
+		    		for(HashMap h2:OutList){
+						String h2name=String.valueOf(h2.get("name"));
+						String h2descri=String.valueOf(h2.get("descri"));
+						TaskTreeIOParam param=new TaskTreeIOParam();
+						param.setDescri(h2descri);
+						param.setName(h2name);
+						param.setIotype(0);
+						params.add(param);
+					}
+	    		}
+	    		taskTreeNode.setParams(params);
 	    		taskTreeNode.setNodeName(name);
 	    		departmentService.saveTaskTreeNode(taskTreeNode);
 	    	}else{
@@ -121,7 +199,27 @@ private static final long serialVersionUID = 8683878162525847072L;
 	    		taskTreeNode.setParentNode(parent);
 	    		taskTreeNode.setUrl(url);
 	    		taskTreeNode.setCode(code);
-	    		taskTreeNode.setOrderid(orderid);
+	    		//taskTreeNode.setOrderid(orderid);
+	    		Set<TaskTreeIOParam> params=new HashSet<TaskTreeIOParam>();
+				for(HashMap h1:InList){
+					String hname=String.valueOf(h1.get("name"));
+					String hdescri=String.valueOf(h1.get("descri"));
+					TaskTreeIOParam param=new TaskTreeIOParam();
+					param.setDescri(hdescri);
+					param.setName(hname);
+					param.setIotype(1);
+					params.add(param);
+				}
+				for(HashMap h2:OutList){
+					String h2name=String.valueOf(h2.get("name"));
+					String h2descri=String.valueOf(h2.get("descri"));
+					TaskTreeIOParam param=new TaskTreeIOParam();
+					param.setDescri(h2descri);
+					param.setName(h2name);
+					param.setIotype(0);
+					params.add(param);
+				}
+	    		taskTreeNode.setParams(params);
 	    		taskTreeNode.setNodeName(name);
 	    		departmentService.saveTaskTreeNode(taskTreeNode);
 	    	};
@@ -131,6 +229,27 @@ private static final long serialVersionUID = 8683878162525847072L;
     		taskTreeNode.setCode(code);
     		taskTreeNode.setNodeName(name);
     		taskTreeNode.setNodeDescription(descri);
+    		Set<TaskTreeIOParam> params=new HashSet<TaskTreeIOParam>();
+			for(HashMap h1:InList){
+				String hname=String.valueOf(h1.get("name"));
+				String hdescri=String.valueOf(h1.get("descri"));
+				TaskTreeIOParam param=new TaskTreeIOParam();
+				param.setDescri(hdescri);
+				param.setName(hname);
+				param.setIotype(1);
+				params.add(param);
+			}
+			for(HashMap h2:OutList){
+				String h2name=String.valueOf(h2.get("name"));
+				String h2descri=String.valueOf(h2.get("descri"));
+				TaskTreeIOParam param=new TaskTreeIOParam();
+				param.setDescri(h2descri);
+				param.setName(h2name);
+				param.setIotype(0);
+				params.add(param);
+			}
+			departmentService.deleteTaskTreeIOParamByTaskTree(Long.valueOf(id.toString()));
+    		taskTreeNode.setParams(params);
     		departmentService.saveTaskTreeNode(taskTreeNode);
     	}
     	

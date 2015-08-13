@@ -18,6 +18,7 @@ public class TaskTreeNode {
 	private String url;
 	private String orderid;
 	private Set<TaskTreeNode> subNodes=new HashSet<TaskTreeNode>();
+	private Set<TaskTreeIOParam> params=new HashSet<TaskTreeIOParam>();	
 	private TaskTreeNode parentNode;
 	private OperationRoles role;
 	public Long getId() {
@@ -74,10 +75,12 @@ public class TaskTreeNode {
 	public void setOrderid(String orderid) {
 		this.orderid = orderid;
 	}
-	
-	
-	
-
+	public Set<TaskTreeIOParam> getParams() {
+		return params;
+	}
+	public void setParams(Set<TaskTreeIOParam> params) {
+		this.params = params;
+	}
 	
 	
 

@@ -94,9 +94,11 @@ function createSMLEdit(){
         	             {type:'split'},
         	             {type:'button',id:'',text:'查看主文档'},
         	             {type:'split'},
-        	             {type:'button',text:'参与计算整机长'},
-        	             {type:'split'},
+        	             //{type:'button',text:'参与计算整机长'},
+        	             //{type:'split'},
         	             {type:'button',text:'查看接口'},
+        	             {type:'split'},
+        	             {type:'button',id:'SMLEditBuildVariantTask',text:'建立变型任务'},
         	             {type:'space',width:'100%'},
         	             {type:'label',text:'<span style="color:red;">双击字段进行编辑</span>'}
 		        	   ]
@@ -107,8 +109,11 @@ function createSMLEdit(){
 	});
 	
 
-	SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
-	
+	//SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//luweijiang
+	function SMLEditTask(classficationTreeId){
+		SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+	}
 	function createSMLTable(tableName){
 		if(Edo.get('SMLEdit_SMLTable')){
 		   SMLEdit_SMLTable.destroy();
@@ -126,7 +131,7 @@ function createSMLEdit(){
 		table.set('id','SMLEdit_SMLTable');
 		table.set('width','100%');
 		table.set('height','100%');
-		//table.set('autoColumns',true);
+		table.set('autoColumns',true);
 		table.set('showHeader',true);
 		table.set('columns',columnChildren);
 		table.set('enableCellSelect',true);
@@ -143,7 +148,6 @@ function createSMLEdit(){
 		    	}else{
 		    		SMLEdit_ct.set('enable',true);
 		    		var tableData = cims201.utils.getData('sml/sml-table-field!getSmlTableByTableName.action?tableName='+tableName);
-		    		console.log(tableData);
 		    		table.set('data',tableData);
 		    	}
 		    },
@@ -172,7 +176,6 @@ function createSMLEdit(){
 			var fieldLabel =smlName+'(<span style="color:red;">'+unit+'</span>)：';
 			e.record.dataType=dataType;
 			var form = showEditPartSMLForm(tableName,fieldName,fieldLabel);
-			console.log(e.record);
 			form.setForm(e.record);
 
 		});
@@ -258,12 +261,110 @@ function createSMLEdit(){
 	                }
 				]
 			});
-			
-			SMLEdit_EditPartSmlForm.show('center','middle',true);
-			return SMLEdit_EditPartSmlForm;
 		}
+		SMLEdit_EditPartSmlForm.show('center','middle',true);
+		return SMLEdit_EditPartSmlForm;
 	}
 	
+	SMLEditBuildVariantTask.on('click',function(e){
+		if(SMLEdit_SMLTable.selecteds.length!=1){
+			Edo.MessageBox.alert("提示","请选择一项建立变型设计任务");
+			return;
+		}
+		var form = showBuildVariantTaskForm();
+		var selected = SMLEdit_SMLTable.selected;
+		form.set('title','建立<span style="color:red">'+selected.partname+'</span>的变型任务');
+		var output = selected.output.split(",");
+		var requirement = "实例名称="+selected.partname+";实例编码="+selected.partnumber+";";
+		for(var i=0;i<output.length;i++){
+			requirement += output[i] +"="+selected[output[i]]+";";
+		}
+		//requirement=requirement.substring(0, requirement.length-1);
+		selected.requirement=requirement;
+		form.setForm(selected);		
+	});
+	function showBuildVariantTaskForm(){
+		if(!Edo.get('SMLEdit_BuildVariantTaskForm')){
+			Edo.create({
+				id:'SMLEdit_BuildVariantTaskForm',
+				type:'window',
+				width:'350',
+				render:document.body,
+				titlebar:{
+					cls:'e-titlebar-close',
+					onclick:function(e){
+						this.parent.owner.destroy();
+					}
+				},
+				children:[
+					{type:'formitem',visible:false,children:[{type:'text',name:'partId'}]},
+					{
+					    type: 'formitem',padding:[20,0,10,0],labelWidth :'75',label: '任务名称：',
+					    children:[{type: 'text',width:'250',name: 'taskname'}]
+					},
+					{
+					    type: 'formitem',padding:[0,0,10,0],labelWidth :'75',label: '实例编码：',
+					    children:[{type: 'text',width:'250',name: 'partnumber',readOnly:true}]
+					},
+					{
+					    type: 'formitem',padding:[0,0,10,0],labelWidth :'75',label: '实例名称：',
+					    children:[{type: 'text',width:'250',name: 'partname',readOnly:true}]
+					},
+					{
+					    type: 'formitem',padding:[0,0,10,0],labelWidth :'75',label: '开始时间：',
+					    children:[{type: 'date',width:'250',name: 'startDate',readOnly:true}]
+					},
+					{
+					    type: 'formitem',padding:[0,0,10,0],labelWidth :'75',label: '结束时间：',
+					    children:[{type: 'date',width:'250',name: 'endDate',readOnly:true}]
+					},
+					{
+					    type: 'formitem',padding:[0,0,10,0],labelWidth :'75',label: '变型要求：',
+					    children:[{type: 'textarea',width:'250',name: 'requirement',readOnly:true}]
+					},
+					{
+					    type: 'formitem',padding:[0,0,10,0],labelWidth :'75',label: '备注：',
+					    children:[{type: 'textarea',width:'250',name: 'demo'}]
+					},
+					{
+	                    type: 'formitem',layout:'horizontal', padding: [20,0,10, 0],
+	                    children:[
+	                        {type: 'space', width:40},
+	                        {type: 'button', text: '提交', 
+	                            onclick: function(){
+	                                if(SMLEdit_BuildVariantTaskForm.valid()){
+	                                    var o = SMLEdit_BuildVariantTaskForm.getForm();
+	                                    Edo.util.Ajax.request({
+										    url: 'sml/variant!addVariantTask.action',
+										    type: 'post',
+										    params:o,
+										    onSuccess: function(text){
+										    	Edo.MessageBox.alert("提示", text);
+										    	SMLEdit_BuildVariantTaskForm.destroy();
+										    	
+										    },
+										    onFail: function(code){
+										        //code是网络交互错误码,如404,500之类
+										        Edo.MessageBox.alert("提示", "操作失败"+code);
+										    }
+										});
+	                                }
+	                            }
+	                        },
+	                        {type: 'space', width:50},
+	                        {type:'button', text:'取消',
+	                    		onclick:function(){
+	                    			SMLEdit_BuildVariantTaskForm.destroy();
+	                    		}
+	                    	}
+	                    ]
+	                }
+				]
+			});
+		}
+		SMLEdit_BuildVariantTaskForm.show('center','middle',true);
+		return SMLEdit_BuildVariantTaskForm;
+	}
 	this.getCodeClassChoose=function(){
 		return CodeClassChoose;
 	};
@@ -271,4 +372,5 @@ function createSMLEdit(){
 	this.getSMLEditCt=function(){
 		return smlEditCt;
 	};
+	SMLEditTask(3041);
 }

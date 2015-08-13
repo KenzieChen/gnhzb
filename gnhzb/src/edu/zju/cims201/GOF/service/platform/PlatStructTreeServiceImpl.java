@@ -43,6 +43,22 @@ public class PlatStructTreeServiceImpl implements PlatStructTreeService {
 		return listRe;
 	}
 	/**
+	 * luweijiang
+	 */
+	public List<PlatStructTree> getUnfinishedPlatStructById(long id) {
+		// TODO Auto-generated method stub
+		PlatStructTree platStructTree=platStructTreeDao.findUniqueBy("id", id);
+		List<PlatStructTree> listRe = new ArrayList<PlatStructTree>();
+		platStructTreeDao.getSession().evict(platStructTree);
+		platStructTree.setModuleConfigStatusList(null);
+		platStructTree.setParent(null);
+		platStructTree.setChildren(null);
+		platStructTree.setModuleClass(null);
+		listRe.add(platStructTree);
+		return listRe;
+	}
+	
+	/**
 	 * 为平台添加模块的时候，同时为该模块下的所有零部件配置规则，设置必选项为零部件本身。
 	 */
 	public String insertTreeNode(long platId, long moduleId){

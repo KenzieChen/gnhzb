@@ -3,7 +3,7 @@ package edu.zju.cims201.GOF.hibernate.pojo;
 import java.util.Date;
 
 public class ProcessTemplate {
-	private int id;
+	private long id;
 	private String name;
 	private String processid;
 	private Date starttime;
@@ -15,7 +15,7 @@ public class ProcessTemplate {
 	}
 
 
-	public ProcessTemplate(int id, String name, String processid,
+	public ProcessTemplate(long id, String name, String processid,
 		Date starttime,Date endtime,Node node) {
 		this.id = id;
 		this.name = name;
@@ -28,15 +28,6 @@ public class ProcessTemplate {
 
 
 
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -95,6 +86,16 @@ public class ProcessTemplate {
 
 	public void setProcessid(String processid) {
 		this.processid = processid;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 

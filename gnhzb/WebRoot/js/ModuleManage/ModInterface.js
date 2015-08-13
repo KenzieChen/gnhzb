@@ -70,7 +70,11 @@ function createModInterface(){
 		]
 	});
 	
-	ModInterfaceClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//ModInterfaceClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//luweijiang
+	function modInterfaceTask(classficationTreeId){
+		ModInterfaceClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+	}
 	var interfacePanel =Edo.create({
 		type:'ct',
 		height:'100%',
@@ -124,11 +128,137 @@ function createModInterface(){
 			Edo.MessageBox.alert("提示","一级模块不能作为接口模块，请重新选择");
 			return;
 		}
+		
 		var form =showAddInterfaceForm();
 		form.reset();
 		form.children[0].children[0].set('text',ModInterfaceTree.selected.id);
 		
 	});
+	
+	//luweijiang
+	function modeInterface_AddInterfaceTask(classficationTreeId){
+		if(!ModInterfaceTree.selected){
+			Edo.MessageBox.alert("提示","请先选择分类！");
+			return;
+		}else if(!ModInterfaceTree.selected.id){
+			Edo.MessageBox.alert("提示","请先选择分类！");
+			return;
+		}else if(-1==ModInterfaceTree.selected.__pid){
+			Edo.MessageBox.alert("提示","一级模块不能作为接口模块，请重新选择");
+			return;
+		}
+		
+		var form =showAddInterfaceFormById(classficationTreeId);
+		form.reset();
+		form.children[0].children[0].set('text',ModInterfaceTree.selected.id);
+	}
+	function showAddInterfaceFormById(classficationTreeId){
+		 if(!Edo.get('ModInterface_AddInterfaceForm')) {
+		        Edo.create({
+		            id: 'ModInterface_AddInterfaceForm',            
+		            type: 'window',title: '增加新接口',
+		            render: document.body,
+		            width:260,
+		            titlebar: [
+		                {
+		                    cls: 'e-titlebar-close',
+		                    onclick: function(e){
+		                    this.parent.owner.destroy();
+							
+		                    }
+		                }
+		            ],
+		            children: [
+						{type:'formitem',visible:false,children:{
+							type:'text',name:'modId'
+						}},
+						{type:'formitem',visible:false,children:{
+							type:'text',name:'mod2Id'
+						}},
+		                {
+		                    type: 'formitem',labelWidth :'65',label: '接口模块:',
+		                    children:[{type: 'combo', width:'165',readOnly : true,text:'请选择...',
+		                    	ontrigger:function(e){
+		                    		var form =showModChooseWin();
+		                    		var data=cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
+		                    		for(var i=0;i<data.length;i++){
+		                    			if(data[i].leaf==0){
+		                    				data[i].__viewicon=true,
+		                    	    		data[i].icon='e-tree-folder',
+		                    	    		data[i].expanded=false;
+		                    			}else{
+		                    				data[i].icon='e-tree-folder';
+		                    			}
+		                    		}
+		                    		ModInterface_ModChooseTree.set('data',data);
+		                    	}
+		                    }]
+		                },
+		                {
+		                    type: 'formitem',padding:[10,0,0,0],labelWidth :'65',label: '接口编号:',
+		                    children:[{type: 'text', width:'165',name: 'interfaceNumber',valid: noEmpty,autoValid:false}]
+		                }, 
+		                {
+		                    type: 'formitem',padding:[10,0,0,0],labelWidth :'65',label: '接口关系:',
+		                    children:[{type: 'text',width:'165',name: 'interfaceRelation',valid: noEmpty,autoValid:false}]
+		                },  
+		                {
+		                    type: 'formitem',padding:[10,0,0,0],labelWidth :'65',label: '接口名称:',
+		                    children:[{type: 'text', width:'165',name: 'interfaceName',valid: noEmpty,autoValid:false}]
+		                }, 
+		                {
+		                    type: 'formitem',padding:[10,0,0,0],labelWidth :'65',label: '接口类别:',
+		                    children:[{type: 'text',width:'165',name: 'interfaceType',valid: noEmpty,autoValid:false}]
+		                },  
+		                {
+		                    type: 'formitem',layout:'horizontal', padding: [20,0,10, 0],
+		                    children:[
+		                        {name: 'submitBtn', type: 'button', text: '确定', 
+		                            onclick: function(){
+		                                if(ModInterface_AddInterfaceForm.valid()){
+		                                    var o = ModInterface_AddInterfaceForm.getForm();
+		                                    if(''==o.mod2Id){
+		                                    	Edo.MessageBox.alert('提示','请选择接口模块');
+		                                    	return;
+		                                    }
+		                                    if(o.mod2Id==o.modId){
+		                                    	Edo.MessageBox.alert('提示','相同模块不能组成接口，请重新选择模块');
+		                                    	return;
+		                                    }
+		                                    Edo.util.Ajax.request({
+											    url: 'interfacedata/interface-module!addInterfaceModule.action',
+											    type: 'post',
+											    params:o,
+											    onSuccess: function(text){
+											    	Edo.MessageBox.alert("提示", text);
+											    	 ModInterface_Table.set('data',cims201.utils.getData('interfacedata/interface-module!getInterfaceModulebyModId.action?modId='+ModInterfaceTree.selected.id));
+											    },
+											    onFail: function(code){
+											        //code是网络交互错误码,如404,500之类
+											        Edo.MessageBox.alert("提示", "操作失败"+code);
+											       
+											    }
+											});
+		                                    ModInterface_AddInterfaceForm.destroy();
+		                                }
+		                            }
+		                        },
+		                        {type: 'space', width:50},
+		                        {name: 'cancleBtn', type:'button', text:'取消',
+		                    		onclick:function(){
+		                    			ModInterface_AddInterfaceForm.destroy();
+		                    		}
+		                    	}
+		                        
+		                    ]
+		                }
+		            ]
+		        });
+		    }
+		    ModInterface_AddInterfaceForm.show('center', 'middle', true);
+		    return ModInterface_AddInterfaceForm;
+	}
+	
 	//点击移除接口
 	ModInterface_RemoveInterface.on('click',function(e){
 		if(ModInterface_Table.selecteds.length!=1){
@@ -610,6 +740,7 @@ function createModInterface(){
 	this.getInterfacePanel =function(){
 		return interfacePanel;
 	};
-
+	modInterfaceTask(3041);
+	modeInterface_AddInterfaceTask(3041);
 
 }
