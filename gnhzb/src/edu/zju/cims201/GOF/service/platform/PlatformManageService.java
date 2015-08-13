@@ -21,5 +21,13 @@ public interface PlatformManageService {
 	public String checkDone(long id, long statusId, String checkinfo);
 
 	public List<PlatformManageDTO> getFinishedPlatform();
+	/**
+	 * luweijiang
+	 * @param id
+	 * @return
+	 */
+	public List<PlatformManageDTO> getPlatform2CheckById(long id);
+
+	public List<PlatformManageDTO> getFinishedPlatformById(long id);
 
 }

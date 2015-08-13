@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import edu.zju.cims201.GOF.hibernate.pojoA.SmlUnitPool;
 @Service
 @Transactional
 public class SmlTableFieldServiceImpl implements SmlTableFieldService {
+	private Log log = LogFactory.getLog(SmlTableFieldServiceImpl.class);
 	private SmlTableFieldDao smlTableFieldDao;
 	
 	private PartDao partDao;
@@ -136,8 +139,10 @@ public class SmlTableFieldServiceImpl implements SmlTableFieldService {
 		tableName=tableName.replaceAll("-", "_");
 		String selectUrl ="select * from "+tableName;
 		List list = smlTableFieldDao.getSession().createSQLQuery(selectUrl).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
-		List<SmlTableField>stf= getSmlTableFieldByTableName(tableName);
-		StringBuffer sb =new StringBuffer("[");
+		List<SmlTableField>stf = getSmlTableFieldByTableName(tableName);
+		//output用于存放field的output属性为1的事物特性，用于变型设计的时候输出
+		StringBuffer output = new StringBuffer("'output':'");
+		StringBuffer sb = new StringBuffer("[");
 		for(int i =0;i<list.size();i++){
 			Map map =(Map)list.get(i); 
 			sb.append("{'id':'"+map.get("ID")+"','partname':'"+map.get("PART_NAME")+"','partnumber':'"+map.get("PART_NUMBER")+"','partId':'"+map.get("PART_ID")+"',");
@@ -151,12 +156,21 @@ public class SmlTableFieldServiceImpl implements SmlTableFieldService {
 					}else{
 						sb.append(map.get(stf.get(j).getTableHead())+"',");
 					}
+					if(stf.get(j).getOutput()==1){
+						output.append(stf.get(j).getTableHead()+",");
+					}
 			 }
-			 sb.deleteCharAt(sb.length()-1);
-			 sb.append("},");
+			 if(output.charAt(output.length()-1)==','){
+				 output.deleteCharAt(output.length()-1);
+			 }
+			 output.append("'");
+			 sb.append(output.toString()+"},");
+			 output.delete("'output':'".length(), output.length());
 		}
+		
 		sb.deleteCharAt(sb.length()-1);
 		sb.append("]");
+		log.info("getSmlTableByTableName("+tableName+"):"+sb.toString());
 	 	return sb.toString();
 	}
 	
@@ -171,7 +185,11 @@ public class SmlTableFieldServiceImpl implements SmlTableFieldService {
 		String msg ="{'dataType':'"+dataType+"','unit':'"+unit+"','smlName':'"+smlName+"'}";
 		return msg;
 	}
-	
+	public void changeOutput(long id, int output){
+		SmlTableField stf = smlTableFieldDao.get(id);
+		stf.setOutput(output);
+		log.info("changeOutput:更改输出状态");
+	}
 	public String modifyPartSML(String tableName,long partId,String tableHead, String smlValue,String dataType){
 		double smlValueD =0;
 		int smlValueI=0;

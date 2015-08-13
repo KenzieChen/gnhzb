@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#" xmlns:swrlb="http://www.w3.org/2003/11/swrlb#" xmlns:swrl="http://www.w3.org/2003/11/swrl#" xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns="http://www.owl-ontologies.com/Ontology1241779535.owl#" xml:base="http://www.owl-ontologies.com/Ontology1241779535.owl">
+  <owl:Ontology rdf:about="" /> 
+<owl:Class rdf:ID="married">
+<owl:disjointWith>
+  <owl:Class rdf:ID="unmarried" /> 
+  </owl:disjointWith>
+<rdfs:subClassOf>
+  <owl:Class rdf:ID="Family" /> 
+  </rdfs:subClassOf>
+  </owl:Class>
+<owl:Class rdf:ID="John">
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="daughter_is" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:ID="Lily" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:allValuesFrom>
+  <owl:Class rdf:ID="Julia" /> 
+  </owl:allValuesFrom>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="marry_with" /> 
+  </owl:onProperty>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#married" /> 
+  </owl:Class>
+<owl:Class rdf:about="#Lily">
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="mother_is" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:about="#Julia" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+  <owl:allValuesFrom rdf:resource="#John" /> 
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="father_is" /> 
+  </owl:onProperty>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+  <owl:Class rdf:about="#unmarried" /> 
+  </rdfs:subClassOf>
+  </owl:Class>
+<owl:Class rdf:ID="Jack">
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="sister_is" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:about="#Julia" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#mother_is" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:ID="Kitty" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:allValuesFrom>
+  <owl:Class rdf:ID="Clark" /> 
+  </owl:allValuesFrom>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#father_is" /> 
+  </owl:onProperty>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+  <owl:Class rdf:about="#unmarried" /> 
+  </rdfs:subClassOf>
+  </owl:Class>
+<owl:Class rdf:about="#Kitty">
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#daughter_is" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:about="#Julia" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="son_is" /> 
+  </owl:onProperty>
+  <owl:allValuesFrom rdf:resource="#Jack" /> 
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#marry_with" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:about="#Clark" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#married" /> 
+  </owl:Class>
+<owl:Class rdf:about="#Julia">
+<rdfs:subClassOf>
+<owl:Restriction>
+  <owl:allValuesFrom rdf:resource="#Lily" /> 
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#daughter_is" /> 
+  </owl:onProperty>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:ID="brother_is" /> 
+  </owl:onProperty>
+  <owl:allValuesFrom rdf:resource="#Jack" /> 
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#mother_is" /> 
+  </owl:onProperty>
+  <owl:allValuesFrom rdf:resource="#Kitty" /> 
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#father_is" /> 
+  </owl:onProperty>
+<owl:allValuesFrom>
+  <owl:Class rdf:about="#Clark" /> 
+  </owl:allValuesFrom>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+  <owl:allValuesFrom rdf:resource="#John" /> 
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#marry_with" /> 
+  </owl:onProperty>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#married" /> 
+  </owl:Class>
+<owl:Class rdf:about="#Clark">
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#daughter_is" /> 
+  </owl:onProperty>
+  <owl:allValuesFrom rdf:resource="#Julia" /> 
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#son_is" /> 
+  </owl:onProperty>
+  <owl:allValuesFrom rdf:resource="#Jack" /> 
+  </owl:Restriction>
+  </rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Restriction>
+  <owl:allValuesFrom rdf:resource="#Kitty" /> 
+<owl:onProperty>
+  <owl:ObjectProperty rdf:about="#marry_with" /> 
+  </owl:onProperty>
+  </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#married" /> 
+  </owl:Class>
+<owl:Class rdf:about="#unmarried">
+  <rdfs:subClassOf rdf:resource="#Family" /> 
+  <owl:disjointWith rdf:resource="#married" /> 
+  </owl:Class>
+<owl:ObjectProperty rdf:about="#marry_with">
+  <rdfs:domain rdf:resource="#married" /> 
+  </owl:ObjectProperty>
+<owl:ObjectProperty rdf:about="#brother_is">
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:ObjectProperty>
+<owl:ObjectProperty rdf:about="#son_is">
+  <rdfs:domain rdf:resource="#married" /> 
+  </owl:ObjectProperty>
+<owl:ObjectProperty rdf:about="#father_is">
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:ObjectProperty>
+<owl:ObjectProperty rdf:about="#sister_is">
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:ObjectProperty>
+<owl:ObjectProperty rdf:about="#mother_is">
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:ObjectProperty>
+<owl:ObjectProperty rdf:about="#daughter_is">
+  <rdfs:domain rdf:resource="#married" /> 
+  </owl:ObjectProperty>
+  </rdf:RDF>
+<!--  Created with Protege (with OWL Plugin 3.4, Build 533)  http://protege.stanford.edu 
+  --> 

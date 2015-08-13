@@ -26,6 +26,7 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 	private StatusService statusService;
 	PrintWriter out;
 	
+	private long orderId;//订单的id
 	private long id;
 	private long statusId;
 	private String orderNumber;
@@ -62,7 +63,13 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 		out = response.getWriter();
 		out.print(listStr);
 	}
-	
+	//luweijiang
+	public void getAllOrederById()  throws IOException{
+		List<OrderManageDTO> list = orderManageService.getAllOrderById(id);
+		String listStr = JSONUtil.write(list);
+		out = response.getWriter();
+		out.print(listStr);
+	}
 	public void getAllStatus() throws IOException{
 		List<Status> list= statusService.getAllStaus();
 		String listStr = JSONUtil.write(list);
@@ -92,9 +99,18 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 		out = response.getWriter();
 		out.print(listStr);
 	}
+	/**
+	 * luweijiang
+	 * @return
+	 */
 	
-	
-
+	public void getOrder4ConfiById() throws IOException{
+		List<OrderManageDTO> list=orderManageService.getOrder4ConfiById(orderId);
+		String listStr = JSONUtil.write(list);
+		System.out.println(listStr);
+		out = response.getWriter();
+		out.print(listStr);
+	}
 	public long getId() {
 		return id;
 	}
@@ -166,6 +182,14 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
 	}
 
 

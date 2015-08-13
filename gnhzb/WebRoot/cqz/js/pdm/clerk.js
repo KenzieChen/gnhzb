@@ -13,6 +13,9 @@ var employdataTable = new Edo.data.DataTree()
         {name: 'sex', mapping: 'sex', type: 'string'
             
         },
+		{name: 'sex1', mapping: 'sex1', type: 'string'
+
+		},
         {name: 'hobby', mapping: 'hobby',  type: 'string'
         },
         {name: 'dep', mapping: 'dep',  type: 'string'

@@ -1,4 +1,8 @@
 function createBomCheck(){
+	//luweijiang
+	function bomCheckTask(bomId){
+		checkBom_CheckBomChooseTable.set('data',cims201.utils.getData('bom/bom!getBom2CheckById.action',{bomId:bomId}));  
+	}
 	var panel =Edo.create({
 		id:'checkBom_topPanel',
 		type:'panel',title:'<span style="color:red;">请先选择待审核的BOM</span>',width:'100%',height:'100%',
@@ -16,7 +20,8 @@ function createBomCheck(){
 			        	if(checkBom_bomChooseBtn.text=='选择BOM'){
 				        	 showBom2CheckWin();	
 				        	 //加载BOM的数据
-				        	 checkBom_CheckBomChooseTable.set('data',cims201.utils.getData('bom/bom!getBom2Check.action'));  	 
+				        	 //checkBom_CheckBomChooseTable.set('data',cims201.utils.getData('bom/bom!getBom2Check.action'));
+				        	 bomCheckTask(1644);
 			        	}
 			        	if(checkBom_bomChooseBtn.text=='取消该BOM审核'){
 			        		

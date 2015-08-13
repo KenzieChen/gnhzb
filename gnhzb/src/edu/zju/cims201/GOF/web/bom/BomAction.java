@@ -76,7 +76,20 @@ public class BomAction extends ActionSupport implements ServletResponseAware{
 		
 		out.print(bomListStr);
 	}
-	
+	//luweijiang
+	public  void getBom2CheckById(){
+		List<BomDTO> bomList = bomService.getBom2CheckById(bomId);
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String bomListStr = JSONUtil.write(bomList);
+		
+		out.print(bomListStr);
+	}
 	public void getAllBom(){
 		List<BomDTO> bomList = bomService.getAllBom();
 		try {

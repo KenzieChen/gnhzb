@@ -188,7 +188,7 @@ String path = request.getContextPath();
 	        type: 'panel',
 	       	title: '模型信息',
 	        width: 400,
-	        height: 500,
+	        height: 600,
 	        verticalGap:'0',
 	        horizontalGap:'0',
 	  		padding:[0,0,0,0],

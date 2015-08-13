@@ -1,4 +1,8 @@
 function createBomConfig(){
+	function bomConfigTask(orderId){
+		var data = cims201.utils.getData('order/order-manage!getOrder4ConfiById.action',{orderId:orderId});
+		return data;
+	}
 	var orderInfo =Edo.create({          
 	        type: 'ct',
 	        width: '250',
@@ -31,7 +35,7 @@ function createBomConfig(){
 			        		children:[
 			        			{type:'button',text:'加载配置项',onclick:function(e){
 			        				var win = showOrderWin();
-			        				var data = cims201.utils.getData('order/order-manage!getOrder4Confi.action');
+			        				var data = bomConfigTask(3121);
 			        				BomConfig_orderTable.set('data',data);
 			        			}}
 			        		]
@@ -60,7 +64,9 @@ function createBomConfig(){
 	            }
 	        ]
 	});
-	
+	function bomConfig_platformTableTask(platformId){
+		BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatformById.action',{id:platformId}));
+	}
 	var platForm = Edo.create({	
 			id:'BomConfig_platStructPanel',
 	        type: 'panel',
@@ -80,7 +86,8 @@ function createBomConfig(){
 	        					return;
 	        				}
 	        				var win = showPlatformWin();
-	        				BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatform.action'));
+	        				bomConfig_platformTableTask(741);
+	        				//BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatform.action'));
 	        				
 	        			}},
 	        			{type:'space',width:'100%'},

@@ -192,11 +192,10 @@ public class Constants {
     
     
     //task配置
-    public static final String  TASK_STATUS_END=config.getValue("task_status_end"); 
     public static final String 	TASK_STATUS_CONFIG=config.getValue("task_status_config");
-     //等待执行
+    public static final String  TASK_STATUS_ACTIVE=config.getValue("task_status_active"); 
+    public static final String  TASK_STATUS_TO_CHECK=config.getValue("task_status_to_check"); 
     public static final String 	TASK_STATUS_TO_BE_ACTIVE=config.getValue("task_status_to_be_active");  
-    public static final String  TASK_STATUS_ACTiVE=config.getValue("task_status_active");
     public static final String 	TASK_STATUS_FINISH=config.getValue("task_status_finish");  
 	//project配置
     public static final String PROJECT_STATUS_NEWCREATE=config.getValue("project_status_newcreate");

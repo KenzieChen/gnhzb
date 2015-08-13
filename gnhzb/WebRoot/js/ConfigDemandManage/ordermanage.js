@@ -104,6 +104,7 @@ function createOrdermanage(){
 				    onSuccess: function(text){
 				    		Edo.MessageBox.alert("提示", text);
 				    		ordermanageTb.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
+				    		Edo.get("ordermanage_addbtn").set('enable',true);
 				    },
 				    onFail: function(code){
 				        //code是网络交互错误码,如404,500之类
@@ -167,7 +168,7 @@ function createOrdermanage(){
 											    	}
 											    	Edo.MessageBox.alert("提示", text);
 											    	ordermanageTb.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
-											    	
+											    	Edo.get("ordermanage_addbtn").set('enable',false);
 											    },
 											    onFail: function(code){
 											        //code是网络交互错误码,如404,500之类

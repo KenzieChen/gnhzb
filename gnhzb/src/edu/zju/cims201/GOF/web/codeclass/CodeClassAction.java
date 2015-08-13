@@ -3,6 +3,7 @@ package edu.zju.cims201.GOF.web.codeclass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,17 +48,29 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		out =response.getWriter();
 		CodeClass nameFlag =codeClassService.findUniqueByClassName(classname);
 		if(nameFlag!=null){
-			out.print("类别名称已存在！");
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("isSuccess", "1");
+			map.put("message", "类别名称已存在！");
+			String jsonString =JSONUtil.write(map);
+			out.print(jsonString);
 			return null;
 		};
 		CodeClass codeFlag =codeClassService.findUniqueByClassCode(classcode);
 		if(codeFlag!=null){
-			out.print("类别代号已存在！");
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("isSuccess", "1");
+			map.put("message", "类别代号已存在！");
+			String jsonString =JSONUtil.write(map);
+			out.print(jsonString);
 			return null;
 		};
 		CodeClass ruleFlag =codeClassService.findUniqueByRule(codehead);
 		if(ruleFlag!=null){
-			out.print("类别码首字段已存在！");
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("isSuccess", "1");
+			map.put("message", "类别码首字段已存在！");
+			String jsonString =JSONUtil.write(map);
+			out.print(jsonString);
 			return null;
 		};
 		
@@ -66,11 +79,21 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		cc.setUuid(UUID.randomUUID().toString());
 		cc.setClassname(classname);
 		cc.setClasscode(classcode);
-		cc.setRule(codehead);
+		cc.setRule(codehead);	
 		cc.setFlag(0);
 		codeClassService.saveCodeClass(cc);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("isSuccess", "1");
+		map.put("message", "添加成功！");
+		List<HashMap<String, String>> resultlist=new ArrayList<HashMap<String,String>>();
+		HashMap<String, String> resultitem=new HashMap<String, String>();
+		resultitem.put("name", "codeclassid");
+		resultitem.put("value", String.valueOf(cc.getId()));
+		resultlist.add(resultitem);
+		map.put("resultlist", resultlist);
 		
-		out.print("添加成功！");
+		String jsonString =JSONUtil.write(map);
+		out.print(jsonString);
 		return null;
 	}
 	
@@ -116,6 +139,32 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		return null;
 	}
 	
+	/**
+	 * luweijiang
+	 * @return
+	 * @throws Exception
+	 */
+	public String findUnConstructedCodeClassById() throws Exception{
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
+		CodeClass cc=codeClassService.findUnConstructedCodeClassById(id);
+		if (cc!=null) {
+			List<CodeClass> ccs=new ArrayList<CodeClass>();
+			ccs.add(cc);
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", ccs);
+			
+			
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
+		return null;
+	}
+	
 	public String addConstructedCodeClass() throws IOException{
 		codeClassService.addConstructedByCodeClass(classcode);
 		out=response.getWriter();
@@ -133,6 +182,23 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		codeClassService.deleteById(id);
 		out=response.getWriter();
 		out.print("删除成功！");
+		return null;
+	}
+	
+	public String findById() throws IOException{
+		List<CodeClass> cc = codeClassService.findById(id);
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
+		if(cc!=null){
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", cc);
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询任务结果出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
 		return null;
 	}
 	

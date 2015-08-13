@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.zju.cims201.GOF.dao.project.ProjectDao;
+import edu.zju.cims201.GOF.hibernate.pojo.Ioflow;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmProject;
 
 /**
@@ -27,8 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 	}
 	public PdmProject getProject(long p) {
-		// TODO Auto-generated method stub
-		return null;
+		return (PdmProject)sessionFactory.getCurrentSession().get(PdmProject.class, p);
 	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;

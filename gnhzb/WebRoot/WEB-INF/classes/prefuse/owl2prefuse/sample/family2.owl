@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#" xmlns:swrlb="http://www.w3.org/2003/11/swrlb#" xmlns:swrl="http://www.w3.org/2003/11/swrl#" xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns="http://www.owl-ontologies.com/Ontology1241779535.owl#" xml:base="http://www.owl-ontologies.com/Ontology1241779535.owl">
+  <owl:Ontology rdf:about="" /> 
+<owl:Class rdf:ID="married">
+<owl:disjointWith>
+  <owl:Class rdf:ID="unmarried" /> 
+  </owl:disjointWith>
+<rdfs:subClassOf>
+  <owl:Class rdf:ID="Family" /> 
+  </rdfs:subClassOf>
+  </owl:Class>
+<owl:Class rdf:about="#unmarried">
+  <rdfs:subClassOf rdf:resource="#Family" /> 
+  <owl:disjointWith rdf:resource="#married" /> 
+  </owl:Class>
+<owl:DatatypeProperty rdf:ID="brother">
+  <rdfs:domain rdf:resource="#Family" /> 
+<rdfs:subPropertyOf>
+  <owl:DatatypeProperty rdf:ID="has_brother" /> 
+  </rdfs:subPropertyOf>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="has_daughter">
+  <rdfs:domain rdf:resource="#married" /> 
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="marry_with">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  <rdfs:domain rdf:resource="#married" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:about="#has_brother">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" /> 
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="has_son">
+  <rdfs:domain rdf:resource="#married" /> 
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="sister">
+<rdfs:subPropertyOf>
+  <owl:DatatypeProperty rdf:ID="has_sister" /> 
+  </rdfs:subPropertyOf>
+  <rdfs:domain rdf:resource="#Family" /> 
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="mother">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="son">
+  <rdfs:domain rdf:resource="#married" /> 
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  <rdfs:subPropertyOf rdf:resource="#has_son" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="daughter">
+  <rdfs:subPropertyOf rdf:resource="#has_daughter" /> 
+  <rdfs:domain rdf:resource="#married" /> 
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:about="#has_sister">
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" /> 
+  <rdfs:domain rdf:resource="#Family" /> 
+  </owl:DatatypeProperty>
+<owl:DatatypeProperty rdf:ID="father">
+  <rdfs:domain rdf:resource="#Family" /> 
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" /> 
+  </owl:DatatypeProperty>
+<married rdf:ID="John">
+  <marry_with xml:lang="en">Julia</marry_with> 
+  <has_son rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_son> 
+  <has_daughter rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_daughter> 
+  <has_brother rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_brother> 
+  <has_sister rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_sister> 
+  <daughter xml:lang="en">Lily</daughter> 
+  </married>
+<unmarried rdf:ID="Jack">
+  <has_sister rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_sister> 
+  <has_brother rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_brother> 
+  <father rdf:datatype="http://www.w3.org/2001/XMLSchema#string" /> 
+  <father xml:lang="en">John</father> 
+  <mother xml:lang="en">Kitty</mother> 
+  <sister xml:lang="en">Julia</sister> 
+  </unmarried>
+<married rdf:ID="Julia">
+  <daughter xml:lang="en">Lily</daughter> 
+  <marry_with xml:lang="en">John</marry_with> 
+  <has_daughter rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_daughter> 
+  <mother xml:lang="en">Kitty</mother> 
+  <brother xml:lang="en">Jack</brother> 
+  <has_brother rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_brother> 
+  <father xml:lang="en">Clark</father> 
+  <has_sister rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_sister> 
+  <has_son rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_son> 
+  </married>
+<unmarried rdf:ID="Lily">
+  <has_sister rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_sister> 
+  <has_brother rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_brother> 
+  <father xml:lang="en">John</father> 
+  <mother xml:lang="en">Julia</mother> 
+  </unmarried>
+<married rdf:ID="Kitty">
+  <has_daughter rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_daughter> 
+  <marry_with xml:lang="en">Clark</marry_with> 
+  <son xml:lang="en">Jack</son> 
+  <daughter xml:lang="en">Julia</daughter> 
+  <has_sister rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_sister> 
+  <has_son rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_son> 
+  <has_brother rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_brother> 
+  </married>
+<married rdf:ID="Clark">
+  <has_son rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_son> 
+  <has_brother rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_brother> 
+  <son xml:lang="en">Jack</son> 
+  <has_sister rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</has_sister> 
+  <has_daughter rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</has_daughter> 
+  <daughter xml:lang="en">Julia</daughter> 
+  <marry_with xml:lang="en">Kitty</marry_with> 
+  </married>
+  </rdf:RDF>

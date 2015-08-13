@@ -10,13 +10,18 @@
                 </id>
                 <property name="nodeDescription" column="nodeDescription" type="string"/>
                 <property name="code" column="code" type="string"/>
+                <property name="url" column="url" type="string"/>
                 <property name="orderid" column="orderid" type="string" />
                 <property name="nodeName" column="nodeName" type="string"/>
-                <property name="url" column="url" type="string"/>
                 <set name="subNodes" table="TaskTreeNode" lazy="false" cascade="all">
                         <key column="parentId"/>
                         
                         <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode"/>
+                </set>
+                <set name="params" table="TaskTreeIOParam" lazy="false" cascade="all">
+                        <key column="nodeid"/>
+                        
+                        <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeIOParam"/>
                 </set>
                  <many-to-one name="parentNode" column="parentId" 
 					class="edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode">

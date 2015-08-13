@@ -51,7 +51,16 @@ public class PlatformManageAction extends ActionSupport implements
 		out=response.getWriter();
 		out.print(platListStr);
 	}
-	
+	/**
+	 * luweijiang
+	 * @throws IOException
+	 */
+	public void getFinishedPlatformById() throws IOException{
+		List<PlatformManageDTO> platList = platformManageService.getFinishedPlatformById(id);
+		String platListStr =JSONUtil.write(platList);
+		out=response.getWriter();
+		out.print(platListStr);
+	}
 	public void updatePlatform() throws IOException{
 		String msg=platformManageService.updatePlatform(id,platName,info);
 		out=response.getWriter();
@@ -72,7 +81,15 @@ public class PlatformManageAction extends ActionSupport implements
 		out=response.getWriter();
 		out.print(str);
 	}
-	
+	/*
+	 * luweijiang
+	 */
+	public void getPlatform2CheckById() throws Exception{
+		List<PlatformManageDTO> platList=platformManageService.getPlatform2CheckById(id);
+		String str =JSONUtil.write(platList);
+		out=response.getWriter();
+		out.print(str);
+	}
 	public void changePlat2CheckStatus() throws IOException{
 		String msg = platformManageService.changePlat2CheckStatus(id);
 		out=response.getWriter();

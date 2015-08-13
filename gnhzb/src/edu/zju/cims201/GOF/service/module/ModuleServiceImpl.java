@@ -23,6 +23,7 @@ import edu.zju.cims201.GOF.hibernate.pojo.PdmModule;
 import edu.zju.cims201.GOF.hibernate.pojo.PdmProcessTemplate;
 import edu.zju.cims201.GOF.hibernate.pojo.ProcessTemplate;
 import edu.zju.cims201.GOF.hibernate.pojo.SystemUser;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.ProcessTemplateIOParam;
 
 
 
@@ -45,7 +46,7 @@ public class ModuleServiceImpl implements ModuleService {
 
 
 	public BaseModule addModule(BaseModule m) {
-		// TODO Auto-generated method stub
+	
 		int version;
 		if(m.getVersion()==0){
 		List<BaseModule> modules=sessionFactory.getCurrentSession().createQuery("from LcaModule m where m.component.id = ? order by m.version")
@@ -66,7 +67,7 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	public BaseModule getModule(String cpid, String pdid,String version) {
-		// TODO Auto-generated method stub
+	
 		if(cpid==null){
 			return (BaseModule)sessionFactory.getCurrentSession().createQuery("from LcaModule m where m.component.id = ? and m.version=?")
 					.setParameter(0, Integer.valueOf(pdid)).setParameter(1, Integer.valueOf(version)).list().get(0);
@@ -93,13 +94,13 @@ public class ModuleServiceImpl implements ModuleService {
 		return processDAO.findPage(page, hql);
 	}
 	public void addProcess(ProcessTemplate process) {
-		// TODO Auto-generated method stub
+	
 		sessionFactory.getCurrentSession().save(process);
 		
 	}
 
 	public List<Ioflow> getioflow(boolean a,String processid,String componentid,String version,String moduleid) {
-		// TODO Auto-generated method stub
+	
 		List<Ioflow> ioflows=null;
 		if(a&&(componentid!=null)){
 			
@@ -128,20 +129,20 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	public Ioflow getioflow(String id) {
-		// TODO Auto-generated method stub
+	
 		return (Ioflow)sessionFactory.getCurrentSession().get(Ioflow.class, Integer.valueOf(id));
 	}
 	public void deleteprocess(String id) {
-		// TODO Auto-generated method stub
+	
 		ProcessTemplate p=(ProcessTemplate)sessionFactory.getCurrentSession().get(ProcessTemplate.class, Integer.valueOf(id));
 		sessionFactory.getCurrentSession().delete(p);
 		sessionFactory.getCurrentSession().flush();
 	}
 
 	public List<BaseModule> getModulelist(String parentid,String componentid,String moduletype) {
-		// TODO Auto-generated method stub
+	
 		if((parentid==null)&&(componentid==null)&&moduletype.equals("PDM")){
-		    return sessionFactory.getCurrentSession().createQuery("from PdmModule m where m.levelid="+"'level_0'").list();
+		    return sessionFactory.getCurrentSession().createQuery("from PdmModule m where m.levelid="+"'level_top'").list();
 		}else if((parentid==null)&&(componentid==null)&&moduletype.equals("LCA")){
 		    return sessionFactory.getCurrentSession().createQuery("from LcaModule m where m.parent.id=?").setParameter(0,Integer.valueOf(parentid)).list();
 		}else if(!(parentid==null)&&(componentid==null)){
@@ -153,16 +154,16 @@ public class ModuleServiceImpl implements ModuleService {
 			}
 	}
 	public List<Component> getLcaModuleComponentlist() {
-		// TODO Auto-generated method stub
+	
 		    return sessionFactory.getCurrentSession().createQuery("select distinct m.component from LcaModule m where m.parent=null").list();
 		}
 
 	public ProcessTemplate getprocess(String processid, Integer moduleid) {
-		// TODO Auto-generated method stub
+	
 		 return (ProcessTemplate)sessionFactory.getCurrentSession().createQuery("from ProcessTemplate p where p.processid=?and p.module.id=?").setParameter(0,processid).setParameter(1,moduleid).list().get(0);
 	}
 	public BaseModule getModule(String id) {
-		// TODO Auto-generated method stub
+	
 		Object object=sessionFactory.getCurrentSession().createQuery("from BaseModule m where m.id = ?").setParameter(0, Integer.valueOf(id)).list().get(0);
 		if (object instanceof PdmModule) {
 			PdmModule a = (PdmModule) object;
@@ -183,7 +184,7 @@ public class ModuleServiceImpl implements ModuleService {
 	    	}
 	    }
 	public PdmProcessTemplate getprocesstemplate(String id) {
-		// TODO Auto-generated method stub
+	
 		PdmProcessTemplate object=(PdmProcessTemplate)sessionFactory.getCurrentSession().createQuery("from PdmProcessTemplate p where p.id = ?").setParameter(0, Integer.valueOf(id)).list().get(0);
 		return object;
 	    }
@@ -193,18 +194,18 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	public void savefunction(Function function) {
-		// TODO Auto-generated method stub
+	
 		sessionFactory.getCurrentSession().save(function);
 		
 	}
 
 	public List<Node> getnode() {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from Node node").list();
 	}
 
 	public List<Function> getfunctionlist() {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from Function f").list();
 	}
 
@@ -214,47 +215,45 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	public List<Node> getnodelist() {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from Node n  order by n.nodetype.id").list();
 	}
 
 	public List<Nodetype> getnodetypelist() {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from Nodetype nt ").list();
 	}
 
 	public List<Nodecategory> getnodecategorylist() {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from Nodecategory nc ").list();
 	}
 
 	public List<Node> getNodeListByType(String nodetype,String nodecategory) {
-		// TODO Auto-generated method stub.
 		return sessionFactory.getCurrentSession().createQuery("from Node n where n.nodecategory.name= '"+nodecategory+"' and n.nodetype.name in(select nt.name from Nodetype nt where nt.name='COMMON' or nt.name= '"+nodetype+"')").list();
 	}
 
 
 	public void addModuleandprocess(BaseModule m) {
-		// TODO Auto-generated method stub
+	
 		sessionFactory.getCurrentSession().save(m);
 		
 	}
 
 	public void saveprocess(ProcessTemplate m) {
-		// TODO Auto-generated method stub
+	
 		sessionFactory.getCurrentSession().save(m);
 		
 	}
 
-	public ProcessTemplate getNodebyModuleandProcess(String moduleid, String processid) {
-		// TODO Auto-generated method stub
+	public ProcessTemplate getProcessTemplatebyModuleandProcess(String moduleid, String processid) {
 		ProcessTemplate p=(ProcessTemplate)sessionFactory.getCurrentSession().createQuery("from ProcessTemplate p where p.module.id=? and p.processid=?" ).setParameter(0, Integer.valueOf(moduleid)).setParameter(1,processid).list().get(0);
 		return p;
 		
 	}
 
 	public List getmodulelistsbycomponnet(String id) {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from LcaModule m where m.component.id=? and m.parent=null").setParameter(0, Integer.valueOf(id)).list();
 	}
 
@@ -288,20 +287,26 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 	}
 	public int addPdmModuleandprocess(BaseModule m) {
-		// TODO Auto-generated method stub
+	
 		sessionFactory.getCurrentSession().save(m);
 		return m.getId();
 		
 	}
 	public ProcessTemplate getprocess(String processid, int moduleid) {
-		// TODO Auto-generated method stub
+	
 		 return (ProcessTemplate)sessionFactory.getCurrentSession().createQuery("from ProcessTemplate p where p.processid=?and p.module.id=?").setParameter(0,processid).setParameter(1,moduleid).list().get(0);
 	}
 
 	public List getprocesslists(int moduleid) {
-		// TODO Auto-generated method stub
+	
 		return sessionFactory.getCurrentSession().createQuery("from ProcessTemplate p where p.module.id=? order by p.orderid").setParameter(0,moduleid).list();
 	}
+
+	public List getProcessTemplateParamsByProcessTemplate(long id) {
+	
+		return sessionFactory.getCurrentSession().createQuery("from ProcessTemplateIOParam p where p.process.id=?").setParameter(0, id).list();
+	}
+
 
 	
 }

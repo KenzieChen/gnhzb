@@ -77,7 +77,11 @@ function createStructUpload(){
 		   }
 		]
 	});
-	StructUploadClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//StructUploadClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	//luweijiang
+	function structUploadTask(classficationTreeId){
+		StructUploadClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+	}
 	
 	var uploadPanel =Edo.create({
 		type:'ct',
@@ -695,4 +699,5 @@ function createStructUpload(){
 	this.getUploadPanel =function(){
 		return uploadPanel;
 	};
+	structUploadTask(3041);
 }

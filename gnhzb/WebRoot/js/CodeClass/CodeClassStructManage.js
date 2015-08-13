@@ -64,14 +64,31 @@ function createCodeClassStructManage(){
                 }
             ]	
 	});
-	var lbdhTreeData =cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
-	for(var i =0;i<lbdhTreeData.length;i++){
-		lbdhTreeData[i].icon='e-tree-folder';
+	/*
+	var lbdhTreeData = cims201.utils
+			.getData('classificationtree/classification-tree!getClassStruct.action');
+	for ( var i = 0; i < lbdhTreeData.length; i++) {
+		lbdhTreeData[i].icon = 'e-tree-folder';
 	}
-	LbdhTree.set('data',
-			[{text:'分类类别',icon:'e-tree-folder',expanded:true,children:lbdhTreeData}]
-	);
+	LbdhTree.set('data', [ {
+		text : '分类类别',
+		icon : 'e-tree-folder',
+		expanded : true,
+		children : lbdhTreeData
+	} ]);*/
 	
+	//luweijiang
+	function codeClassStructManageTask(classficationTreeId){
+		var lbdhTreeData =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
+		//console.log(lbdhTreeData);
+		for(var i =0;i<lbdhTreeData.length;i++){
+			lbdhTreeData[i].icon='e-tree-folder';
+		}
+		LbdhTree.set('data',
+				[{text:'分类类别',icon:'e-tree-folder',expanded:true,children:lbdhTreeData}]
+		);
+		
+	}
 	//分类结构
 	var FljgPanel = Edo.create({		
             type: 'panel',

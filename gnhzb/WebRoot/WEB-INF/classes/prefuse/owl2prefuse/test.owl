@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns="http://www.owl-ontologies.com/unnamed.owl#"
+  xml:base="http://www.owl-ontologies.com/unnamed.owl">
+  <owl:Ontology rdf:about=""/>
+  <owl:Class rdf:ID="通用术语"/>
+  <owl:Class rdf:ID="扩展术语"/>
+  <owl:ObjectProperty rdf:ID="下位词">
+    <rdfs:domain rdf:resource="#通用术语"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="参考词">
+    <rdfs:domain rdf:resource="#通用术语"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="上位词">
+    <rdfs:domain rdf:resource="#通用术语"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="同义词">
+    <rdfs:domain rdf:resource="#通用术语"/>
+  </owl:ObjectProperty>
+  <owl:FunctionalProperty rdf:ID="录入">
+    <rdfs:domain rdf:resource="#通用术语"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="来源">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#通用术语"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="内涵">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#通用术语"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="英文">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#通用术语"/>
+          <owl:Class rdf:about="#扩展术语"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="正规术语">
+    <rdfs:domain rdf:resource="#扩展术语"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <通用术语 rdf:ID="固体推进剂">
+    <上位词>
+      <通用术语 rdf:ID="推进剂">
+        <下位词>
+          <通用术语 rdf:ID="液体推进剂">
+            <上位词 rdf:resource="#推进剂"/>
+            <参考词>
+              <通用术语 rdf:ID="液体火箭发动机">
+                <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >航天科技词典</来源>
+                <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >robot</录入>
+                <上位词>
+                  <通用术语 rdf:ID="火箭发动机">
+                    <下位词 rdf:resource="#液体火箭发动机"/>
+                    <下位词>
+                      <通用术语 rdf:ID="固体火箭发动机">
+                        <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >航天科技词典</来源>
+                        <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >robot</录入>
+                        <上位词 rdf:resource="#火箭发动机"/>
+                        <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >以固体推进剂为能量来源的火箭发动机</内涵>
+                        <参考词>
+                          <通用术语 rdf:ID="固体推进剂运载火箭">
+                            <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >robot</录入>
+                            <参考词 rdf:resource="#固体推进剂"/>
+                            <上位词>
+                              <通用术语 rdf:ID="运载火箭">
+                                <下位词>
+                                  <通用术语 rdf:ID="液体推进剂运载火箭">
+                                    <参考词 rdf:resource="#液体火箭发动机"/>
+                                    <参考词>
+                                      <通用术语 rdf:ID="上面级">
+                                        <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                        >robot</录入>
+                                        <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                        >航天科技词典</来源>
+                                        <参考词>
+                                          <通用术语 rdf:ID="有效载荷">
+                                            <内涵 rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#string"
+                                            >运载火箭运输的卫星、飞船、空间站等飞行器。</内涵>
+                                            <来源 rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#string"
+                                            >航天科技词典</来源>
+                                            <参考词>
+                                              <通用术语 rdf:ID="卫星">
+                                                <录入 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >robot</录入>
+                                                <上位词>
+                                                  <通用术语 rdf:ID="飞行器">
+                                                    <来源 rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >航天科技词典</来源>
+                                                    <参考词>
+                                                      <通用术语 rdf:ID="预定轨道">
+                                                        <参考词 rdf:resource="#飞行器"/>
+                                                        <参考词 rdf:resource="#卫星"/>
+                                                        <参考词>
+                                                          <通用术语 rdf:ID="飞船">
+                                                            <来源
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >航天科技词典</来源>
+                                                            <录入
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >robot</录入>
+                                                            <内涵
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >包括载人飞船及货物飞船。</内涵>
+                                                            <上位词 rdf:resource="#飞行器"/>
+                                                            <上位词 rdf:resource="#有效载荷"/>
+                                                            <参考词 rdf:resource="#运载火箭"/>
+                                                          </通用术语>
+                                                        </参考词>
+                                                        <参考词>
+                                                          <通用术语 rdf:ID="空间站">
+                                                            <上位词 rdf:resource="#飞行器"/>
+                                                            <上位词 rdf:resource="#有效载荷"/>
+                                                            <录入
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >robot</录入>
+                                                            <内涵
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >在地球轨道上运行的空间实验室。</内涵>
+                                                            <来源
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >航天科技词典</来源>
+                                                          </通用术语>
+                                                        </参考词>
+                                                        <来源 rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#string"
+                                                        >航天科技词典</来源>
+                                                        <录入 rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#string"
+                                                        >robot</录入>
+                                                        <内涵 rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#string"
+                                                        >卫星、飞船、空间站等的预定运行轨道。</内涵>
+                                                      </通用术语>
+                                                    </参考词>
+                                                    <参考词 rdf:resource="#运载火箭"/>
+                                                    <录入 rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >robot</录入>
+                                                    <内涵 rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >在大气层内或太空飞行的装置，包括飞机、导弹、飞艇、卫星、火箭、飞船、空间站等。</内涵>
+                                                    <上位词 rdf:resource="#飞行器"/>
+                                                    <上位词 rdf:resource="#有效载荷"/>
+                                                  </通用术语>
+                                                </上位词>
+                                                <上位词 rdf:resource="#有效载荷"/>
+                                                <参考词>
+                                                  <通用术语 rdf:ID="星箭分离">
+                                                    <录入 rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >robot</录入>
+                                                    <来源 rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >航天科技词典</来源>
+                                                    <上位词>
+                                                      <通用术语 rdf:ID="分离">
+                                                        <下位词>
+                                                          <通用术语 rdf:ID="级间分离">
+                                                            <内涵
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >运载火箭最下面一级发动机关机后，将进行与上面级的分离。</内涵>
+                                                            <上位词 rdf:resource="#分离"/>
+                                                            <来源
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >航天科技词典</来源>
+                                                            <参考词 rdf:resource="#上面级"/>
+                                                            <参考词 rdf:resource="#运载火箭"/>
+                                                            <录入
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >robot</录入>
+                                                          </通用术语>
+                                                        </下位词>
+                                                        <下位词 rdf:resource="#星箭分离"/>
+                                                        <录入 rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#string"
+                                                        >robot</录入>
+                                                        <内涵 rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#string"
+                                                        >包括级间分离、头体分离、助推分离等。</内涵>
+                                                        <来源 rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#string"
+                                                        >航天科技词典</来源>
+                                                        <参考词>
+                                                          <通用术语 rdf:ID="爆炸螺栓">
+                                                            <来源
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >航天科技词典</来源>
+                                                            <内涵
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >用于分离的紧固件。</内涵>
+                                                            <录入
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >robot</录入>
+                                                            <参考词 rdf:resource="#分离"/>
+                                                          </通用术语>
+                                                        </参考词>
+                                                        <参考词>
+                                                          <通用术语 rdf:ID="分离发动机">
+                                                            <来源
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >国防科技词典</来源>
+                                                            <参考词 rdf:resource="#飞行器"/>
+                                                            <参考词 rdf:resource="#分离"/>
+                                                            <录入
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >xdict</录入>
+                                                            <内涵
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >用于分离的发动机。</内涵>
+                                                            <上位词 rdf:resource="#火箭发动机"/>
+                                                          </通用术语>
+                                                        </参考词>
+                                                        <参考词 rdf:resource="#运载火箭"/>
+                                                      </通用术语>
+                                                    </上位词>
+                                                    <参考词 rdf:resource="#卫星"/>
+                                                    <参考词 rdf:resource="#运载火箭"/>
+                                                    <内涵 rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >卫星与运载火箭分离，进入轨道。</内涵>
+                                                  </通用术语>
+                                                </参考词>
+                                                <参考词 rdf:resource="#预定轨道"/>
+                                                <来源 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >航天科技词典</来源>
+                                                <内涵 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >包括气象卫星、侦查卫星、地球资源卫星、通讯卫星等。</内涵>
+                                              </通用术语>
+                                            </参考词>
+                                            <参考词 rdf:resource="#飞船"/>
+                                            <参考词 rdf:resource="#空间站"/>
+                                            <录入 rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#string"
+                                            >robot</录入>
+                                          </通用术语>
+                                        </参考词>
+                                        <参考词 rdf:resource="#星箭分离"/>
+                                        <参考词 rdf:resource="#运载火箭"/>
+                                        <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                        >运载火箭的末级，一般与有效载荷直接对接，上面级具有机动能力。</内涵>
+                                      </通用术语>
+                                    </参考词>
+                                    <参考词 rdf:resource="#液体推进剂"/>
+                                    <上位词 rdf:resource="#运载火箭"/>
+                                    <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                    >航天科技词典</来源>
+                                    <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                    >robot</录入>
+                                    <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                    >使用液体发动机的运载火箭。</内涵>
+                                  </通用术语>
+                                </下位词>
+                                <下位词 rdf:resource="#固体推进剂运载火箭"/>
+                                <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                >用于发射卫星和飞船等载荷的飞行器。</内涵>
+                                <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                >robot</录入>
+                                <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                >航天科技词典</来源>
+                              </通用术语>
+                            </上位词>
+                            <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >使用固体发动机的运载火箭。</内涵>
+                            <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >航天科技词典</来源>
+                          </通用术语>
+                        </参考词>
+                        <参考词 rdf:resource="#固体推进剂"/>
+                      </通用术语>
+                    </下位词>
+                    <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >为运载火箭提供推进的动力系统。</内涵>
+                    <参考词>
+                      <通用术语 rdf:ID="发动机摇摆">
+                        <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >通过改变喷管的方向改变发动机推力方向。</内涵>
+                        <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >robot</录入>
+                        <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >航天科技词典</来源>
+                        <参考词>
+                          <通用术语 rdf:ID="伺服机构">
+                            <参考词 rdf:resource="#发动机摇摆"/>
+                            <参考词 rdf:resource="#运载火箭"/>
+                            <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >航天科技词典</来源>
+                            <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >用于执行弹箭控制信号，改变发动机的推力方向。</内涵>
+                            <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >xdict</录入>
+                          </通用术语>
+                        </参考词>
+                        <参考词 rdf:resource="#火箭发动机"/>
+                        <参考词 rdf:resource="#发动机摇摆"/>
+                      </通用术语>
+                    </参考词>
+                    <参考词 rdf:resource="#运载火箭"/>
+                    <参考词 rdf:resource="#推进剂"/>
+                    <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >航天科技词典</来源>
+                    <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >robot</录入>
+                  </通用术语>
+                </上位词>
+                <参考词 rdf:resource="#固体火箭发动机"/>
+                <参考词 rdf:resource="#液体推进剂"/>
+                <参考词 rdf:resource="#液体推进剂运载火箭"/>
+                <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >以液体推进剂为能量来源的火箭发动机。</内涵>
+              </通用术语>
+            </参考词>
+            <参考词 rdf:resource="#液体推进剂运载火箭"/>
+            <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >robot</录入>
+            <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >航天科技词典</来源>
+          </通用术语>
+        </下位词>
+        <下位词 rdf:resource="#固体推进剂"/>
+        <参考词 rdf:resource="#火箭发动机"/>
+        <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >robot</录入>
+        <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >航天科技词典</来源>
+        <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >为发动机提供能量，包括燃料和氧化剂。</内涵>
+      </通用术语>
+    </上位词>
+    <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >robot</录入>
+    <参考词 rdf:resource="#固体火箭发动机"/>
+    <参考词 rdf:resource="#固体推进剂运载火箭"/>
+    <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >固体形态的火箭燃料或氧化剂。</内涵>
+    <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >航天科技词典</来源>
+  </通用术语>
+  <扩展术语 rdf:ID="液体火箭">
+    <正规术语 rdf:resource="#液体推进剂运载火箭"/>
+  </扩展术语>
+  <扩展术语 rdf:ID="固体火箭">
+    <正规术语 rdf:resource="#固体推进剂运载火箭"/>
+  </扩展术语>
+  <扩展术语 rdf:ID="火箭">
+    <正规术语 rdf:resource="#运载火箭"/>
+  </扩展术语>
+  <通用术语 rdf:ID="姿态控制">
+    <录入 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >robot</录入>
+    <参考词 rdf:resource="#火箭发动机"/>
+    <参考词 rdf:resource="#上面级"/>
+    <参考词 rdf:resource="#预定轨道"/>
+    <参考词 rdf:resource="#发动机摇摆"/>
+    <参考词 rdf:resource="#运载火箭"/>
+    <来源 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >航天科技词典</来源>
+    <内涵 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >采用动力摇摆、矢量推力系统、自控发动机等实现飞行器的姿态调整和控制。</内涵>
+  </通用术语>
+  <扩展术语 rdf:ID="飞行轨道">
+    <正规术语 rdf:resource="#预定轨道"/>
+  </扩展术语>
+  <扩展术语 rdf:ID="液体发动机">
+    <正规术语 rdf:resource="#液体火箭发动机"/>
+  </扩展术语>
+  <扩展术语 rdf:ID="固体发动机">
+    <正规术语 rdf:resource="#固体火箭发动机"/>
+  </扩展术语>
+  <扩展术语 rdf:ID="末级">
+    <正规术语 rdf:resource="#上面级"/>
+  </扩展术语>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3.1, Build 430)  http://protege.stanford.edu -->

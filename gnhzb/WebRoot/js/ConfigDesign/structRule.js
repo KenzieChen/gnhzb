@@ -96,7 +96,11 @@ function createStructRule(){
          ]	
 	});
 	
-	structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
+	//structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
+	//luweijiang
+	function structRuleTask(platStructTreeId){
+		structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platStructTreeId}));
+	}
 	var structRulePanel = Edo.create({
 		type: 'panel', id:'', title:'<h3><font color="blue">配置规则处理</font></h3>', padding: [0,0,0,0],
 		width:'100%', height:'100%', verticalGap: 0,
@@ -406,4 +410,5 @@ function createStructRule(){
 	this.getStructRulePanel = function(){
 		return structRulePanel;
 	};
+	structRuleTask(3148);
 }

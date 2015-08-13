@@ -94,7 +94,14 @@ public class PartDraftServiceImpl implements PartDraftService{
 		if(description ==null){
 			description="";
 		}
-		String suffix=fileFileName.substring(fileFileName.lastIndexOf(".")+1);
+		String suffix=null;
+		//creo中保存的文件是{prt.数字}构成，改成prt后缀
+		if(fileFileName.contains(".prt") && 
+				!fileFileName.substring(fileFileName.lastIndexOf(".")+1).equals("prt")){
+			suffix="prt"; 
+		}else{
+			suffix=fileFileName.substring(fileFileName.lastIndexOf(".")+1);
+		}
 		fileFileName=System.currentTimeMillis()+(new Random()).nextInt(100000)+"."+suffix;
 		DraftType dt = draftTypeDao.findUniqueBy("ismaster", 1);
 		String typename =dt.getTypeName();

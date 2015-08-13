@@ -213,7 +213,7 @@ function createNav_ModManageAccordin(){
 		            border:[0,0,0,0],
 		            padding:[0,0,0,0],
 		            enableCollapse: true,
-		            expanded: false,
+		            expanded: true,
 		            onclick: onPanelClick,                                           
 		            titlebar:[{
 		                cls:'e-titlebar-accordion',
@@ -352,8 +352,8 @@ function createNav_ModManageAccordin(){
 					  		}
 		            	}
 		            ]
-		        },
-		        {
+		        }
+/*		        {
 		            type: 'panel',
 		            width: '100%',height: '100%',
 		            enableCollapse: true,
@@ -383,7 +383,7 @@ function createNav_ModManageAccordin(){
 					        }
 		            	}
 		            ]
-		        } 
+		        } */
            	]
 	});
 	/*var cpxqfxdata =[
@@ -420,44 +420,46 @@ function createNav_ModManageAccordin(){
 	   		];*/
 	var bmgldata =[
 			{id:001,index:'CodeClassDefi',name:'产品分类定义'},
-			{id:002,index:'CodeClassRuleManage',name:'编码规则管理'},
-			{id:003,index:'CodeClassManage',name:'编码大类管理'},
+			{id:002,index:'CodeClassManage',name:'编码大类管理'},
+			{id:003,index:'CodeClassRuleManage',name:'编码规则管理'},
 			{id:004,index:'CodeClassStructManage',name:'产品结构管理'}
 		];
 	var mkgldata =[
+	        {id:011,index:'DocTypeManage',name:'图文档类型管理'},
 			{id:005,index:'StructUpload',name:'模块主模型及图文档管理'},
 			{id:006,index:'PartInstanceRg',name:'零部件分类管理'},
 			{id:007,index:'PartUpload',name:'零部件图文档管理'},
 			{id:008,index:'PartCreate',name:'零部件实例管理'},
-			{id:09,index:'ModInterface',name:'模块接口管理'},
-			{id:010,index:'ModLookup',name:'模块库查看'},
-			{id:011,index:'DocTypeManage',name:'图文档类型管理'}
+			//{id:09,index:'ModInterface',name:'模块接口管理'},
+			//{id:010,index:'ModLookup',name:'模块库查看'},
+			
 		];
 		
 	var smldata =[
-			{id:012,index:'SMLParamPool',name:'事物特性参数池'},
-			{id:013,index:'SMLParamPool_view',name:'事物特性参数池浏览'},
-			{id:014,index:'SMLCodePool',name:'事物特性编码管理'},
-			{id:015,index:'SMLCodePool_view',name:'事物特性编码浏览'},
-			{id:016,index:'SMLPoolManage',name:'事物特性池管理'},
-			{id:017,index:'SMLPoolManage_view',name:'事物特性池浏览'},
+	        {id:014,index:'SMLCodePool',name:'事物特性编码管理'},
+			{id:012,index:'SMLParamPool',name:'事物特性参数管理'},
+			//{id:013,index:'SMLParamPool_view',name:'事物特性参数池浏览'},
+			//{id:015,index:'SMLCodePool_view',name:'事物特性编码浏览'},
+			//{id:016,index:'SMLPoolManage',name:'事物特性池管理'},
+			//{id:017,index:'SMLPoolManage_view',name:'事物特性池浏览'},
 			{id:018,index:'SMLModeling',name:'事物特性建模'},
 			{id:019,index:'SMLEdit',name:'事物特性编辑'},
-			{id:020,index:'SMLEdit_view',name:'事物特性浏览'}
+			{id:020,index:'variantDesign',name:'变型设计任务'}
+			//{id:020,index:'SMLEdit_view',name:'事物特性浏览'}
 		];
 	var pzxqdata =[
-			{id:021,index:'orderview',name:'配置需求查看'},
+	        {id:025,index:'demandmanage',name:'需求管理'},
+			//{id:021,index:'orderview',name:'配置需求查看'},
 			{id:022,index:'ordermanage',name:'配置需求管理'},
 			{id:023,index:'neworder',name:'配置需求录入'},
 			{id:024,index:'checkorder',name:'配置需求审核'},
-			{id:025,index:'demandmanage',name:'需求管理'},
-			{id:026,index:'templatemanage',name:'默认需求管理'},
-			{id:027,index:'newtemplate',name:'默认需求录入'},
-			{id:028,index:'templateupdate',name:'默认需求修改'}
+			//{id:026,index:'templatemanage',name:'默认需求管理'},
+			//{id:027,index:'newtemplate',name:'默认需求录入'},
+			//{id:028,index:'templateupdate',name:'默认需求修改'}
 		];
 	var mkpzsjdata=[
 			{id:029,index:'platform',name:'平台管理'},
-			{id:030,index:'platform_view',name:'平台查看'},
+			//{id:030,index:'platform_view',name:'平台查看'},
 			{id:031,index:'platformStruct',name:'平台结构搭建'},
 			{id:032,index:'platformStruct_view',name:'平台结构查看'},
 			{id:033,index:'structRule',name:'配置规则创建'},
@@ -467,10 +469,10 @@ function createNav_ModManageAccordin(){
 			{id:037,index:'BomCheck',name:'BOM审核'},
 			{id:038,index:'historyBomView',name:'BOM查看'}
 		];
-	var lcmbdata = [
+/*	var lcmbdata = [
 			{id:039,index:'TemplateCreate',name:'模板创建'},
 			{id:040,index:'TemplateManage',name:'模板管理'}
-		];
+		];*/
 /*	Edo.get('cpxqfx').set('data',cpxqfxdata);
 	Edo.get('rwcm').set('data',rwcmdata);
 	Edo.get('gnylandgnmk').set('data',gnylandgnmkdata);
@@ -480,7 +482,7 @@ function createNav_ModManageAccordin(){
 	Edo.get('bmgl').set('data',bmgldata);
 	Edo.get('mkgl').set('data',mkgldata);
 	Edo.get('smlgl').set('data',smldata);
-	Edo.get('lcmbgl').set('data',lcmbdata);
+	//Edo.get('lcmbgl').set('data',lcmbdata);
 	Edo.get('pzxqgl').set('data',pzxqdata);
 	Edo.get('mkpzsj').set('data',mkpzsjdata);
 	this.getModManageAccordin = function(){

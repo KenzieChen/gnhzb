@@ -78,20 +78,35 @@
 			this.level=level;
 			this.levelmoduleobject={
 				cellid:cell.getId(),
-				orderid:null,
+				//orderid:null,
 				processname:null,
 				processnote:null,
 				knowledgecategoryid:null,
 				knowledgecategoryindex:null,
 				konwledge:null,
-				input:null,
+				/* input:null,
 				output:null,
+				inputdescrip:null,
+				outputdescrip:null, */
+				Outparamlist:null,
+				Inparamlist:null,
+				OutparamlistTemp:null,
+				InparamlistTemp:null,
 				description:null,
 				type:null,
 				tasktreenodeid:null,
-				tasktreenodename:null
+				tasktreenodename:null,
+				parentmoduleid:level.parentmoduleid,
+				parentmodulename:level.parentmodulename,
+				moduleid:level.levelid+'_'+cell.getId(),
+				prevmoduleid:null,
+				prevmodulename:null,
+				nextmoduleid:null,
+				nextmodulename:null
 			};
 			this.childlevel=null;
+			
+			
 		}
 		levelmodule.prototype.constructor = levelmodule;
 		levelmodule.prototype.createlavelid=function(){
@@ -106,8 +121,11 @@
 		alllevel.prototype.alllevels=new Array();
 		alllevel.prototype.setrootlevel=function(rootlevel){
 			this.rootlevel=rootlevel;
-			rootlevel.levelid='level_0';
-			rootlevel.parentlevelid='level_stage';
+			rootlevel.levelid='level_top';
+			rootlevel.parentlevelid=0;
+			rootlevel.parentcellid=0;
+		    rootlevel.parentmoduleid=0;
+	        rootlevel.parentmodulename=0;
 			this.alllevels.add(rootlevel);
 		};
 		alllevel.prototype.getcurrentlevel=function(){
@@ -119,6 +137,8 @@
 		alllevel.prototype.addlevel=function(levelmodule){
 			var newlevel=new level();
 			var parentlevel=this.getcurrentlevel();
+			newlevel.parentmoduleid=levelmodule.levelmoduleobject.moduleid;
+			newlevel.parentmodulename=levelmodule.levelmoduleobject.processname;
 			newlevel.setparentlevel(parentlevel);
 			newlevel.parentcellid=levelmodule.levelmoduleobject.cellid;
 			levelmodule.childlevel=newlevel;
@@ -134,6 +154,8 @@
 		
 		//表示某一层的对象，（父层，父层id，父层节点id，xml文件信息，cells和levelmodules指什么？）
 		function level(type){
+	        this.parentmoduleid=null;
+	        this.parentmodulename=null;
 		    this.parentcellid=null;
 			this.levelmodules=new Array();
 			this.cells=null;
@@ -770,7 +792,7 @@
 						 }
 						 parent.resetmoduledefineContainer();
 						 drawchoosencells(choosencells)
-						 wholelevel.getcurrentlevel().type='realmoduelevel';
+						 wholelevel.getcurrentlevel().type='realmodulelevel';
 						});
 				var outln = new mxOutline(graph, outline);
 				var menubar= Edo.create({
@@ -1283,9 +1305,10 @@
 				            	if(label=='process'){
 							  	    var level=wholelevel.getcurrentlevel();
 						      	    var modules=level.levelmodules;
+									var cells =  graph.getChildCells();
 							        for(var i=0;i<modules.length;i++){
 								       if(modules[i].levelmoduleobject.cellid==cell.getId()){
-										    parent.moduleprocessdefine(cell,modules[i]);
+										    parent.moduleprocessdefine(cell,modules[i],modules);
 										    break;
 								    	}
 									}
@@ -1707,14 +1730,12 @@
 			 var levelmodule=wholelevel.addlevelmodule(v1);
 			 levelmodule.levelmoduleobject.type='process';
 			 levelmodule.levelmoduleobject.processname=cells[0].indexname;
-			 levelmodule.levelmoduleobject.processnote=cells[0].indexname;
 			 var previous=v1;
 			 for(var i=1;i<cells.length;i++){
 				 var v = addnewprocess(cells[i].indexname,100, i*150+50, 180, 100,'process','#00CCFF');
 				 var levelmodule=wholelevel.addlevelmodule(v);
 				 levelmodule.levelmoduleobject.type='process';
 				 levelmodule.levelmoduleobject.processname=cells[i].indexname;
-				 levelmodule.levelmoduleobject.processnote=cells[i].indexname;
 				 var e1=graph.insertEdge(parent, null, '', previous, v);
 				 previous=v;
 				 }

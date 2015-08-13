@@ -15,6 +15,7 @@ public interface ClassificationTreeService {
 	public String deleteTreeNode(Long id);
 	public String updateClassDes(Long id,String classDes);
 	public String updateCode(Long id,String newCode);
+	
 	/**
 	 * 用于接口服务客户端
 	 * @return

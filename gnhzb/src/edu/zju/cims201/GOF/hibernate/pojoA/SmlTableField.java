@@ -13,6 +13,7 @@ public class SmlTableField {
 	private String tableHead;
 	private String headShow;
 	private SmlParameterPool smlParameterPool;
+	//是否输出，0：否，1：是
 	private int output;
 	
 	@Id

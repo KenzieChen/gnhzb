@@ -1,0 +1,109 @@
+2015-06-28 20:48:20,875 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 20:48:20,877 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 20:56:12,094 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 20:56:12,094 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 21:25:23,920 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 21:25:23,920 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 21:27:26,988 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 21:27:26,988 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 21:31:28,225 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 21:31:28,225 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 21:34:57,391 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 21:34:57,392 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 21:36:47,402 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 21:36:47,402 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 21:47:43,073 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 21:47:43,086 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 22:01:56,782 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 22:01:56,798 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 22:07:05,521 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 22:07:05,521 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 22:13:34,994 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 22:13:34,994 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 22:13:36,045 [main] WARN  [org.apache.axis.attachments.AttachmentsImpl] - Exception:
+AxisFault
+ faultCode: {http://schemas.xmlsoap.org/soap/envelope/}Server.userException
+ faultSubcode: 
+ faultString: java.io.IOException: No serializer found for class edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree in registry org.apache.axis.encoding.TypeMappingDelegate@470f4f
+ faultActor: 
+ faultNode: 
+ faultDetail: 
+	{http://xml.apache.org/axis/}stackTrace:java.io.IOException: No serializer found for class edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree in registry org.apache.axis.encoding.TypeMappingDelegate@470f4f
+	at org.apache.axis.encoding.SerializationContext.serializeActual(SerializationContext.java:1507)
+	at org.apache.axis.encoding.SerializationContext.serialize(SerializationContext.java:980)
+	at org.apache.axis.encoding.SerializationContext.outputMultiRefs(SerializationContext.java:1055)
+	at org.apache.axis.message.SOAPBody.outputImpl(SOAPBody.java:145)
+	at org.apache.axis.message.SOAPEnvelope.outputImpl(SOAPEnvelope.java:478)
+	at org.apache.axis.message.MessageElement.output(MessageElement.java:1208)
+	at org.apache.axis.SOAPPart.writeTo(SOAPPart.java:315)
+	at org.apache.axis.SOAPPart.writeTo(SOAPPart.java:269)
+	at org.apache.axis.SOAPPart.saveChanges(SOAPPart.java:530)
+	at org.apache.axis.attachments.AttachmentsImpl.getAttachmentCount(AttachmentsImpl.java:554)
+	at org.apache.axis.Message.getContentType(Message.java:486)
+	at org.apache.axis.transport.http.HTTPSender.writeToSocket(HTTPSender.java:343)
+	at org.apache.axis.transport.http.HTTPSender.invoke(HTTPSender.java:138)
+	at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+	at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+	at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:165)
+	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
+	at org.apache.axis.client.Call.invoke(Call.java:2767)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at edu.zju.cims201.GOF.web.server.BomDraftService.synImg(BomDraftService.java:69)
+	at edu.zju.cims201.GOF.web.server.ModuleService.sendTreeNodes2SynImg(ModuleService.java:149)
+	at edu.zju.cims201.GOF.web.client.Test.main(Test.java:19)
+
+	{http://xml.apache.org/axis/}hostname:JCCBZCP
+
+java.io.IOException: No serializer found for class edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree in registry org.apache.axis.encoding.TypeMappingDelegate@470f4f
+	at org.apache.axis.AxisFault.makeFault(AxisFault.java:101)
+	at org.apache.axis.SOAPPart.writeTo(SOAPPart.java:317)
+	at org.apache.axis.SOAPPart.writeTo(SOAPPart.java:269)
+	at org.apache.axis.SOAPPart.saveChanges(SOAPPart.java:530)
+	at org.apache.axis.attachments.AttachmentsImpl.getAttachmentCount(AttachmentsImpl.java:554)
+	at org.apache.axis.Message.getContentType(Message.java:486)
+	at org.apache.axis.transport.http.HTTPSender.writeToSocket(HTTPSender.java:343)
+	at org.apache.axis.transport.http.HTTPSender.invoke(HTTPSender.java:138)
+	at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+	at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+	at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+	at org.apache.axis.client.AxisClient.invoke(AxisClient.java:165)
+	at org.apache.axis.client.Call.invokeEngine(Call.java:2784)
+	at org.apache.axis.client.Call.invoke(Call.java:2767)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at edu.zju.cims201.GOF.web.server.BomDraftService.synImg(BomDraftService.java:69)
+	at edu.zju.cims201.GOF.web.server.ModuleService.sendTreeNodes2SynImg(ModuleService.java:149)
+	at edu.zju.cims201.GOF.web.client.Test.main(Test.java:19)
+Caused by: java.io.IOException: No serializer found for class edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree in registry org.apache.axis.encoding.TypeMappingDelegate@470f4f
+	at org.apache.axis.encoding.SerializationContext.serializeActual(SerializationContext.java:1507)
+	at org.apache.axis.encoding.SerializationContext.serialize(SerializationContext.java:980)
+	at org.apache.axis.encoding.SerializationContext.outputMultiRefs(SerializationContext.java:1055)
+	at org.apache.axis.message.SOAPBody.outputImpl(SOAPBody.java:145)
+	at org.apache.axis.message.SOAPEnvelope.outputImpl(SOAPEnvelope.java:478)
+	at org.apache.axis.message.MessageElement.output(MessageElement.java:1208)
+	at org.apache.axis.SOAPPart.writeTo(SOAPPart.java:315)
+	... 18 more
+2015-06-28 22:16:21,456 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 22:16:21,456 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 22:20:09,997 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 22:20:09,998 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+
+2015-06-28 22:22:11,830 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - Unsuccessful: alter table node_function add constraint FKB4579975B736BFC1 foreign key (functionid) references functions
+2015-06-28 22:22:11,831 [main] ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] - ORA-02264: 名称已被一现有约束条件占用
+

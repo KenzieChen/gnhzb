@@ -25,5 +25,7 @@ public interface BomService {
 	public String getBoms2Syn();
 
 	public void SynFinish(String instanceBoms);
+	//luweijiang
+	public List<BomDTO> getBom2CheckById(long bomId);
 
 }

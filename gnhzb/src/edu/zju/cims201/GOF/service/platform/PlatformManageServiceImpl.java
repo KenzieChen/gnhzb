@@ -100,7 +100,29 @@ public class PlatformManageServiceImpl implements PlatformManageService{
 		
 		return platListRe;
 	}
-	
+	/**
+	 * luweijiang
+	 */
+	public List<PlatformManageDTO> getPlatform2CheckById(long id) {
+		// TODO Auto-generated method stub
+		List<PlatformManage> platList = platformManageDao.find("from PlatformManage pm where pm.status.statusName='正在审核' and pm.id="+id);
+		List<PlatformManageDTO> platListRe = new ArrayList<PlatformManageDTO>();
+		for(PlatformManage plat:platList){
+			PlatformManageDTO platDTO = new PlatformManageDTO();
+			platDTO.setBeginDate(new SimpleDateFormat("yyyy-MM-dd").format(plat.getBeginDate()));
+			platDTO.setCheckUserName("");
+			platDTO.setId(plat.getId());
+			platDTO.setInfo(plat.getInfo());
+			platDTO.setInputUserName("");
+			platDTO.setPlatName(plat.getPlatName());
+			PlatformStatus status= plat.getStatus();
+			platDTO.setStatusId(status.getId());
+			platDTO.setStatusName(status.getStatusName());
+			platListRe.add(platDTO);
+		}
+		
+		return platListRe;
+	}
 	
 	public List<PlatformManageDTO> getAllPlatform(){
 		List<PlatformManage> platList = platformManageDao.getAll();
@@ -124,6 +146,28 @@ public class PlatformManageServiceImpl implements PlatformManageService{
 	
 	public List<PlatformManageDTO> getFinishedPlatform(){
 		List<PlatformManage> platList = platformManageDao.find("from PlatformManage pm where pm.status.statusName='审核通过'");
+		List<PlatformManageDTO> platListRe = new ArrayList<PlatformManageDTO>();
+		for(PlatformManage plat:platList){
+			PlatformManageDTO platDTO = new PlatformManageDTO();
+			platDTO.setBeginDate(new SimpleDateFormat("yyyy-MM-dd").format(plat.getBeginDate()));
+			platDTO.setCheckUserName("");
+			platDTO.setId(plat.getId());
+			platDTO.setInfo(plat.getInfo());
+			platDTO.setInputUserName("");
+			platDTO.setPlatName(plat.getPlatName());
+			PlatformStatus status= plat.getStatus();
+			platDTO.setStatusId(status.getId());
+			platDTO.setStatusName(status.getStatusName());
+			platListRe.add(platDTO);
+		}
+		return platListRe;
+	}
+	/**
+	 * luweijiang
+	 */
+	public List<PlatformManageDTO> getFinishedPlatformById(long id) {
+		// TODO Auto-generated method stub
+		List<PlatformManage> platList = platformManageDao.find("from PlatformManage pm where pm.status.statusName='审核通过' and pm.id="+id);
 		List<PlatformManageDTO> platListRe = new ArrayList<PlatformManageDTO>();
 		for(PlatformManage plat:platList){
 			PlatformManageDTO platDTO = new PlatformManageDTO();

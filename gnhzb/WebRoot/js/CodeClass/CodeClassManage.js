@@ -1,4 +1,18 @@
 function createCodeClassManage(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
 	 var topBar = Edo.create({
 			type:'group',
 			width:'100%',
@@ -29,6 +43,35 @@ function createCodeClassManage(){
 				 cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
 		 );
 	 });
+	 //luweijiang
+	 this.inittask=function(){
+		 var codeClassId=null;
+		 var isexist=false;
+		 for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'codeclassid'){
+				alert('存在输入参数');
+				isexist=true;
+				codeClassId=inputparam[i].value;
+				break;
+			}
+ 		}
+		if(isexist){
+			 showAddClassForm();
+			 var data=cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClassById.action',{id:codeClassId});
+			 if(data.isSuccess == '1'){
+				 addClassCombo.set('data',data.result);
+			 }else{
+				 addClassCombo.set('data',
+						 cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
+				 );
+			 }
+			Edo.MessageBox.alert(data.message);
+		}else{
+			addClassCombo.set('data',
+					 cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
+			 );
+		}
+	 }
 	 CodeClassManageDeleBtn.on("click",function(e){
 		 var classcode =ClassTree.selected.classcode;
 		 if(!classcode){

@@ -2416,8 +2416,31 @@ function getComponentByIndex(id,index,params){
 				});
 			}
 		}
-		else if('SMLEdit_view'==index){
+		else if('variantDesign'==index){
 
+			var existcomponent = iscomponentexist(id,'variantDesign');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myVariantDesign = new createVariantDesign();
+
+				enterEventList[enterEventList.length] = myVariantDesign;
+				enterEventIDList[enterEventIDList.length] = 'variantDesign';
+			
+				myComponent = Edo.create({
+					id: id?id:'variantDesign234',   
+				    type: 'box',                 
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+				               myVariantDesign.getPanel()
+				    ]
+				});
+			}
+		}
+		else if('SMLEdit_view'==index){
 			var existcomponent = iscomponentexist(id,'SMLEdit_view');
 			if(null!=existcomponent){
 				myComponent=existcomponent;

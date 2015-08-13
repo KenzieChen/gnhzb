@@ -49,7 +49,7 @@
                         <key column="parentid"/>
                         <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.PdmModule"/>
             </set>
-             <set name="pdmprocessTemplates" table="ProcessTemplate" lazy="false" cascade="save-update,persist" inverse="false">
+             <set name="pdmprocessTemplates" table="PdmProcessTemplate" lazy="false" cascade="save-update,persist" inverse="false">
              <key column="moduleid"/>
              <one-to-many class="edu.zju.cims201.GOF.hibernate.pojo.PdmProcessTemplate" />
          </set>

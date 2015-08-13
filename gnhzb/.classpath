@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/My Java EE5 Libraries"/>
 	<classpathentry kind="lib" path="Library/axis/axis-ant.jar"/>
 	<classpathentry kind="lib" path="Library/axis/axis.jar"/>
 	<classpathentry kind="lib" path="Library/axis/commons-discovery-0.2.jar"/>
@@ -119,6 +120,9 @@
 	<classpathentry kind="lib" path="Library/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="Library/standard.jar"/>
 	<classpathentry kind="lib" path="Library/stringtree-json-2.0.9.jar"/>
+	<classpathentry kind="lib" path="Library/jacob.jar"/>
+	<classpathentry kind="lib" path="Library/ezmorph-1.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Tidy.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/backport-util-concurrent.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cfgatewayadapter.jar"/>
@@ -133,14 +137,11 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/flex-messaging-remoting.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/fop.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/itext-1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jacob.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jai_codec.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-flex-core-1.5.0.M1.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Tidy.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xalan.jar"/>
-	<classpathentry kind="lib" path="Library/jacob.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sqljdbc4.jar"/>
-	<classpathentry kind="lib" path="Library/ezmorph-1.0.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/My Java EE5 Libraries"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xalan.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

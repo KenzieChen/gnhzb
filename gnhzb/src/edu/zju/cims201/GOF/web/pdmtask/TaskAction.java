@@ -31,8 +31,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springside.modules.orm.Page;
 
 
+import com.hp.hpl.jena.sparql.core.Var;
+
+
 import EDU.oswego.cs.dl.util.concurrent.Takable;
 import edu.zju.cims201.GOF.web.CrudActionSupport;
+import edu.zju.cims201.GOF.dao.task.PdmtaskDAO;
 import edu.zju.cims201.GOF.hibernate.pojo.Function;
 import edu.zju.cims201.GOF.hibernate.pojo.Node;
 import edu.zju.cims201.GOF.hibernate.pojo.PdmModule;
@@ -45,7 +49,10 @@ import edu.zju.cims201.GOF.hibernate.pojo.TreeNode;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.Employee;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmProject;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.LcaTask;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmProjectValuePool;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.PdmTask;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskIOParam;
+import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeIOParam;
 import edu.zju.cims201.GOF.hibernate.pojo.pdm.TaskTreeNode;
 import edu.zju.cims201.GOF.rs.dto.PageDTO;
 import edu.zju.cims201.GOF.rs.dto.TaskDTO;
@@ -57,6 +64,7 @@ import edu.zju.cims201.GOF.service.tree.TreeService;
 import edu.zju.cims201.GOF.util.Constants;
 import edu.zju.cims201.GOF.util.JSONUtil;
 
+import org.apache.commons.lang.StringUtils;
 
 
 @Namespace("/pdmtask")
@@ -93,6 +101,8 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 	PrintWriter out;
 	private String tasktype;
 	private String processtemplateid;
+	private String result;
+	private String resultparam;
 
 
 	public LcaTask getModel() {
@@ -164,7 +174,6 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 			page.setPageNo(this.getIndex());
 			Page<PdmTask> newpage = null;
 			newpage = taskService.getPdmtasks(user, page);
-
 			PageDTO pagedto = new PageDTO();
 			pagedto.setTotal(newpage.getTotalCount());
 			pagedto.setPagesize(newpage.getPageSize());
@@ -230,9 +239,120 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 			return null;
 		}else {
 			return null;
+		}		
+	}
+	
+	
+	public void submitTask() throws IOException{
+		HashMap<String, String> resultmap=new HashMap<String, String>();
+		PdmTask task=taskService.getPdmTask(Long.valueOf(taskid));
+		List<HashMap<String, Object>> resultlist=(List<HashMap<String, Object>>) getJSONvalueObject(resultparam);
+		List<TaskIOParam> params=taskService.getTaskParamsByTask(Long.valueOf(taskid),0);
+		List<PdmProjectValuePool> items=new ArrayList<PdmProjectValuePool>();
+		for(HashMap<String, Object> parammap:resultlist){
+			String name=String.valueOf(parammap.get("name"));
+			String value=String.valueOf(parammap.get("value"));
+			if(StringUtils.isBlank(value)){
+				resultmap.put("isSuccess", "0");
+				resultmap.put("message", "输出不全,"+String.valueOf(parammap.get("descri"))+"为空!");
+				String jsonString =JSONUtil.write(resultmap);
+				out.print(jsonString);
+				return;
+			}
+			for(TaskIOParam param:params){
+				if(name.equals(param.getName())){
+					PdmProjectValuePool item=new PdmProjectValuePool();
+					item.setIsarray(0);
+					item.setIotype(0);
+					item.setValue(value);
+					item.setName(param.getName());
+					item.setProject(task.getPdmProject());
+					items.add(item);
+					param.setValue(value);
+					break;
+				}
+			}
 		}
-		
-		
+		taskService.savePdmProjectValuePool(items);
+		taskService.saveIoPrams(params);
+		List<PdmTask> alltaskList=new ArrayList<PdmTask>();
+		if(task.getCheckperson() == null){
+			task.setStatus(Constants.TASK_STATUS_FINISH);
+			getNextTasks(task,alltaskList,params);
+			
+		}else{
+			task.setStatus(Constants.TASK_STATUS_TO_CHECK);
+			
+		}
+		alltaskList.add(task);
+      	taskService.updateTaskStatus(alltaskList);
+		resultmap.put("isSuccess", "1");
+		resultmap.put("message", "任务提交成功");
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
+	}
+	
+	public void submitTaskCheck() throws IOException{
+		List<PdmTask> alltaskList=new ArrayList<PdmTask>();
+		PdmTask task=taskService.getPdmTask(Long.valueOf(taskid));
+		task.setStatus(Constants.TASK_STATUS_FINISH);
+		getNextTasks(task,alltaskList,null);
+	    taskService.updateTaskStatus(alltaskList);
+	    HashMap<String, String> resultmap=new HashMap<String, String>();
+	    resultmap.put("isSuccess", "1");
+		resultmap.put("message", "审核成功");
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
+	}
+	
+	public void getNextTasks(PdmTask task,List<PdmTask> alltaskList,List<TaskIOParam> params){
+		List<PdmTask> nextTasks=taskService.getTaskByPreTaskId(task.getTaskid(), task.getPdmProject().getId());
+	    if(nextTasks.isEmpty()){
+	    	String parenttaskid=task.getParenttaskid();
+	    	Long projectid=task.getPdmProject().getId();
+	    	PdmTask parenttask=taskService.getTaskByparentTaskId(parenttaskid,projectid);
+	    	parenttask.setStatus(Constants.TASK_STATUS_FINISH);
+	    	alltaskList.add(parenttask);
+	    	List<PdmTask> nextparentTasks=taskService.getTaskByPreTaskId(parenttask.getTaskid(), parenttask.getPdmProject().getId());
+	    	for(PdmTask task2:nextparentTasks){
+	    		task2.setStatus(Constants.TASK_STATUS_ACTIVE);
+				alltaskList.add(task2);
+				List<PdmTask> tasksList=taskService.getTaskByParentLevelModule(1,task2.getTaskid(),projectid);
+				for(PdmTask task3:tasksList){
+					task3.setStatus(Constants.TASK_STATUS_ACTIVE);
+					alltaskList.add(task3);
+				}
+			}
+	    }else{
+	    	for(PdmTask t:nextTasks){
+	    		
+	        	t.setStatus(Constants.TASK_STATUS_ACTIVE);
+	        	alltaskList.add(t);
+	        	if(params != null){
+	        		List<TaskIOParam> inputparams=taskService.getTaskParamsByTask(t.getId(),1);
+	        /*		for(TaskIOParam param:ioparams){
+		        		if(param.getIotype() == 1){
+		        			inputparams.add(param);
+		        		}
+		        	}*/
+	        		List<TaskIOParam> updateparams=new ArrayList<TaskIOParam>();
+	        		for(TaskIOParam param:params){
+	        			for(TaskIOParam inputparam:inputparams){
+			        		if(inputparam.getName().equals(param.getName())){
+			        			inputparam.setValue(param.getValue());
+			        			updateparams.add(inputparam);
+			        			break;
+			        		}
+			        		
+			        	}
+		        	}
+	        		taskService.saveIoPrams(updateparams);
+	        	}
+	        	
+	        }	
+	    }
 	}
 	public void getkeywordidsbyprocess() throws IOException{
     	PdmProcessTemplate p=moduleService.getprocesstemplate(processtemplateid);
@@ -252,27 +372,60 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
     	ObjectMapper objectMapper = new ObjectMapper();	
 	    objectMapper.writeValue(response.getWriter(),list);
     }
-    public void getTaskTreeCollectionbyTaskid() throws IOException{
+
+	
+	
+    public void getTaskDetailbyTaskid() throws IOException{
     	PdmTask t=taskService.getPdmTask(Long.valueOf(taskid));
-    	System.out.println("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     	PdmProcessTemplate p=t.getPdmprocessTemplate();
-    	TaskTreeNode parentnode=p.getTasktreenode();
-    	PdmProject pro=t.getPdmProject();
-    	PdmModule parentmodule=p.getModule();
-    	PdmModule superparentmodule=parentmodule.getParent();
-    	List<HashMap<String, Object>> list=new ArrayList<HashMap<String,Object>>();
+    	TaskTreeNode node=p.getTasktreenode();
     	HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", parentnode.getId());
+		map.put("id", node.getId());
 		map.put("name", p.getName());	
-		map.put("des", parentnode.getNodeDescription());	
-		map.put("url", parentnode.getUrl());
+		map.put("des", node.getNodeDescription());	
+		map.put("url", node.getUrl());
+		map.put("status", t.getStatus());
 		map.put("processtemplateid", p.getId());
-		map.put("code", parentnode.getCode());	
-		map.put("children", getsubnodes(p,parentmodule.getLevelid(),String.valueOf(superparentmodule.getId())));	
-		list.add(map);
+		map.put("code", node.getCode());	
+		List<HashMap<String, String>> Inparamlist=new ArrayList<HashMap<String, String>>();
+		List<HashMap<String, String>> Outparamlist=new ArrayList<HashMap<String, String>>();
+		List<TaskIOParam> params=taskService.getTaskParamsByTask(Long.valueOf(taskid),-1);
+		List<PdmProjectValuePool> items=taskService.getPdmProjectValuePools(t.getPdmProject().getId());
+		for(TaskIOParam param:params){
+			HashMap<String, String> parammap=new HashMap<String, String>();
+			parammap.put("descri", param.getDescri());
+			parammap.put("name", param.getName());
+			if(param.getIotype()==1){
+				parammap.put("type", "1");
+				if(StringUtils.isEmpty(param.getValue())){
+					updateparamvalue(param,items);
+				}
+				parammap.put("value", param.getValue());
+				Inparamlist.add(parammap);
+			}else{
+				parammap.put("value", param.getValue());
+				parammap.put("type", "0");
+				Outparamlist.add(parammap);
+			}
+			
+		}
+		map.put("Inparamlist", Inparamlist);
+		map.put("Outparamlist", Outparamlist);
     	ObjectMapper objectMapper = new ObjectMapper();	
-	    objectMapper.writeValue(response.getWriter(),list);
+	    objectMapper.writeValue(response.getWriter(),map);
     }
+    public void updateparamvalue(TaskIOParam param,List<PdmProjectValuePool> items){
+    	PdmProject project=param.getTask().getPdmProject();
+    	for(PdmProjectValuePool item : items){
+    		if(item.getName().equals(param.getName()) && !StringUtils.isEmpty(item.getValue())){
+    			param.setValue(item.getValue());
+        	}
+    	}
+    }
+    
+    
+    
+    
     public List getsubnodes(PdmProcessTemplate p,String parentlevelid,String supermoduleid){
     	List<HashMap<String, Object>> nodelist=new ArrayList<HashMap<String,Object>>();
     	PdmModule submodule =moduleService.getPdmModulebyparentandprocess(parentlevelid,
@@ -287,8 +440,8 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
         		HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("id", subnode.getId());
 				map.put("name", pt.getName());
-				map.put("input", pt.getInput());
-				map.put("output", pt.getOutput());
+//				map.put("input", pt.getInput());
+//				map.put("output", pt.getOutput());
 				map.put("des", subnode.getNodeDescription());	
 				map.put("url", subnode.getUrl());
 				map.put("processtemplateid", pt.getId());
@@ -358,6 +511,19 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 			  
 		   }
     }*/
+    
+    public Object getJSONvalueObject(String data) {
+		Object datas;
+		try {
+			datas = JSONUtil.read(data);
+		} catch (Exception e) {
+			System.out.println("jason解析错误");
+			e.printStackTrace();
+			return null;
+		}
+		return datas;
+	}
+	
     public List<HashMap> getJSONvalueList()
 	{
 		//JSONUtil jr  = new JSONUtil();
@@ -524,6 +690,26 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 
 	public void setProcesstemplateid(String processtemplateid) {
 		this.processtemplateid = processtemplateid;
+	}
+
+
+	public String getResult() {
+		return result;
+	}
+
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+
+	public String getResultparam() {
+		return resultparam;
+	}
+
+
+	public void setResultparam(String resultparam) {
+		this.resultparam = resultparam;
 	}
 
 	/**

@@ -19,5 +19,8 @@ public interface OrderManageService {
 	public String checkDone(long id, long statusId, String checkinfo);
 
 	public List<OrderManageDTO> getOrder4Confi();
+	//luweijiang
+	public List<OrderManageDTO> getAllOrderById(long id);
+	public List<OrderManageDTO> getOrder4ConfiById(long orderId);
 
 }

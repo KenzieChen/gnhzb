@@ -42,7 +42,7 @@ String taskid=request.getParameter("taskid");
 	    <script src="<%=basePath %>js/knowledge/knowledge-util.js" type="text/javascript"></script>
 	    <script src="<%=basePath %>js/knowledge/knowledge-list-fulltext.js" type="text/javascript"></script>
 	    <script src="<%=basePath %>js/systemevent.js" type="text/javascript"></script>
-	    <script src="<%=basePath %>js/getComponentByIndex.js" type="text/javascript"></script>
+	    <script src="<%=basePath %>js/getComponentByIndexTask.js" type="text/javascript"></script>
 		<!-- 编码管理系统 陈谦庄 -->
 <script src="<%=basePath%>js/CodeClass/codeclassdefi.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/CodeClass/CodeClassManage.js" type="text/javascript"></script>

@@ -1,0 +1,2241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns="http://www.semlab.nl/knowledgebase.owl#"
+	xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+	xml:base="http://www.semlab.nl/knowledgebase.owl">
+	<owl:Ontology rdf:about="" />
+	<owl:Class rdf:ID="Term">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Financial" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="South_America">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="America" />
+		</rdfs:subClassOf>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			South America
+		</synonym>
+	</owl:Class>
+	<owl:Class rdf:about="#America">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="World" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Static">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Device" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Imaging">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Software" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Computer">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			PC
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Personal computer
+		</synonym>
+		<rdfs:subClassOf rdf:resource="#Static" />
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Product" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="#Device">
+		<wordnet
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">
+			true
+		</wordnet>
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Concept" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Blogging">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Internet" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Mobile">
+		<wordnet
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">
+			false
+		</wordnet>
+		<rdfs:subClassOf rdf:resource="#Device" />
+	</owl:Class>
+	<owl:Class rdf:ID="Federal_bank">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Bank" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Zones">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#Financial" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="#Concept">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<owl:DatatypeProperty rdf:ID="image" />
+				</owl:onProperty>
+				<owl:cardinality
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#int">
+					1
+				</owl:cardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf
+			rdf:resource="http://www.w3.org/2002/07/owl#Thing" />
+	</owl:Class>
+	<owl:Class rdf:about="#Product">
+		<rdfs:subClassOf rdf:resource="#Concept" />
+	</owl:Class>
+	<owl:Class rdf:about="#Internet">
+		<rdfs:subClassOf rdf:resource="#Product" />
+	</owl:Class>
+	<owl:Class rdf:ID="Business_leaders">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Very_important_people" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="#Financial">
+		<wordnetSense
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			http://www.w3.org/2006/03/wn/wn20/instances/synset-economics-noun-1
+		</wordnetSense>
+		<rdfs:subClassOf rdf:resource="#Concept" />
+	</owl:Class>
+	<owl:Class rdf:ID="Networking">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Computer_hardware" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Programming">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#Software" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="OtherCompany">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Company" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="#Software">
+		<rdfs:subClassOf rdf:resource="#Product" />
+	</owl:Class>
+	<owl:Class rdf:ID="Operating_system">
+		<rdfs:subClassOf rdf:resource="#Software" />
+	</owl:Class>
+	<owl:Class rdf:ID="Middle_East">
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="Asia" />
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Class rdf:ID="EMEA" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Risk">
+		<rdfs:subClassOf rdf:resource="#Financial" />
+	</owl:Class>
+	<owl:Class rdf:about="#Company">
+		<rdfs:subClassOf rdf:resource="#Concept" />
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			companies
+		</synonym>
+		<wordnetSense
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			http://www.w3.org/2006/03/wn/wn20/instances/synset-institution-noun-1
+		</wordnetSense>
+	</owl:Class>
+	<owl:Class rdf:about="#EMEA">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#World" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="NasdaqCompany">
+		<rdfs:subClassOf rdf:resource="#Company" />
+	</owl:Class>
+	<owl:Class rdf:ID="Oceania">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#World" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="#Bank">
+		<rdfs:subClassOf rdf:resource="#Financial" />
+	</owl:Class>
+	<owl:Class rdf:about="#Asia">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#World" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Microprocessor">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#Computer_hardware" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Market">
+		<rdfs:subClassOf rdf:resource="#Financial" />
+	</owl:Class>
+	<owl:Class rdf:about="#Computer_hardware">
+		<rdfs:subClassOf rdf:resource="#Product" />
+	</owl:Class>
+	<owl:Class rdf:ID="Audio_video">
+		<rdfs:subClassOf rdf:resource="#Software" />
+	</owl:Class>
+	<owl:Class rdf:ID="Organizations">
+		<rdfs:subClassOf rdf:resource="#Financial" />
+	</owl:Class>
+	<owl:Class rdf:ID="Politicians">
+		<rdfs:subClassOf>
+			<owl:Class rdf:about="#Very_important_people" />
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:ID="Europe">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			european
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			europeans
+		</synonym>
+		<rdfs:subClassOf rdf:resource="#EMEA" />
+	</owl:Class>
+	<owl:Class rdf:ID="Commercial_bank">
+		<rdfs:subClassOf rdf:resource="#Bank" />
+	</owl:Class>
+	<owl:Class rdf:ID="Africa">
+		<rdfs:subClassOf rdf:resource="#EMEA" />
+	</owl:Class>
+	<owl:Class rdf:about="#World">
+		<rdfs:subClassOf rdf:resource="#Concept" />
+		<wordnetSense
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			http://www.w3.org/2006/03/wn/wn20/instances/synset-class-noun-1
+		</wordnetSense>
+	</owl:Class>
+	<owl:Class rdf:ID="North_America">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			North America
+		</synonym>
+		<rdfs:subClassOf rdf:resource="#America" />
+	</owl:Class>
+	<owl:Class rdf:ID="Searching">
+		<rdfs:subClassOf rdf:resource="#Internet" />
+	</owl:Class>
+	<owl:Class rdf:about="#Very_important_people">
+		<rdfs:subClassOf rdf:resource="#Concept" />
+	</owl:Class>
+	<owl:ObjectProperty rdf:ID="hasProduct">
+		<rdfs:domain rdf:resource="#Company" />
+		<owl:inverseOf>
+			<owl:ObjectProperty rdf:ID="isProducedBy" />
+		</owl:inverseOf>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<owl:Class rdf:about="#Product" />
+					<owl:Class rdf:about="#Device" />
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="#isProducedBy">
+		<rdfs:range rdf:resource="#Company" />
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<owl:Class rdf:about="#Product" />
+					<owl:Class rdf:about="#Device" />
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<owl:inverseOf rdf:resource="#hasProduct" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:ID="hasCEO">
+		<rdfs:domain rdf:resource="#Company" />
+		<owl:inverseOf>
+			<owl:InverseFunctionalProperty rdf:ID="isCeoOf" />
+		</owl:inverseOf>
+		<rdfs:range rdf:resource="#Business_leaders" />
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:ID="hasMember">
+		<rdfs:domain rdf:resource="#Zones" />
+		<rdfs:range rdf:resource="#World" />
+		<owl:inverseOf>
+			<owl:ObjectProperty rdf:ID="isMember" />
+		</owl:inverseOf>
+	</owl:ObjectProperty>
+	<owl:ObjectProperty rdf:about="#isMember">
+		<rdfs:range rdf:resource="#Zones" />
+		<owl:inverseOf rdf:resource="#hasMember" />
+		<rdfs:domain rdf:resource="#World" />
+	</owl:ObjectProperty>
+	<owl:DatatypeProperty rdf:about="#image">
+		<rdfs:domain rdf:resource="#Concept" />
+		<rdfs:range
+			rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+	</owl:DatatypeProperty>
+	<owl:DatatypeProperty rdf:ID="synonym">
+		<rdfs:domain rdf:resource="#Concept" />
+		<rdfs:range
+			rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+	</owl:DatatypeProperty>
+	<owl:DatatypeProperty rdf:ID="wordnetSense">
+		<rdfs:domain rdf:resource="#Concept" />
+		<rdfs:range
+			rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+	</owl:DatatypeProperty>
+	<owl:DatatypeProperty rdf:ID="numberOfConcepts">
+		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int" />
+		<rdfs:domain rdf:resource="#Concept" />
+	</owl:DatatypeProperty>
+	<owl:DatatypeProperty rdf:ID="wordnet">
+		<rdfs:domain rdf:resource="#Concept" />
+		<rdfs:range
+			rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" />
+	</owl:DatatypeProperty>
+	<owl:SymmetricProperty rdf:ID="hasPartner">
+		<rdfs:range rdf:resource="#Company" />
+		<rdfs:domain rdf:resource="#Company" />
+		<owl:inverseOf rdf:resource="#hasPartner" />
+		<rdf:type
+			rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+	</owl:SymmetricProperty>
+	<owl:SymmetricProperty rdf:ID="hasCompetitor">
+		<rdfs:domain rdf:resource="#Company" />
+		<rdf:type
+			rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+		<owl:inverseOf rdf:resource="#hasCompetitor" />
+		<rdfs:range rdf:resource="#Company" />
+	</owl:SymmetricProperty>
+	<owl:InverseFunctionalProperty rdf:about="#isCeoOf">
+		<rdfs:range rdf:resource="#Company" />
+		<rdfs:domain rdf:resource="#Business_leaders" />
+		<owl:inverseOf rdf:resource="#hasCEO" />
+		<rdf:type
+			rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+	</owl:InverseFunctionalProperty>
+	<Europe rdf:ID="Czech_Republic">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Czech Republic
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Czech
+		</synonym>
+	</Europe>
+	<Africa rdf:ID="Tunisia" />
+	<Asia rdf:ID="East_Timor">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			East Timor
+		</synonym>
+	</Asia>
+	<South_America rdf:ID="Bolivia" />
+	<Africa rdf:ID="Nigeria">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Niger Delta
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Abuja
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Lagos
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Nigerian
+		</synonym>
+	</Africa>
+	<Middle_East rdf:ID="Jordan">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Jordanian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Amman
+		</synonym>
+	</Middle_East>
+	<NasdaqCompany rdf:ID="AKAM">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			companies/akamai.png
+		</image>
+		<hasCEO>
+			<Business_leaders rdf:ID="Paul_Sagan">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Paul Sagan
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					CEO Sagan
+				</synonym>
+				<isCeoOf rdf:resource="#AKAM" />
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					very_important_people/business_leaders/paul_sagan.png
+				</image>
+			</Business_leaders>
+		</hasCEO>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			AKAMAI TECHNOLOGIES INC
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Atari
+		</synonym>
+	</NasdaqCompany>
+	<NasdaqCompany rdf:ID="YHOO">
+		<hasProduct>
+			<Searching rdf:ID="Yahoo_search" />
+		</hasProduct>
+		<hasCompetitor>
+			<NasdaqCompany rdf:ID="EBAY">
+				<hasCEO>
+					<Business_leaders rdf:ID="Meg_Whitman">
+						<isCeoOf rdf:resource="#EBAY" />
+						<image
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							very_important_people/business_leaders/meg_whitman.png
+						</image>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							CEO Whitman
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Meg Whitman
+						</synonym>
+					</Business_leaders>
+				</hasCEO>
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/ebay.png
+				</image>
+				<hasCompetitor>
+					<NasdaqCompany rdf:ID="AMZN">
+						<hasCEO>
+							<Business_leaders rdf:ID="Jeff_Bezos">
+								<image
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									very_important_people/business_leaders/jeff_bezos.png
+								</image>
+								<isCeoOf rdf:resource="#AMZN" />
+							</Business_leaders>
+						</hasCEO>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Amazon.com
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Amazon
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							AMAZON.COM INC
+						</synonym>
+						<image
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							companies/amazon.png
+						</image>
+						<hasCompetitor rdf:resource="#EBAY" />
+					</NasdaqCompany>
+				</hasCompetitor>
+				<hasCompetitor>
+					<NasdaqCompany rdf:ID="GOOG">
+						<hasCEO>
+							<Business_leaders rdf:ID="Larry_Page">
+								<isCeoOf rdf:resource="#GOOG" />
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									Larry Page
+								</synonym>
+								<image
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									very_important_people/business_leaders/larry_page.png
+								</image>
+							</Business_leaders>
+						</hasCEO>
+						<hasCompetitor rdf:resource="#YHOO" />
+						<hasCompetitor rdf:resource="#EBAY" />
+						<hasCompetitor>
+							<NasdaqCompany rdf:ID="MSFT">
+								<hasProduct>
+									<Programming rdf:ID="DOTNET">
+										<synonym
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											.NET
+										</synonym>
+										<synonym
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											C#
+										</synonym>
+										<synonym
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											Visual Basic
+										</synonym>
+									</Programming>
+								</hasProduct>
+								<hasCompetitor>
+									<NasdaqCompany rdf:ID="RHAT">
+										<image
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											companies/redhat.png
+										</image>
+										<hasCompetitor
+											rdf:resource="#MSFT" />
+										<synonym
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											Red Hat
+										</synonym>
+										<hasProduct>
+											<Operating_system
+												rdf:ID="Linux" />
+										</hasProduct>
+										<hasCEO>
+											<Business_leaders
+												rdf:ID="Matthew_Szulik">
+												<isCeoOf
+													rdf:resource="#RHAT" />
+												<synonym
+													rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+													Matthew Szulik
+												</synonym>
+												<synonym
+													rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+													CEO Szulik
+												</synonym>
+												<image
+													rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+													very_important_people/business_leaders/matthew_szullik.png
+												</image>
+											</Business_leaders>
+										</hasCEO>
+									</NasdaqCompany>
+								</hasCompetitor>
+								<hasCEO>
+									<Business_leaders
+										rdf:ID="Steve_Ballmer">
+										<image
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											very_important_people/business_leaders/steve_ballmer.png
+										</image>
+										<isCeoOf rdf:resource="#MSFT" />
+									</Business_leaders>
+								</hasCEO>
+								<hasCompetitor>
+									<NasdaqCompany rdf:ID="SUNW">
+										<hasProduct>
+											<Programming rdf:ID="Java" />
+										</hasProduct>
+										<hasProduct>
+											<Computer rdf:ID="Server" />
+										</hasProduct>
+										<synonym
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											Sun Microsystems
+										</synonym>
+										<hasCEO>
+											<Business_leaders
+												rdf:ID="Jonathan_Schwartz">
+												<isCeoOf
+													rdf:resource="#SUNW" />
+												<image
+													rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+													very_important_people/business_leaders/jonathan_schwartz.png
+												</image>
+												<synonym
+													rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+													CEO Schwartz
+												</synonym>
+												<synonym
+													rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+													Jonathan Schwartz
+												</synonym>
+											</Business_leaders>
+										</hasCEO>
+										<image
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											companies/sun.png
+										</image>
+									</NasdaqCompany>
+								</hasCompetitor>
+								<hasProduct>
+									<Operating_system rdf:ID="Windows" />
+								</hasProduct>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									Microsoft
+								</synonym>
+								<hasProduct>
+									<Searching rdf:ID="MSN_search">
+										<synonym
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											MSN
+										</synonym>
+									</Searching>
+								</hasProduct>
+								<hasPartner rdf:resource="#YHOO" />
+								<hasCompetitor rdf:resource="#GOOG" />
+								<image
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									companies/microsoft.png
+								</image>
+							</NasdaqCompany>
+						</hasCompetitor>
+						<image
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							companies/google.png
+						</image>
+						<hasProduct>
+							<Searching rdf:ID="Google_search" />
+						</hasProduct>
+						<hasProduct>
+							<Blogging rdf:ID="YouTube" />
+						</hasProduct>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Google
+						</synonym>
+					</NasdaqCompany>
+				</hasCompetitor>
+				<hasCompetitor rdf:resource="#YHOO" />
+			</NasdaqCompany>
+		</hasCompetitor>
+		<hasCompetitor rdf:resource="#GOOG" />
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			companies/yahoo.png
+		</image>
+		<hasCEO>
+			<Business_leaders rdf:ID="Terry_Semel">
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					very_important_people/business_leaders/terry_semel.png
+				</image>
+				<isCeoOf rdf:resource="#YHOO" />
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Terry Semel
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					CEO Semel
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Terry S. Semel
+				</synonym>
+			</Business_leaders>
+		</hasCEO>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Yahoo
+		</synonym>
+		<hasPartner rdf:resource="#MSFT" />
+	</NasdaqCompany>
+	<Asia rdf:ID="India">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			New Dehli
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Indian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Mumbai
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Dehli
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Bombay
+		</synonym>
+	</Asia>
+	<owl:DataRange>
+		<owl:oneOf rdf:parseType="Resource">
+			<rdf:rest
+				rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil" />
+			<rdf:first
+				rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">
+				false
+			</rdf:first>
+		</owl:oneOf>
+	</owl:DataRange>
+	<Middle_East rdf:ID="United_Arab_Emirates">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Abu Dhabi
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Dubai
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			U.A.E.
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Emirates
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			UAE
+		</synonym>
+	</Middle_East>
+	<Africa rdf:ID="São_Tomé_and_Príncipe" />
+	<Europe rdf:ID="Sweden" />
+	<North_America rdf:ID="United_States">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			American
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			USA
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			United States
+		</synonym>
+		<isMember>
+			<Zones rdf:ID="NAFTA">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					North American Free Trade Agreement
+				</synonym>
+				<hasMember rdf:resource="#United_States" />
+				<hasMember>
+					<North_America rdf:ID="Mexico">
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Mexican
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Mexico City
+						</synonym>
+						<isMember rdf:resource="#NAFTA" />
+					</North_America>
+				</hasMember>
+				<hasMember>
+					<North_America rdf:ID="Canada">
+						<isMember rdf:resource="#NAFTA" />
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Toronto
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Ottowa
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Quebec
+						</synonym>
+					</North_America>
+				</hasMember>
+			</Zones>
+		</isMember>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Washington
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Washington D.C.
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Washington DC
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			U.S.A.
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			U.S.
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			US
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			New York
+		</synonym>
+	</North_America>
+	<Business_leaders rdf:ID="Rob_Glaser">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Rob Glaser
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Robert Glaser
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			CEO Glaser
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/rob_glaser.png
+		</image>
+		<isCeoOf>
+			<NasdaqCompany rdf:ID="RNWK">
+				<hasProduct>
+					<Audio_video rdf:ID="Real_player" />
+				</hasProduct>
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/real.png
+				</image>
+				<hasCEO rdf:resource="#Rob_Glaser" />
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Real Networks
+				</synonym>
+			</NasdaqCompany>
+		</isCeoOf>
+	</Business_leaders>
+	<Middle_East rdf:ID="Lebanon" />
+	<Asia rdf:ID="Vietnam" />
+	<Europe rdf:ID="Monaco" />
+	<Middle_East rdf:ID="Turkey" />
+	<Oceania rdf:ID="Samoa" />
+	<Africa rdf:ID="Djibouti" />
+	<Africa rdf:ID="Congo" />
+	<Africa rdf:ID="Somaliland" />
+	<Business_leaders rdf:ID="Hector_Ruiz">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/hector_ruiz.png
+		</image>
+		<isCeoOf>
+			<NasdaqCompany rdf:ID="AMD">
+				<hasCEO rdf:resource="#Hector_Ruiz" />
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/amd.png
+				</image>
+				<hasProduct>
+					<Microprocessor rdf:ID="Athlon_64" />
+				</hasProduct>
+				<hasProduct>
+					<Microprocessor rdf:ID="Opteron" />
+				</hasProduct>
+				<hasCompetitor>
+					<NasdaqCompany rdf:ID="INTC">
+						<image
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							companies/intel.png
+						</image>
+						<hasPartner>
+							<NasdaqCompany rdf:ID="AAPL">
+								<hasCEO>
+									<Business_leaders
+										rdf:ID="Steve_Jobs">
+										<image
+											rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+											very_important_people/business_leaders/steve_jobs.png
+										</image>
+										<isCeoOf rdf:resource="#AAPL" />
+									</Business_leaders>
+								</hasCEO>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									Apple Computers
+								</synonym>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									APPLE COMPUTER INC
+								</synonym>
+								<hasCompetitor rdf:resource="#MSFT" />
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									MacBook
+								</synonym>
+								<hasProduct>
+									<Computer rdf:ID="Macintosh" />
+								</hasProduct>
+								<image
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									companies/apple.png
+								</image>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									iMac
+								</synonym>
+								<hasPartner rdf:resource="#INTC" />
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									iPod
+								</synonym>
+							</NasdaqCompany>
+						</hasPartner>
+						<hasCompetitor rdf:resource="#AMD" />
+						<hasCEO>
+							<Business_leaders rdf:ID="Paul_Otellini">
+								<image
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									very_important_people/business_leaders/paul_otellini.png
+								</image>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									CEO Otellini
+								</synonym>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									Paul Otellini
+								</synonym>
+								<synonym
+									rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+									Paul S. Otellini
+								</synonym>
+								<isCeoOf rdf:resource="#INTC" />
+							</Business_leaders>
+						</hasCEO>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Intel
+						</synonym>
+						<hasProduct>
+							<Microprocessor rdf:ID="Core_2_duo" />
+						</hasProduct>
+						<hasProduct>
+							<Microprocessor rdf:ID="Pentium_4" />
+						</hasProduct>
+						<hasProduct>
+							<Microprocessor rdf:ID="Xeon" />
+						</hasProduct>
+					</NasdaqCompany>
+				</hasCompetitor>
+			</NasdaqCompany>
+		</isCeoOf>
+	</Business_leaders>
+	<North_America rdf:ID="Grenada" />
+	<Europe rdf:ID="Lithuania" />
+	<Middle_East rdf:ID="Syria" />
+	<Zones rdf:ID="Benelux">
+		<hasMember>
+			<Europe rdf:ID="Belgium">
+				<isMember rdf:resource="#Benelux" />
+			</Europe>
+		</hasMember>
+		<hasMember>
+			<Europe rdf:ID="Luxembourg">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Luxemburg
+				</synonym>
+				<isMember rdf:resource="#Benelux" />
+			</Europe>
+		</hasMember>
+		<hasMember>
+			<Europe rdf:ID="Netherlands">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					The Netherlands
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Holland
+				</synonym>
+				<isMember rdf:resource="#Benelux" />
+			</Europe>
+		</hasMember>
+	</Zones>
+	<Asia rdf:ID="North_Korea" />
+	<Oceania rdf:ID="Papua_New_Guinea">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			New Zealand
+		</synonym>
+	</Oceania>
+	<Africa rdf:ID="Burundi" />
+	<Politicians rdf:ID="Mahmoud_Ahmadinejad">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Mahmoud Ahmadinejad
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			President Mahmoud Ahmadinejad
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Ahmadinejad
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			President Ahmadinejad
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/mahmoud_ahmadinejad.png
+		</image>
+	</Politicians>
+	<Europe rdf:ID="Belarus" />
+	<Europe rdf:ID="Finland" />
+	<Market rdf:ID="Hong_Kong_Stock_Exchange">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			HSI
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Hong Kong Stock Exchange
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Hang Seng Index
+		</synonym>
+	</Market>
+	<Asia rdf:ID="Bangladesh" />
+	<Business_leaders rdf:ID="Edgar_Masri">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Edgar Masri
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			CEO Masri
+		</synonym>
+		<isCeoOf>
+			<NasdaqCompany rdf:ID="COMS">
+				<hasCEO rdf:resource="#Edgar_Masri" />
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/3com.png
+				</image>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					3COM CORP
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					3com
+				</synonym>
+			</NasdaqCompany>
+		</isCeoOf>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/edgar_masri.png
+		</image>
+	</Business_leaders>
+	<North_America rdf:ID="Belize" />
+	<Africa rdf:ID="Togo" />
+	<Middle_East rdf:ID="Bahrain" />
+	<Market rdf:ID="London_Stock_Exchange">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			FTSE
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			LSE
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			London Stock Exchange
+		</synonym>
+	</Market>
+	<Mobile rdf:ID="Personal_digital_assistent">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			PDA
+		</synonym>
+	</Mobile>
+	<Europe rdf:ID="Italy" />
+	<Politicians rdf:ID="Hugo_Chavez">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Chavez
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Hugo Chavez
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/hugo_chavez.png
+		</image>
+	</Politicians>
+	<Business_leaders rdf:ID="Bill_Gates">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/bill_gates.png
+		</image>
+	</Business_leaders>
+	<Europe rdf:ID="San_Marino" />
+	<NasdaqCompany rdf:ID="ADPT">
+		<hasCEO>
+			<Business_leaders rdf:ID="Sundi_Sundaresh">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					S. "Sundi" Sundaresh
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					CEO Sundaresh
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					S. Sundaresh
+				</synonym>
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					very_important_people/business_leaders/sundi_sundaresh.png
+				</image>
+				<isCeoOf rdf:resource="#ADPT" />
+			</Business_leaders>
+		</hasCEO>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Adaptec
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			ADAPTEC INC
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			companies/adaptec.png
+		</image>
+	</NasdaqCompany>
+	<NasdaqCompany rdf:ID="ADBE">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			companies/adobe.png
+		</image>
+		<hasProduct>
+			<Imaging rdf:ID="Photoshop" />
+		</hasProduct>
+		<hasCEO>
+			<Business_leaders rdf:ID="Bruce_Chizen">
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					very_important_people/business_leaders/bruce_chizen.png
+				</image>
+				<isCeoOf rdf:resource="#ADBE" />
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					CEO Chizen
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Bruce Chizen
+				</synonym>
+			</Business_leaders>
+		</hasCEO>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Adobe
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Photoshop
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			ADOBE SYSTEMS INC
+		</synonym>
+	</NasdaqCompany>
+	<South_America rdf:ID="Chile" />
+	<Middle_East rdf:ID="Iran">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Persian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Persia
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Iranian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Tehran
+		</synonym>
+	</Middle_East>
+	<Africa rdf:ID="Comoros" />
+	<Asia rdf:ID="Malaysia" />
+	<Africa rdf:ID="Botswana" />
+	<Federal_bank rdf:ID="Bank_of_England">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Bank of England
+		</synonym>
+	</Federal_bank>
+	<Term rdf:ID="Surplus" />
+	<Politicians rdf:ID="Saddam_Hussein">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/saddam_hussein.png
+		</image>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			former Iraqi president Hussein
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Saddam Hussein
+		</synonym>
+	</Politicians>
+	<South_America rdf:ID="Brazil">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			São Paulo
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Brasilia
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Rio de Janairo
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Brazilian
+		</synonym>
+	</South_America>
+	<Africa rdf:ID="Zimbabwe" />
+	<North_America rdf:ID="Trinidad_and_Tobago">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Tobago
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Trinidad
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Trinidad and Tobago
+		</synonym>
+	</North_America>
+	<Computer rdf:ID="Personal_Computer">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			PC
+		</synonym>
+	</Computer>
+	<Europe rdf:ID="Andorra" />
+	<Africa rdf:ID="Mali" />
+	<Asia rdf:ID="Myanmar">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Burma
+		</synonym>
+	</Asia>
+	<Europe rdf:ID="Serbia_and_Montenegro">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Montenegro
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Serbia
+		</synonym>
+	</Europe>
+	<Africa rdf:ID="Chad" />
+	<Europe rdf:ID="Norway">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Oslo
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Norwegian
+		</synonym>
+	</Europe>
+	<Africa rdf:ID="Cape_Verde">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Cape Verde
+		</synonym>
+	</Africa>
+	<Europe rdf:ID="Slovenia" />
+	<Market rdf:ID="Euronext">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			AEX
+		</synonym>
+	</Market>
+	<North_America rdf:ID="Jamaica" />
+	<Africa rdf:ID="Madagascar" />
+	<Asia rdf:ID="Singapore" />
+	<Term rdf:ID="Share" ></Term>
+	<Asia rdf:ID="Pakistan">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Karachi
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Islamabad
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Pakistani
+		</synonym>
+	</Asia>
+	<Middle_East rdf:ID="Oman" />
+	<Africa rdf:ID="Mauritania" />
+	<South_America rdf:ID="Uruguay" />
+	<Europe rdf:ID="Germany">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			German
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Berlin
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Frankfurt
+		</synonym>
+	</Europe>
+	<Africa rdf:ID="Namibia" />
+	<Africa rdf:ID="Kenya" />
+	<Asia rdf:ID="Japan">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Japanese
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Tokyo
+		</synonym>
+	</Asia>
+	<Africa rdf:ID="Ghana" />
+	<Middle_East rdf:ID="Palestine" />
+	<Europe rdf:ID="Latvia" />
+	<Africa rdf:ID="Somalia" />
+	<Asia rdf:ID="Thailand" />
+	<Europe rdf:ID="Austria" />
+	<Politicians rdf:ID="Mahmoud_Abbas">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			president mahmoud abbas
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			president Abbas
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Abbas
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/mahmoud_abbas.png
+		</image>
+	</Politicians>
+	<Zones rdf:ID="EU">
+		<hasMember>
+			<Europe rdf:ID="Denmark" />
+		</hasMember>
+		<hasMember rdf:resource="#Germany" />
+		<hasMember>
+			<Europe rdf:ID="Malta" />
+		</hasMember>
+		<hasMember rdf:resource="#Latvia" />
+		<hasMember>
+			<Europe rdf:ID="Poland" />
+		</hasMember>
+		<hasMember rdf:resource="#Czech_Republic" />
+		<hasMember>
+			<Europe rdf:ID="Greece" />
+		</hasMember>
+		<hasMember rdf:resource="#Belgium" />
+		<hasMember>
+			<Europe rdf:ID="United_Kingdom">
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Welsh
+				</rdfs:label>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Northern Ireland
+				</rdfs:label>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Wales
+				</rdfs:label>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					London
+				</rdfs:label>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Scotland
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Great Britain
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Wales
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					London
+				</synonym>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					England
+				</rdfs:label>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Scotish
+				</rdfs:label>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					British
+				</rdfs:label>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Scotish
+				</synonym>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					UK
+				</rdfs:label>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					England
+				</synonym>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					English
+				</rdfs:label>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					UK
+				</synonym>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Great Britain
+				</rdfs:label>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					English
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					U.K.
+				</synonym>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Scotland
+				</rdfs:label>
+				<rdfs:label
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					GB
+				</rdfs:label>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Welsh
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					British
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					G.B.
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					GB
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Northern Ireland
+				</synonym>
+			</Europe>
+		</hasMember>
+		<hasMember>
+			<Europe rdf:ID="Portugal" />
+		</hasMember>
+		<hasMember rdf:resource="#Sweden" />
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			European Union
+		</synonym>
+		<hasMember>
+			<Europe rdf:ID="Hungary" />
+		</hasMember>
+		<hasMember>
+			<Europe rdf:ID="France">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Paris
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					French
+				</synonym>
+			</Europe>
+		</hasMember>
+		<hasMember rdf:resource="#Lithuania" />
+		<hasMember rdf:resource="#Finland" />
+		<hasMember>
+			<Europe rdf:ID="Spain">
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Spanish
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Basque
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Barcelona
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Madrid
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Catalan
+				</synonym>
+			</Europe>
+		</hasMember>
+		<hasMember rdf:resource="#Slovenia" />
+		<hasMember>
+			<Europe rdf:ID="Cyprus" />
+		</hasMember>
+		<hasMember rdf:resource="#Netherlands" />
+		<hasMember>
+			<Europe rdf:ID="Slovakia" />
+		</hasMember>
+		<hasMember>
+			<Europe rdf:ID="Ireland" />
+		</hasMember>
+		<hasMember rdf:resource="#Italy" />
+		<hasMember rdf:resource="#Luxembourg" />
+		<hasMember rdf:resource="#Austria" />
+	</Zones>
+	<Federal_bank rdf:ID="European_Central_Bank">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			ECB
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			European Central Bank
+		</synonym>
+	</Federal_bank>
+	<Europe rdf:ID="Ukraine" />
+	<Middle_East rdf:ID="Saudi_Arabia">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Mecca
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Medina
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Riyadh
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Saudi
+		</synonym>
+	</Middle_East>
+	<Term rdf:ID="Future_Value">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			future value
+		</synonym>
+	</Term>
+	<NasdaqCompany rdf:ID="ASML">
+		<hasPartner rdf:resource="#INTC" />
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			companies/asml.png
+		</image>
+		<hasCEO>
+			<Business_leaders rdf:ID="Eric_Meurice">
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					very_important_people/business_leaders/eric_meurice.png
+				</image>
+				<isCeoOf rdf:resource="#ASML" />
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Eric Meurice
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					CEO Meurice
+				</synonym>
+			</Business_leaders>
+		</hasCEO>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			ASML HOLDING NV
+		</synonym>
+	</NasdaqCompany>
+	<Middle_East rdf:ID="Iraq">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Baghdad
+		</synonym>
+	</Middle_East>
+	<Africa rdf:ID="Morocco" />
+	<Asia rdf:ID="Kyrgyzstan" />
+	<Oceania rdf:ID="Fiji" />
+	<Term rdf:ID="Option" />
+	<Asia rdf:ID="Cambodia" />
+	<Africa rdf:ID="Gambia" />
+	<North_America rdf:ID="Cuba" />
+	<Africa rdf:ID="Burkina_Faso">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Burkina Faso
+		</synonym>
+	</Africa>
+	<South_America rdf:ID="Argentinia" />
+	<Africa rdf:ID="Benin" />
+	<North_America rdf:ID="Costa_Rica">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Central African Republic
+		</synonym>
+	</North_America>
+	<Term rdf:ID="Cash_Flow">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			cash flow
+		</synonym>
+	</Term>
+	<Europe rdf:ID="Croatia" />
+	<Politicians rdf:ID="Javier_Solana">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			European foreign policy chief
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Javier Solana
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Solana
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/javier_solana.png
+		</image>
+	</Politicians>
+	<North_America rdf:ID="El_Salvador">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			El Salvador
+		</synonym>
+	</North_America>
+	<Asia rdf:ID="Brunei" />
+	<Business_leaders rdf:ID="Kevin_Rollins">
+		<isCeoOf>
+			<NasdaqCompany rdf:ID="DELL">
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/dell.png
+				</image>
+				<hasCEO rdf:resource="#Kevin_Rollins" />
+			</NasdaqCompany>
+		</isCeoOf>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			CEO Rollins
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Kevin B. Rollins
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Kevin Rollins
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/kevin_rollins.png
+		</image>
+	</Business_leaders>
+	<Asia rdf:ID="Indonesia">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Indonesian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Djakarta
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Jakarta
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Sumatra
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Java
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Aceh
+		</synonym>
+	</Asia>
+	<Asia rdf:ID="Laos" />
+	<Europe rdf:ID="Estonia" />
+	<Middle_East rdf:ID="Qatar" />
+	<Africa rdf:ID="Cote_dIvoire">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Côte d'Ivoire
+		</synonym>
+	</Africa>
+	<Africa rdf:ID="Uganda" />
+	<Europe rdf:ID="Azerbaijan" />
+	<Europe rdf:ID="Bulgaria" />
+	<Oceania rdf:ID="Kiribati" />
+	<Oceania rdf:ID="Vanuatu" />
+	<Oceania rdf:ID="Nauru" />
+	<Politicians rdf:ID="George_W_Bush">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/george_w_bush.png
+		</image>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			President Bush
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			The White House
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			George W. Bush
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			George Bush
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Bush Junior
+		</synonym>
+	</Politicians>
+	<Africa rdf:ID="Zambia" />
+	<North_America rdf:ID="Haiti" />
+	<Asia rdf:ID="Uzbekistan" />
+	<owl:DataRange>
+		<owl:oneOf rdf:parseType="Resource">
+			<rdf:rest
+				rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil" />
+			<rdf:first
+				rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">
+				true
+			</rdf:first>
+		</owl:oneOf>
+	</owl:DataRange>
+	<Market rdf:ID="New_York_Stock_Exchange">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Wall Street
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			New York Stock Exchange
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			NYSE
+		</synonym>
+	</Market>
+	<Asia rdf:ID="Mongolia" />
+	<Africa rdf:ID="Mozambique" />
+	<Federal_bank rdf:ID="Federal_Reserve">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Fed
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Federal Reserve
+		</synonym>
+	</Federal_bank>
+	<Oceania rdf:ID="Solomon_Islands" />
+	<Asia rdf:ID="South_Korea">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Republic of Korea
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			South Korean
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			ROK
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Seoul
+		</synonym>
+	</Asia>
+	<Europe rdf:ID="Macedonia" />
+	<Term rdf:ID="Annual_Report">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			annual reports
+		</synonym>
+	</Term>
+	<South_America rdf:ID="Colombia" />
+	<Term rdf:ID="Goodwill" />
+	<Business_leaders rdf:ID="Mike_Lazaridis">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			co-CEO Lazaridis
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Mike Lazaridis
+		</synonym>
+		<isCeoOf>
+			<NasdaqCompany rdf:ID="RIMM">
+				<hasCEO rdf:resource="#Mike_Lazaridis" />
+				<hasProduct rdf:resource="#Personal_digital_assistent" />
+				<hasProduct>
+					<Mobile rdf:ID="Mobile_phone">
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							Mobile phone
+						</synonym>
+						<synonym
+							rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+							GSM
+						</synonym>
+					</Mobile>
+				</hasProduct>
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/rim.png
+				</image>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Research in motion
+				</synonym>
+			</NasdaqCompany>
+		</isCeoOf>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/mike_lazaridis.png
+		</image>
+	</Business_leaders>
+	<Africa rdf:ID="Libya" />
+	<Asia rdf:ID="Turkmenistan" />
+	<North_America rdf:ID="Honduras" />
+	<Asia rdf:ID="Bhutan" />
+	<Organizations rdf:ID="WTO">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			World Trade Organization
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			GATT
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			General Agreement on Tariffs and Trade
+		</synonym>
+	</Organizations>
+	<Term rdf:ID="Deficit" />
+	<Term rdf:ID="PE_Ratio">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			P/E ratio
+		</synonym>
+	</Term>
+	<Africa rdf:ID="Lesotho" />
+	<Africa rdf:ID="Cameroon" />
+	<Term rdf:ID="Investment" />
+	<North_America rdf:ID="Saint_Vincent_and_the_Grenadines" />
+	<Europe rdf:ID="Armenia" />
+	<Asia rdf:ID="Russia">
+		<rdf:type rdf:resource="#Europe" />
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Siberian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Russia
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Siberia
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Moscow
+		</synonym>
+	</Asia>
+	<Africa rdf:ID="Sudan">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Darfur
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Khartoum
+		</synonym>
+	</Africa>
+	<Oceania rdf:ID="Tuvalu" />
+	<Europe rdf:ID="Georgia" />
+	<Term rdf:ID="Inflation" />
+	<Asia rdf:ID="Kazakhstan" />
+	<South_America rdf:ID="Panama">
+		<rdf:type rdf:resource="#North_America" />
+	</South_America>
+	<Politicians rdf:ID="Fidel_Castro">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/fidel_castro.png
+		</image>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Castro
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Fidel Castro
+		</synonym>
+	</Politicians>
+	<Africa rdf:ID="Algeria" />
+	<Europe rdf:ID="Albania" />
+	<Africa rdf:ID="Liberia" />
+	<Asia rdf:ID="Sri_Lanka">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Sri Lanka
+		</synonym>
+	</Asia>
+	<South_America rdf:ID="Peru" />
+	<North_America rdf:ID="Dominica" />
+	<Africa rdf:ID="Seychelles" />
+	<North_America rdf:ID="Saint_Kitts_and_Nevis">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Saint Kitts and Nevis
+		</synonym>
+	</North_America>
+	<Africa rdf:ID="Senegal" />
+	<Term rdf:ID="Dividend" />
+	<Politicians rdf:ID="Gordon_Brown">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/gordon_brown.png
+		</image>
+	</Politicians>
+	<Oceania rdf:ID="Palau" />
+	<Europe rdf:ID="Vatican_City" />
+	<Middle_East rdf:ID="Afghanistan">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Afghan
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Kabul
+		</synonym>
+	</Middle_East>
+	<Commercial_bank rdf:ID="Citigroup">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Citibank
+		</synonym>
+	</Commercial_bank>
+	<Term rdf:ID="Return_On_Investment">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			rate of return
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			ROI
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			return on investment
+		</synonym>
+	</Term>
+	<Business_leaders rdf:ID="John_Chambers">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/john_chambers.png
+		</image>
+		<isCeoOf>
+			<NasdaqCompany rdf:ID="CSCO">
+				<hasCEO rdf:resource="#John_Chambers" />
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Cisco
+				</synonym>
+				<synonym
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					Linksys
+				</synonym>
+				<image
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					companies/cisco.png
+				</image>
+			</NasdaqCompany>
+		</isCeoOf>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			John T. Chambers
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			John Chambers
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			CEO Chambers
+		</synonym>
+	</Business_leaders>
+	<Oceania rdf:ID="Tonga" />
+	<Term rdf:ID="Revenue" />
+	<Africa rdf:ID="Sierra_Leone" />
+	<Commercial_bank rdf:ID="UBS">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			UBS Switzerland
+		</synonym>
+	</Commercial_bank>
+	<North_America rdf:ID="Bahamas" />
+	<Africa rdf:ID="Gabon" />
+	<Africa rdf:ID="Equatorial_Guinea">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Equatorial Guinea
+		</synonym>
+	</Africa>
+	<South_America rdf:ID="Ecuador" />
+	<South_America rdf:ID="Venezuela">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Caracas
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Venezuelan
+		</synonym>
+	</South_America>
+	<Business_leaders rdf:ID="Jim_Balsillie">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			co-CEO Balsillie
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Jim Balsillie
+		</synonym>
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/business_leaders/jim_balsillie.png
+		</image>
+	</Business_leaders>
+	<South_America rdf:ID="Nicaragua" />
+	<Africa rdf:ID="Tanzania" />
+	<Africa rdf:ID="Guinea" />
+	<Term rdf:ID="Leverage">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			gearing
+		</synonym>
+	</Term>
+	<Term rdf:ID="Profit" />
+	<Africa rdf:ID="Swaziland" />
+	<Oceania rdf:ID="Micronesia" />
+	<Politicians rdf:ID="Tony_Blair">
+		<image rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			very_important_people/politicians/tony_blair.png
+		</image>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			prime minister blair
+		</synonym>
+	</Politicians>
+	<Africa rdf:ID="Angola" />
+	<Middle_East rdf:ID="Kuwait">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Kuwaiti
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Kuwait City
+		</synonym>
+	</Middle_East>
+	<Europe rdf:ID="Romania" />
+	<Africa rdf:ID="Malawi" />
+	<Africa rdf:ID="Rwanda" />
+	<Europe rdf:ID="Moldova" />
+	<Middle_East rdf:ID="Yemen" />
+	<Asia rdf:ID="Taiwan" />
+	<Europe rdf:ID="Iceland" />
+	<North_America rdf:ID="Barbados" />
+	<Africa rdf:ID="Niger" />
+	<Market rdf:ID="NASDAQ">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			NSDQ
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			National Association of Securities Dealers' Automated
+			Quotations System
+		</synonym>
+	</Market>
+	<Europe rdf:ID="Switzerland" />
+	<Term rdf:ID="Interest" />
+	<North_America rdf:ID="Saint_Lucia" />
+	<Term rdf:ID="Emerging_Markets">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			emerging markets
+		</synonym>
+	</Term>
+	<Market rdf:ID="Tokyo_Stock_Exchange">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Nikkei 225
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Tokyo Stock Exchange
+		</synonym>
+	</Market>
+	<Asia rdf:ID="Maldives" />
+	<Middle_East rdf:ID="Israel">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Palestine
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Ramallah
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Jerusalem
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Palestinian
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Tel Aviv
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Israeli
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Gaza
+		</synonym>
+		<wordnet
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">
+			false
+		</wordnet>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			West Bank
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Gaza Strip
+		</synonym>
+	</Middle_East>
+	<Oceania rdf:ID="Marshall_Islands">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Marshall Islands
+		</synonym>
+	</Oceania>
+	<Asia rdf:ID="Tajikistan" />
+	<Asia rdf:ID="Philippines" />
+	<Asia rdf:ID="China">
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			People's Republic of China
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Shanghai
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Chinese
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Beijing
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Hongkong
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			Hong Kong
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			PRC
+		</synonym>
+		<synonym
+			rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+			PR China
+		</synonym>
+	</Asia>
+	<Term rdf:ID="Liquidity" />
+	<South_America rdf:ID="Guyana" />
+	<Oceania rdf:ID="New_Zealand" />
+	<Africa rdf:ID="Egypt">
+		<rdf:type rdf:resource="#Middle_East" />
+	</Africa>
+	<Term rdf:ID="Discount" />
+	<Africa rdf:ID="Ethiopia" />
+	<Oceania rdf:ID="Australia" />
+	<Africa rdf:ID="Mauritius" />
+	<OtherCompany rdf:ID="Blinkx" />
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.2.1, Build 365)  http://protege.stanford.edu -->

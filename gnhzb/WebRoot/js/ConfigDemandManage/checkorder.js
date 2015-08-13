@@ -1,4 +1,8 @@
 function createCheckorder(){
+	//luweijiang
+	function checkorderTask(orderManageId){
+		checkorder_CheckOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderManageId}));
+	}
 	var panel =Edo.create({
 		id:'checkorder_topPanel',
 		type:'panel',title:'<span style="color:red;">请先选择要进行审核的配置需求</span>',width:'100%',height:'100%',
@@ -15,7 +19,9 @@ function createCheckorder(){
 			        {type:'button',id:'checkorder_OrderChooseBtn',text:'选择配置需求',onclick:function(e){
 			        	if(checkorder_OrderChooseBtn.text=='选择配置需求'){
 				        	 showOrder2CheckWin();	
-				        	 checkorder_CheckOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
+				        	 
+				        	 checkorderTask(3121);
+				        	 //checkorder_CheckOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
 				        	
 				        	 checkorder_CheckOrderChooseTable.data.filter(function(o, i){
 				                if(o.statusName =='待审核') return true;

@@ -14,15 +14,24 @@ public class PdmTask {
 	private String name;
 	private String status;
 	private Employee checkperson;
+	private TaskTreeNode checkTaskTreeNode;
 	private Employee carrier;
 	private String mainFileName;
 	private Date starttime;
 	private PdmProcessTemplate pdmprocessTemplate;
-	private PdmModule pdmModule;
+	private PdmModule pdmModule;//子任务模板
+	private String prevtaskid;
+	private String nexttaskid;
+	private String parenttaskid;
+	private String taskid;
+	private String taskindex;//任务index,如1,1.1，1.2
+	private int istail;
+	private int istop;
 	private Date endtime;
 	private PdmProject pdmProject;
 	private PdmTask parentPdmTask;
 	private Set<PdmTask> subPdmTasks=new HashSet<PdmTask>();
+	private Set<TaskIOParam> params=new HashSet<TaskIOParam>();
 	public Long getId() {
 		return id;
 	}
@@ -101,6 +110,62 @@ public class PdmTask {
 	}
 	public void setPdmprocessTemplate(PdmProcessTemplate pdmprocessTemplate) {
 		this.pdmprocessTemplate = pdmprocessTemplate;
+	}
+	
+	public int getIstail() {
+		return istail;
+	}
+	public void setIstail(int istail) {
+		this.istail = istail;
+	}
+	public int getIstop() {
+		return istop;
+	}
+	public void setIstop(int istop) {
+		this.istop = istop;
+	}
+
+	public String getPrevtaskid() {
+		return prevtaskid;
+	}
+	public void setPrevtaskid(String prevtaskid) {
+		this.prevtaskid = prevtaskid;
+	}
+	public String getNexttaskid() {
+		return nexttaskid;
+	}
+	public void setNexttaskid(String nexttaskid) {
+		this.nexttaskid = nexttaskid;
+	}
+	public String getParenttaskid() {
+		return parenttaskid;
+	}
+	public void setParenttaskid(String parenttaskid) {
+		this.parenttaskid = parenttaskid;
+	}
+	public String getTaskid() {
+		return taskid;
+	}
+	public void setTaskid(String taskid) {
+		this.taskid = taskid;
+	}
+	public TaskTreeNode getCheckTaskTreeNode() {
+		return checkTaskTreeNode;
+	}
+	public void setCheckTaskTreeNode(TaskTreeNode checkTaskTreeNode) {
+		this.checkTaskTreeNode = checkTaskTreeNode;
+	}
+	public String getTaskindex() {
+		return taskindex;
+	}
+	public void setTaskindex(String taskindex) {
+		this.taskindex = taskindex;
+	}
+	public Set<TaskIOParam> getParams() {
+		return params;
+	}
+	public void setParams(Set<TaskIOParam> params) {
+		this.params = params;
 	}
 
 }
