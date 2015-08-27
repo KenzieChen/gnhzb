@@ -2,15 +2,19 @@ package edu.zju.cims201.GOF.web.platform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import edu.zju.cims201.GOF.hibernate.pojoA.CodeClass;
 import edu.zju.cims201.GOF.hibernate.pojoA.PlatStructTree;
 import edu.zju.cims201.GOF.rs.dto.PlatStructTreeDTO;
 import edu.zju.cims201.GOF.service.platform.PlatStructTreeService;
@@ -42,17 +46,38 @@ public class PlatStructTreeAction extends ActionSupport implements
 	 * luweijiang
 	 */
 	public void getUnfinishedPlatStructById() throws IOException{
+		
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		List<PlatStructTree> list=platStructTreeService.getUnfinishedPlatStructById(id);
-		String listStr = JSONUtil.write(list);
-		out =response.getWriter();
-		out.print(listStr);
+		if(CollectionUtils.isNotEmpty(list)){
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", list);
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
 	}
 	
 	public void getPlatStructById() throws IOException{
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		List<PlatStructTree> list=platStructTreeService.getPlatStructById(id);
-		String listStr = JSONUtil.write(list);
-		out =response.getWriter();
-		out.print(listStr);
+		if(CollectionUtils.isNotEmpty(list)){
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", list);
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
 	}
 	/**
 	 * 获取平台树的根节点

@@ -7,6 +7,81 @@ function createPlatformStruct(){
 		}
 		return lbdhTreeData;
 	}
+	var lbdhTreeData=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'platstructtreeid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'platformstructplatformstructtreeid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert('提示','对应的平台结构树不存在');
+			return null;
+		}
+		return outputparam;
+	}
+	this.inittask=function(){
+		var classificationtreeid=null;
+		var platstructtreeid=null;
+		var isexist1=false;
+		var isexist2=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'classificationtreeid'){
+				isexist1=true;
+				classificationtreeid=inputparam[i].value;
+				break;
+			}
+		}
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'platstructtreeid'){
+				isexist2=true;
+				platstructtreeid=inputparam[i].value;
+				break;
+			}
+		}
+		
+		if(isexist1){
+			var data =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classificationtreeid});
+			if(data.isSuccess == '1'){
+				var resultdata=data.result;
+				for(var i =0;i<resultdata.length;i++){
+					resultdata[i].icon='e-tree-folder';
+				}
+				lbdhTreeData=resultdata;
+			}
+			Edo.MessageBox.alert('提示',data.message);
+		}
+		if(isexist2){
+			var data =cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platstructtreeid});
+			if(data.isSuccess == '1'){
+				platformStruct_combo.set('data',data.result);
+			}
+			Edo.MessageBox.alert('提示',data.message);
+		}
+		if(!isexist1 || !isexist2){
+			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
+
 	var panel =Edo.create({
 			type: 'panel', id:'', title:'<h3><font color="blue">建立分类结构</font></h3>', padding: [0,0,0,0],
 			width:'100%', height:'100%', verticalGap: 0,
@@ -115,12 +190,11 @@ function createPlatformStruct(){
 	      ]
 
 	});
-	
 	platformStruct_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
-	//luweijiang
 	function platformStructTask(platStructTreeId){
 		platformStruct_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platStructTreeId}));
 	}
+	
 	platformStruct_addNode.on('click',function(e){
 		showAddNodeWin();
 	});
@@ -444,18 +518,25 @@ function createPlatformStruct(){
 			});
 		}
 		
-		var lbdhTreeData = cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
+
+		if(lbdhTreeData == null){
+			initlbdhTreeData();
+		}
+		console.log(lbdhTreeData);
 		for(var i=0;i<lbdhTreeData.length;i++){
 			lbdhTreeData[i].icon ='e-tree-folder';
 		}
-		//luweijiang
-//		var lbdhTreeData = platformStructlbdhTreeTask(3041);
-
 		platformStruct_LbdhTree.set("data",lbdhTreeData);
 		platformStruct_addNodeWin.show('center','middle',true);
 		return platformStruct_addNodeWin;
 	}
 	
+	function initlbdhTreeData(){
+		lbdhTreeData=cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
+		for(var i=0;i<lbdhTreeData.length;i++){
+			lbdhTreeData[i].icon ='e-tree-folder';
+		}
+	}
 	function showUpdateNodeForm(){
 		if(!Edo.get('platformStruct_updateNodeForm')){
 			Edo.create({
@@ -563,5 +644,4 @@ function createPlatformStruct(){
 	};
 	
 	//platformStructTask(3148);
-	createPlatformStruct_check(742);
 }

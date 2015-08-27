@@ -20,7 +20,7 @@ String taskid=request.getParameter("taskid");
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	 <link href="<%=basePath%>js/edo/res/css/edo-all.css" rel="stylesheet"
+	 <link href="<%=basePath%>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet"
 			type="text/css" />
 		<link href="<%=basePath%>css/icon.css" rel="stylesheet"
 			type="text/css" />
@@ -34,7 +34,7 @@ String taskid=request.getParameter("taskid");
   		
   	</script>
   </body>
-		<script src="<%=basePath%>js/edo/edo.js" type="text/javascript"></script>
+		<script src="<%=basePath%>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
 		<script src="<%=basePath %>js/cims201.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/utils.js" type="text/javascript"></script>
 	    <!-- 知识搜索 -->
@@ -45,9 +45,16 @@ String taskid=request.getParameter("taskid");
 	    <script src="<%=basePath %>js/getComponentByIndexTask.js" type="text/javascript"></script>
 		<!-- 编码管理系统 陈谦庄 -->
 <script src="<%=basePath%>js/CodeClass/codeclassdefi.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/CodeClass/codeclassdefi_check.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/CodeClass/CodeClassManage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/CodeClass/CodeClassManage_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/CodeClass/CodeClassRuleManage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/CodeClass/CodeClassRuleManage_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/CodeClass/CodeClassStructManage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/CodeClass/CodeClassStructManage_check.js" type="text/javascript"></script>
+
 
 <!-- 模块管理系统 陈谦庄 -->
 <script src="<%=basePath%>js/ModuleManage/DocTypeManage.js" type="text/javascript"></script>
@@ -63,7 +70,11 @@ String taskid=request.getParameter("taskid");
 <script src="<%=basePath%>js/SMLManage/SMLCodePool.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLEdit_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLEdit.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/SMLManage/SMLEdit_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/SMLManage/SMLModeling.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/SMLManage/SMLModeling_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/SMLManage/SMLParamPool_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLParamPool.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLPoolManage_view.js" type="text/javascript"></script>
@@ -73,8 +84,12 @@ String taskid=request.getParameter("taskid");
 <script src="<%=basePath%>js/ConfigDemandManage/checkorder.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/demandmanage.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/neworder.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDemandManage/neworder_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/ConfigDemandManage/newtemplate.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/ordermanage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDemandManage/ordermanage_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/ConfigDemandManage/orderview.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/templatemanage.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/templateupdate.js" type="text/javascript"></script>
@@ -84,11 +99,17 @@ String taskid=request.getParameter("taskid");
 <script src="<%=basePath%>js/ConfigDesign/historyBomView.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platform_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platform.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDesign/platform_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/ConfigDesign/platformStruct_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platformStruct.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDesign/platformStruct_check.js" type="text/javascript"></script>
+
 <script src="<%=basePath%>js/ConfigDesign/structRule_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/structRule.js" type="text/javascript"></script>
-<script src="<%=basePath%>js/ConfigDesign/checkplatform.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDesign/structRule_check.js" type="text/javascript"></script>
+
+<%-- <script src="<%=basePath%>js/ConfigDesign/checkplatform.js" type="text/javascript"></script> --%>
 
 <script src="<%=basePath%>js/ModTemp/IndustryProductAnalyse.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ModTemp/CustomerDemandMatch.js" type="text/javascript"></script>
@@ -102,7 +123,7 @@ String taskid=request.getParameter("taskid");
 <script src="<%=basePath%>js/ModTemp/SchemeDesign.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ModTemp/SchemeChoose.js" type="text/javascript"></script>
 
-
+<script src="<%=basePath%>js/swfupload/swfupload.js" type="text/javascript"></script>
 
 <script src="<%=basePath %>cqz/js/pdm/re.js" type="text/javascript"></script>
 		

@@ -1,4 +1,42 @@
-function createNewOrder_check(orderId){
+function createNewOrder_check(){
+	var orderId=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var neworderordermanageid=null;
+		
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'neworderordermanageid'){
+				isexist=true;
+				neworderordermanageid=outputparam[i].value;
+				orderId=neworderordermanageid;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:neworderordermanageid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				newOrderTb_check.set("data",data.result);
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
 	//表格	
 	if(!Edo.get('newOrder_check_window')){
 		var Table = Edo.create({
@@ -61,24 +99,24 @@ function createNewOrder_check(orderId){
 		    
 		});
 		
-		newOrderTb_check.set('data',
-				cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderId}));
+//		newOrderTb_check.set('data',
+//				cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderId}));
 		
 		Edo.create({
 			id:'newOrder_check_window',
-			type:'window',
-			title:'配置需求录入审批；<span style="color:red;">双击配置需求可查看详细信息</span>',
+			type:'box',
+//			title:'配置需求录入审批；<span style="color:red;">双击配置需求可查看详细信息</span>',
 			height:'250',
 			width:'900',
 			padding:[0,0,0,0],
-			titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//			titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        layout:'horizontal',
 	        children:[Table]
 		})
@@ -145,7 +183,10 @@ function createNewOrder_check(orderId){
 		return newOrder_OrderDetailWin_check;
 		
 	}
-	newOrder_check_window.show('center','middle',true);
+	this.getBox=function(){
+		return newOrder_check_window;
+	}
+//	newOrder_check_window.show('center','middle',true);
 }
 	
 	

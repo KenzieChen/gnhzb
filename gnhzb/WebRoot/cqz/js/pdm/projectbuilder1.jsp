@@ -44,12 +44,12 @@
 	<script type="text/javascript" src="<%=basePath%>js/lca/flow/mxclient1.8goo.js"></script>
 	<link rel="stylesheet" type="text/css"
 			href="<%=basePath%>css/welcome.css">
-		<link href="<%=basePath%>js/edo/res/css/edo-all.css" rel="stylesheet"
+		<link href="<%=basePath%>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet"
 			type="text/css" />
 		<link href="<%=basePath%>css/icon.css" rel="stylesheet"
 			type="text/css" />
 
-		<script src="<%=basePath%>js/edo/edo.js" type="text/javascript"></script>
+		<script src="<%=basePath%>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
 		<script src="<%=basePath %>js/cims201.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/utils.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/lca/projectdefine.js" type="text/javascript"></script>

@@ -1948,6 +1948,34 @@ function getComponentByIndex(id,index,params){
 					realComponent:myCodeClassDefi
 			};
 		}
+		else if('CodeClassDeficheck'==index){
+			var existcomponent = iscomponentexist(id,'CodeClassDeficheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myCodeClassDeficheck = new createCodeClassDefi_check();
+				enterEventList[enterEventList.length] = myCodeClassDeficheck;
+				enterEventIDList[enterEventIDList.length] = 'CodeClassDeficheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'CodeClassDeficheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	myCodeClassDeficheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:myCodeClassDeficheck
+			};
+		}
 		else if('CodeClassRuleManage'==index){
 
 			var existcomponent = iscomponentexist(id,'CodeClassRuleManage234');
@@ -1972,8 +2000,40 @@ function getComponentByIndex(id,index,params){
 				    	myCodeClassRuleManage.getRuleTree()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myCodeClassRuleManage
+				};
 			}
 			
+		}
+		else if('CodeClassRuleManagecheck'==index){
+			var existcomponent = iscomponentexist(id,'CodeClassRuleManagecheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myCodeClassRuleManagecheck = new createCodeClassRuleManage_check();
+				enterEventList[enterEventList.length] = myCodeClassRuleManagecheck;
+				enterEventIDList[enterEventIDList.length] = 'CodeClassRuleManagecheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'CodeClassRuleManagecheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	myCodeClassRuleManagecheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:myCodeClassRuleManagecheck
+			};
 		}
 		else if('CodeClassManage'==index){
 
@@ -2006,7 +2066,34 @@ function getComponentByIndex(id,index,params){
 			}
 			
 		}
-		
+		else if('CodeClassManagecheck'==index){
+			var existcomponent = iscomponentexist(id,'CodeClassManagecheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var mycreateCodeClassManagecheck = new createCodeClassManage_check();
+				enterEventList[enterEventList.length] = mycreateCodeClassManagecheck;
+				enterEventIDList[enterEventIDList.length] = 'CodeClassManagecheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'CodeClassManagecheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	mycreateCodeClassManagecheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:mycreateCodeClassManagecheck
+			};
+		}
 		else if('CodeClassStructManage'==index){
 
 			var existcomponent = iscomponentexist(id,'CodeClassStructManage234');
@@ -2031,8 +2118,40 @@ function getComponentByIndex(id,index,params){
 				    	myCodeClassStructManage.getFlmclForm()
 				    ]
 				});
+			    resultComponent={
+							myComponent:myComponent,
+							realComponent:myCodeClassStructManage
+				};
 			}
 			
+		}
+		else if('CodeClassStructManagecheck'==index){
+			var existcomponent = iscomponentexist(id,'CodeClassStructManagecheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myCodeClassStructManagecheck = new createCodeClassStructManage_check();
+				enterEventList[enterEventList.length] = myCodeClassStructManagecheck;
+				enterEventIDList[enterEventIDList.length] = 'CodeClassStructManagecheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'CodeClassStructManagecheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	myCodeClassStructManagecheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:myCodeClassStructManagecheck
+			};
 		}
 		else if('StructUpload'==index){
 
@@ -2059,10 +2178,13 @@ function getComponentByIndex(id,index,params){
 				        myStructUpload. getUploadPanel()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myStructUpload
+				};
 			}
 		}
 		else if('PartInstanceRg'==index){
-
 			var existcomponent = iscomponentexist(id,'PartInstanceRg234');
 			if(null!=existcomponent){
 				myComponent=existcomponent;
@@ -2086,6 +2208,10 @@ function getComponentByIndex(id,index,params){
 				        myPartInstanceRg.getRgPanel()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myPartInstanceRg
+				};
 			}
 		}
 		else if('PartUpload'==index){
@@ -2113,6 +2239,10 @@ function getComponentByIndex(id,index,params){
 				        myPartUpload.getUploadPanel()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myPartUpload
+				};
 			}
 		}
 		else if('DocTypeManage'==index){
@@ -2164,6 +2294,11 @@ function getComponentByIndex(id,index,params){
 		               myPartCreate.getCreatePartPanel()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myPartCreate
+				};
+
 			}
 		}
 		else if('ModInterface'==index){
@@ -2398,7 +2533,39 @@ function getComponentByIndex(id,index,params){
 		               mySMLModeling.getSMLModeling()
 				    ]
 				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:mySMLModeling
+				};
 			}
+		}
+		else if('SMLModelingcheck'==index){
+			var existcomponent = iscomponentexist(id,'SMLModelingcheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var mySMLModelingcheck = new createSMLModeling_check();
+				enterEventList[enterEventList.length] = mySMLModelingcheck;
+				enterEventIDList[enterEventIDList.length] = 'SMLModelingcheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'SMLModelingcheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	mySMLModelingcheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:mySMLModelingcheck
+			};
 		}
 		else if('SMLEdit'==index){
 
@@ -2425,7 +2592,39 @@ function getComponentByIndex(id,index,params){
 		               mySMLEdit.getSMLEditCt()
 				    ]
 				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:mySMLEdit
+				};
 			}
+		}
+		else if('SMLEditcheck'==index){
+			var existcomponent = iscomponentexist(id,'SMLEditcheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var mySMLEditcheck = new createSMLEdit_check();
+				enterEventList[enterEventList.length] = mySMLEditcheck;
+				enterEventIDList[enterEventIDList.length] = 'SMLEditcheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'SMLEditcheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	mySMLEditcheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:mySMLEditcheck
+			};
 		}
 		else if('SMLEdit_view'==index){
 
@@ -2501,10 +2700,41 @@ function getComponentByIndex(id,index,params){
 			               myOrdermanage.getTable()
 				    ]
 				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:myOrdermanage
+				};
 			}
 		}
+		else if('ordermanagecheck'==index){
+			var existcomponent = iscomponentexist(id,'ordermanagecheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myordermanagecheck = new createOrdermanage_check();
+				enterEventList[enterEventList.length] = myordermanagecheck;
+				enterEventIDList[enterEventIDList.length] = 'ordermanagecheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'ordermanagecheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	myordermanagecheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:myordermanagecheck
+			};
+		}
 		else if('neworder'==index){
-
 			var existcomponent = iscomponentexist(id,'neworder');
 			if(null!=existcomponent){
 				myComponent=existcomponent;
@@ -2527,7 +2757,39 @@ function getComponentByIndex(id,index,params){
 			               myNeworder.getPanel()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myNeworder
+				};
 			}
+		}
+		else if('newordercheck'==index){
+			var existcomponent = iscomponentexist(id,'newordercheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var mynewordercheck = new createNewOrder_check();
+				enterEventList[enterEventList.length] = mynewordercheck;
+				enterEventIDList[enterEventIDList.length] = 'newordercheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'newordercheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	mynewordercheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:mynewordercheck
+			};
 		}
 		else if('checkorder'==index){
 			var existcomponent = iscomponentexist(id,'checkorder');
@@ -2671,8 +2933,41 @@ function getComponentByIndex(id,index,params){
 			               myPlatform.getPanel()
 				    ]
 				});
+			    resultComponent={
+						myComponent:myComponent,
+						realComponent:myPlatform
+				};
 			}
 		}
+		else if('platformcheck'==index){
+			var existcomponent = iscomponentexist(id,'platformcheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myplatformcheck = new createPlatform_check();
+				enterEventList[enterEventList.length] = myplatformcheck;
+				enterEventIDList[enterEventIDList.length] = 'platformcheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'platformcheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	myplatformcheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:myplatformcheck
+			};
+		}
+
 		else if('platform_view'==index){
 			var existcomponent = iscomponentexist(id,'platform_view');
 			if(null!=existcomponent){
@@ -2719,8 +3014,41 @@ function getComponentByIndex(id,index,params){
 			               myPlatformStruct.getPanel()
 				    ]
 				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:myPlatformStruct
+				};
 			}
 		}
+		else if('platformStructcheck'==index){
+			var existcomponent = iscomponentexist(id,'platformStructcheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myplatformStructcheck = new createPlatformStruct_check();
+				enterEventList[enterEventList.length] = myplatformcheck;
+				enterEventIDList[enterEventIDList.length] = 'platformStructcheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'platformStructcheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	myplatformStructcheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:myplatformStructcheck
+			};
+		}
+
 		else if('platformStruct_view'==index){
 			var existcomponent = iscomponentexist(id,'platformStruct_view');
 			if(null!=existcomponent){
@@ -2767,7 +3095,39 @@ function getComponentByIndex(id,index,params){
 			               myStructRule.getStructRulePanel()
 				    ]
 				});
+				 resultComponent={
+							myComponent:myComponent,
+							realComponent:myStructRule
+					};
 			}
+		}
+		else if('structRulecheck'==index){
+			var existcomponent = iscomponentexist(id,'structRulecheck234');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var mystructRulecheck = new createStructRule_check();
+				enterEventList[enterEventList.length] = mystructRulecheck;
+				enterEventIDList[enterEventIDList.length] = 'structRulecheck';
+			  
+				myComponent = Edo.create({
+					id: id?id:'structRulecheck234',   
+				    type: 'box',                 
+				    layout: 'vertical',  
+				    verticalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,10,0,5],
+				    children: [
+				    	mystructRulecheck.getBox()
+				    ]
+				});
+			}
+		    resultComponent={
+					myComponent:myComponent,
+					realComponent:mystructRulecheck
+			};
 		}
 		else if('structRule_view'==index){
 			var existcomponent = iscomponentexist(id,'structRule_view');
@@ -2839,6 +3199,10 @@ function getComponentByIndex(id,index,params){
 						myBomConfig.getBomDisplay()
 				    ]
 				});
+				 resultComponent={
+							myComponent:myComponent,
+							realComponent:myBomConfig
+					};
 			}
 		}else if('BomCheck' == index){
 			var existcomponent = iscomponentexist(id,'BomCheck');

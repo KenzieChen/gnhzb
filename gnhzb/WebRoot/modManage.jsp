@@ -29,6 +29,7 @@
 
 <link href="<%=basePath%>css/wenku.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/cims201.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/liuchang/liuchang.css" rel="stylesheet" type="text/css" />
 
 <script src="<%=basePath%>js/knowledge/keep/keeputils.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/edo/edo.js" type="text/javascript"></script>
@@ -318,6 +319,7 @@
         //height: cims201.utils.getScreenSize().height,
         //height: cims201.utils.getScreenSize().height+50,
         layout: 'vertical',
+        verticalGap: 0,
         padding: [0,0,0,0],
         border: [0,0,0,0],
         //增加框架的元素
@@ -325,7 +327,7 @@
         	//顶栏描述
         	{	id:'navBtns',
                 type: 'box',border:[0,0,0,0],padding: [0,0,0,0],width: '100%',height: '76', layout: 'horizontal',titleIcon:'',
-                bodyCls: 'cims201_topbar_bg9',
+                bodyCls: 'topbar_bg_mod',
                 children:[         
 	                {
 					    type: 	'label',width: 	'100%', height: '100%',
@@ -380,8 +382,8 @@
                 	{
 		                id: 'leftRegion', visible: false,
 		                border:[0,0,0,0], padding: [0,0,0,0],
-		                type: 'panel',width: '180',height: '100%',
-		                title: '<span class="cims201_con_font">导航列表</span>',	
+		                type: 'panel',width: '200',height: '100%',
+		                title: '<div class=panel_nav_font_mod>　　　导航列表</div>',	
 		                titlebar: [{
 				            cls:'e-titlebar-toggle-west',
 				            icon: 'button',

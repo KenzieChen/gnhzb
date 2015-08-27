@@ -71,7 +71,6 @@ public class UserAction extends CrudActionSupport<SystemUser> implements Servlet
 	@Resource(name="axisWebService")
 	private AxisWebService axisWebService;
 	
-
 	//-- 页面属性 --//
 	private Long id;
 	private String email;

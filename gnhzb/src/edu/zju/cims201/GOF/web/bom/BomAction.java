@@ -2,6 +2,7 @@ package edu.zju.cims201.GOF.web.bom;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,18 +50,13 @@ public class BomAction extends ActionSupport implements ServletResponseAware{
 	}
 	/**
 	 * 保存BOM
+	 * @throws IOException 
 	 */
-	public void saveBom(){
-
-		String msg = bomService.insertNewBom(orderId, platId, bomName, info);
-		
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		out.print(msg);
+	public void saveBom() throws IOException{
+		HashMap<String, Object> resultmap = bomService.insertNewBom(orderId, platId, bomName, info);
+		out = response.getWriter();
+		String jsonString =JSONUtil.write(resultmap);
+		out.print(jsonString);
 	}
 	
 	public  void getBom2Check(){

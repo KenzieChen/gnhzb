@@ -168,7 +168,7 @@ function gettaskdefinebox(cell){
 	var level=wholelevel.getcurrentlevel();
     var modules=level.levelmodules;
     for(var i=0;i<modules.length;i++){
-       if(modules[i].levelmoduleobject.cellid==cell.getId()){
+       if(modules[i].levelmoduleobject.cellid == cell.getId()){
     	   var levelmodule=modules[i];
         	var box=Edo.create(
         			{type: 'box',width: '100%',border: [0,0,0,0],padding: [0,0,0,0],layout: 'vertical',verticalGap:'10',
@@ -195,7 +195,7 @@ function gettaskdefinebox(cell){
             	levelmodule.levelmoduleobject.processpersonid=Edo.get('processpersonid').text;
             	levelmodule.levelmoduleobject.processpersonname=Edo.get('processpersonname').text;
             	levelmodule.levelmoduleobject.processcheckpersonid=Edo.get('processcheckpersonid').text;
-            	levelmodule.levelmoduleobject.processcheckpersonname=Edo.get('processpersonname').text;
+            	levelmodule.levelmoduleobject.processcheckpersonname=Edo.get('processcheckpersonname').text;
             	var graph=editor.graph;
             	var label =  graph.convertValueToString(cell);
     		    var nodelabel =  label.slice(0,label.length);
@@ -289,14 +289,14 @@ function getcarrier(type)
             Edo.get('processpersonid').set('text',row.id);
            }
     	
-    }if(type=='check'){
+    }
+	if(type=='check'){
     	var func=function(){
        	    
         	var row=Edo.get('emp').getSelected();
             Edo.get('processcheckpersonname').set('text',row.name);
             Edo.get('processcheckpersonid').set('text',row.id);
            }
-    	
     }
    
     var toolbar=new gettoolbar(null,func);

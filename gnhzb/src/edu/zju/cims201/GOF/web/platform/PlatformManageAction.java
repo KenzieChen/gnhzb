@@ -2,16 +2,20 @@ package edu.zju.cims201.GOF.web.platform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import edu.zju.cims201.GOF.dao.platform.PlatStructTreeDao;
+import edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree;
 import edu.zju.cims201.GOF.rs.dto.PlatformManageDTO;
 import edu.zju.cims201.GOF.service.platform.PlatformManageService;
 import edu.zju.cims201.GOF.util.JSONUtil;
@@ -33,9 +37,11 @@ public class PlatformManageAction extends ActionSupport implements
 	
 
 	public void createPlatform() throws IOException{
-		String msg=platformManageService.createPlatform(platName,info);
-		out =response.getWriter();
-		out.print(msg);
+		HashMap<String, Object> resultmap =platformManageService.createPlatform(platName,info);
+		resultmap.put("type", "create");
+		out = response.getWriter();
+		String jsonString =JSONUtil.write(resultmap);
+		out.print(jsonString);
 	}
 	
 	public void getAllPlatform() throws IOException{
@@ -56,15 +62,27 @@ public class PlatformManageAction extends ActionSupport implements
 	 * @throws IOException
 	 */
 	public void getFinishedPlatformById() throws IOException{
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		List<PlatformManageDTO> platList = platformManageService.getFinishedPlatformById(id);
-		String platListStr =JSONUtil.write(platList);
-		out=response.getWriter();
-		out.print(platListStr);
+		if (CollectionUtils.isNotEmpty(platList)) {
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", platList);
+
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out =response.getWriter();
+		out.print(jsonString);
 	}
 	public void updatePlatform() throws IOException{
-		String msg=platformManageService.updatePlatform(id,platName,info);
-		out=response.getWriter();
-		out.print(msg);
+		HashMap<String, Object> resultmap=platformManageService.updatePlatform(id,platName,info);
+		resultmap.put("type", "update");
+		out = response.getWriter();
+		String jsonString =JSONUtil.write(resultmap);
+		out.print(jsonString);
 	} 
 	
 	
@@ -92,10 +110,20 @@ public class PlatformManageAction extends ActionSupport implements
 	}
 	
 	public void getPlatformById() throws IOException{
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		List<PlatformManageDTO> platList = platformManageService.getPlatformById(id);
-		String str = JSONUtil.write(platList);
-		out=response.getWriter();
-		out.print(str);
+		if (CollectionUtils.isNotEmpty(platList)) {
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", platList);
+
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out =response.getWriter();
+		out.print(jsonString);
 	}
 	public void changePlat2CheckStatus() throws IOException{
 		String msg = platformManageService.changePlat2CheckStatus(id);

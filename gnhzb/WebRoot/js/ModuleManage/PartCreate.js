@@ -70,11 +70,68 @@ function createPartCreate(){
 		]
 	});
 	
-	//PartCreateClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+	PartCreateClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
 	//luweijiang
 	function partCreateTask(classficationTreeId){
 		PartCreateClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
 	}
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'classificationtreeid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'partcreateclassificationtreeid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert("提示",'对应的编码结构树不存在');
+			return null;
+		}
+		return outputparam;
+	}
+	this.inittask=function(){
+		var classificationtreeid=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'classificationtreeid'){
+				isexist=true;
+				classificationtreeid=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classificationtreeid});
+			if(data.isSuccess == '1'){
+				var resultdata=data.result;
+				PartCreateClassNameCombo.set('data',resultdata);
+			}else{
+				PartCreateClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			PartCreateClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+			Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
+
+
 	var createPartPanel =Edo.create({
 		type:'ct',
 		height:'100%',

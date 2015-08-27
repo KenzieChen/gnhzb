@@ -1,16 +1,62 @@
 function createCodeClassRuleManage(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'codeclassid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'codeclassrulemanagecodeclassid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert('提示','对应的编码大类不存在');
+			return null;
+		}
+		return outputparam;
+	}
 	//luweijiang
-	function codeClassRuleManageTask(codeClassId){
-		var data=cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClassById.action',{id:codeClassId});
-		 if(data.isSuccess == '1'){
-			 ClassNameCombo.set('data',data.result);
-		 }else{
-			 ClassNameCombo.set('data',
-					 cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
-			 );
-		 }
-		Edo.MessageBox.alert(data.message);
-		
+	this.inittask=function(){
+		var codeClassId=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'codeclassid'){
+				isexist=true;
+				codeClassId=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data=cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClassById.action',{id:codeClassId});
+			if(data.isSuccess == '1'){
+				ClassNameCombo.set('data',data.result);
+			}else{
+				ClassNameCombo.set('data',
+					cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
+				);
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			ClassNameCombo.set('data',
+				cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
+			);
+			Edo.MessageBox.alert('提示',"查询上一任务输出结果出错，请联系管理员！");
+		}
 	}
 	var topbar = Edo.create({
 		

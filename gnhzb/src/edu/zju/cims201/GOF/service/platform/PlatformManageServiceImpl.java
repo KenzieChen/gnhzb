@@ -3,6 +3,7 @@ package edu.zju.cims201.GOF.service.platform;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,10 +57,13 @@ public class PlatformManageServiceImpl implements PlatformManageService{
 	public void setPlatStructTreeDao(PlatStructTreeDao platStructTreeDao) {
 		this.platStructTreeDao = platStructTreeDao;
 	}
-	public String createPlatform(String platName,String info){
+	public HashMap<String, Object> createPlatform(String platName,String info){
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		PlatformManage platExist = platformManageDao.findUniqueBy("platName", platName);
 		if(platExist!=null){
-			return "平台名称已存在，请重新添加";
+			map.put("isSuccess", "0");
+			map.put("message", "平台名称已存在，请重新添加");
+			return map;
 		}
 		PlatformManage plat = new PlatformManage();
 		Date date =new Date();
@@ -79,7 +83,19 @@ public class PlatformManageServiceImpl implements PlatformManageService{
 		pst.setIsmust(1);
 		pst.setOnlyone(1);
 		platStructTreeDao.save(pst);
-		return "平台创建成功！";
+		map.put("isSuccess", "1");
+		map.put("message", "平台创建成功！");
+		List<HashMap<String, String>> resultlist=new ArrayList<HashMap<String,String>>();
+		HashMap<String, String> resultitem1=new HashMap<String, String>();
+		HashMap<String, String> resultitem=new HashMap<String, String>();
+		resultitem.put("name", "platformmanageid");
+		resultitem.put("value", String.valueOf(plat.getId()));
+		resultlist.add(resultitem);
+		resultitem1.put("name", "platstructtreeid");
+		resultitem1.put("value", String.valueOf(pst.getId()));
+		resultlist.add(resultitem1);
+		map.put("resultlist", resultlist);
+		return map;
 	}
 	public List<PlatformManageDTO> getPlatform2Check(){
 		List<PlatformManage> platList = platformManageDao.find("from PlatformManage pm where pm.status.statusName='正在审核'");
@@ -208,10 +224,13 @@ public class PlatformManageServiceImpl implements PlatformManageService{
 		return platListRe;
 	}
 	
-	public String updatePlatform(long id, String platName, String info){
+	public HashMap<String, Object> updatePlatform(long id, String platName, String info){
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		List<PlatformManage> list=platformManageDao.find("from PlatformManage plat where plat.platName=? and plat.id <>?",platName,id);
 		if(list.size()>0){
-			return "平台名称已存在，请重新修改";
+			map.put("isSuccess", "0");
+			map.put("message", "平台名称已存在，请重新添加");
+			return map;
 		}
 		PlatformManage plat=platformManageDao.get(id);
 		PlatStructTree pst =platStructTreeDao.findUnique("from PlatStructTree pst where pst.parent.id =null and pst.plat.id= ? ",id);
@@ -221,7 +240,18 @@ public class PlatformManageServiceImpl implements PlatformManageService{
 		plat.setInfo(info);
 		plat.setPlatName(platName);
 		platformManageDao.save(plat);
-		return "平台修改成功！";
+		map.put("isSuccess", "1");
+		map.put("message", "平台创建成功！");
+		List<HashMap<String, String>> resultlist=new ArrayList<HashMap<String,String>>();
+		HashMap<String, String> resultitem=new HashMap<String, String>();
+		resultitem.put("name", "platformmanageid");
+		resultitem.put("value", String.valueOf(plat.getId()));
+		HashMap<String, String> resultitem1=new HashMap<String, String>();
+		resultitem1.put("name", "platstructtreeid");
+		resultitem1.put("value", String.valueOf(pst.getId()));
+		resultlist.add(resultitem1);
+		map.put("resultlist", resultlist);
+		return map;
 	}
 	
 	public String deletePlatform(long id){

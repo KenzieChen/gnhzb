@@ -69,7 +69,6 @@ public class TaskServiceImpl implements TaskService {
 	public List<PdmTask> getTaskByPreTaskId(String prevtaskid, long projectid) {
 		return sessionFactory.getCurrentSession().createQuery("from PdmTask task where task.prevtaskid=? and task.pdmProject.id=?").setParameter(0, prevtaskid).setParameter(1, projectid).list();
 	}
-	
 	public PdmTask getTaskByparentTaskId(String parenttaskid, long projectid) {
 		return (PdmTask)sessionFactory.getCurrentSession().createQuery("from PdmTask task where task.taskid=? and task.pdmProject.id=?").setParameter(0, parenttaskid).setParameter(1, projectid).list().get(0);
 	}
@@ -109,7 +108,6 @@ public class TaskServiceImpl implements TaskService {
 
 
 	public PdmTask getPdmTask(long id) {
-		
 		return (PdmTask)sessionFactory.getCurrentSession().get(PdmTask.class, id);
 	}
 	public LcaTask getLcaTask(long id) {
@@ -155,9 +153,12 @@ public class TaskServiceImpl implements TaskService {
 	public List<PdmProjectValuePool> getPdmProjectValuePools(Long id) {
 		return sessionFactory.getCurrentSession().createQuery("from PdmProjectValuePool p where p.project.id=? and p.iotype=0").setParameter(0, id).list();
 	}
-	
-	
-	
+	public List<PdmTask> getTaskByNextTaskId(String nextidsstring, Long projectid) {
+		return sessionFactory.getCurrentSession().createQuery("from PdmTask task where task.taskid in (?) and task.pdmProject.id=?").setParameter(0, nextidsstring).setParameter(1, projectid).list();
 
-	
+	}
+	public int checkTasksIsFinished(String taskids1string, Long projectid) {
+		
+		return (Integer)sessionFactory.getCurrentSession().createQuery("count(*) from PdmTask task where task.taskid in ? and and task.status !='"+Constants.TASK_STATUS_FINISH+"'"+"and task.pdmProject.id=?").setParameter(0,taskids1string).setParameter(1, projectid).uniqueResult();
+	}
 }

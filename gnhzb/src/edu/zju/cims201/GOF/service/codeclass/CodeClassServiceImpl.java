@@ -150,41 +150,7 @@ public class CodeClassServiceImpl implements CodeClassService{
 		return rule;
 
 	}
-	//审批用
-	public HashMap<String, Object> getRuleByCodeClassId(long id){
-		CodeClass cc=codeClassDao.get(id);
-		String className = cc.getClassname();
-		String ruleStr=cc.getRule();
-		String[] ruleAra=ruleStr.split("-");
-		StringBuilder sb =new StringBuilder();
-		sb.append("[");
-		for(int i =0;i<ruleAra.length;i++){
-			sb.append("{'text':'");
-			if(i==0){
-				sb.append("分类码 首字段："+ruleAra[i]);
-			}else{
-				sb.append("分类码 第【"+i+"】层");
-				if(ruleAra[i].startsWith("C")){
-					sb.append(" 字符型，长度：");
-					sb.append(ruleAra[i].substring(1));
-				}else if(ruleAra[i].startsWith("N")){
-					sb.append(" 数字，长度：");
-					sb.append(ruleAra[i].substring(1));
-				}else if(ruleAra[i].startsWith("B")){
-					sb.append(" 混合型，长度：");
-					sb.append(ruleAra[i].substring(1));
-				}
-			}
-			sb.append("','value':'"+i+":"+ruleAra[i]+"'},");
-		}
-		String rule=sb.toString().substring(0, sb.lastIndexOf(","));
-		rule =rule+"]";
-		System.out.println(rule);
-		HashMap<String,Object> data = new HashMap<String,Object>();
-		data.put("className",className);
-		data.put("rule", rule);
-		return data;
-	}
+
 	/**
 	 * 根据大类的编码新增大类的规则层
 	 * @param classcode 大类的编码
@@ -296,7 +262,7 @@ public class CodeClassServiceImpl implements CodeClassService{
 	 * 根据大类的编码为某一编码大类建立大类结构
 	 * @param classcode 大类的编码
 	 */
-	public void addConstructedByCodeClass(String classcode) {
+	public ClassificationTree addConstructedByCodeClass(String classcode) {
 		// TODO Auto-generated method stub
 		CodeClass cc =codeClassDao.findUniqueBy("classcode", classcode);
 		cc.setFlag(1);
@@ -310,6 +276,7 @@ public class CodeClassServiceImpl implements CodeClassService{
 		cTree.setCode(cc.getRule().split("-")[0]);
 		codeClassDao.save(cc);
 		classificationTreeDao.save(cTree);
+		return cTree;
 	}
 	/**
 	 * 删除编码大类的大类结构(待完善)
@@ -338,18 +305,50 @@ public class CodeClassServiceImpl implements CodeClassService{
 	 * luweijiang
 	 */
 	public CodeClass findUnConstructedCodeClassById(long id) {
-		// TODO Auto-generated method stub
 		CodeClass cc=codeClassDao.findUniqueBy("id", id);
 		
 		return cc;
 	}
 
 	public CodeClass findCodeClassById(long id) {
-		// TODO Auto-generated method stub
 		CodeClass cc=codeClassDao.findUniqueBy("id", id);
 		return cc;
 	}
 
 
-
+	public HashMap<String, Object> getRuleByCodeClassId(long id) {
+		CodeClass cc=codeClassDao.get(id);
+		String className = cc.getClassname();
+		String ruleStr=cc.getRule();
+		String[] ruleAra=ruleStr.split("-");
+		StringBuilder sb =new StringBuilder();
+		sb.append("[");
+		for(int i =0;i<ruleAra.length;i++){
+			sb.append("{'text':'");
+			if(i==0){
+				sb.append("分类码 首字段："+ruleAra[i]);
+			}else{
+				sb.append("分类码 第【"+i+"】层");
+				if(ruleAra[i].startsWith("C")){
+					sb.append(" 字符型，长度：");
+					sb.append(ruleAra[i].substring(1));
+				}else if(ruleAra[i].startsWith("N")){
+					sb.append(" 数字，长度：");
+					sb.append(ruleAra[i].substring(1));
+				}else if(ruleAra[i].startsWith("B")){
+					sb.append(" 混合型，长度：");
+					sb.append(ruleAra[i].substring(1));
+				}
+			}
+			sb.append("','value':'"+i+":"+ruleAra[i]+"'},");
+		}
+		String rule=sb.toString().substring(0, sb.lastIndexOf(","));
+		rule =rule+"]";
+		System.out.println(rule);
+		HashMap<String,Object> data = new HashMap<String,Object>();
+		data.put("className",className);
+		data.put("rule", rule);
+		return data;
+	}
+	
 }

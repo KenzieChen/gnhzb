@@ -1,12 +1,13 @@
 package edu.zju.cims201.GOF.service.order;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.zju.cims201.GOF.rs.dto.OrderManageDTO;
 
 public interface OrderManageService {
 
-	public String addOrder(String orderNumber, String info);
+	public HashMap<String, Object> addOrder(String orderNumber, String info);
 
 	public String updateOrder(long id, String info, long statusId);
 

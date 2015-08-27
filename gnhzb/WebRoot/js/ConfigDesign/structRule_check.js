@@ -1,5 +1,49 @@
-function createStructRule_check(platStructId){
-	
+function createStructRule_check(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var structruleplatstructtreeid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'structruleplatstructtreeid'){
+				isexist=true;
+				structruleplatstructtreeid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('platform/plat-struct-tree!getPlatStructById.action',{id:structruleplatstructtreeid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				if(data.result[0].leaf==0){
+					data.result[0].__viewicon=true;
+					data.result[0].expanded=false;
+					data.result[0].icon='e-tree-folder';
+				}else{
+					data.result[0].icon='e-tree-folder';
+				}
+				
+				structRule_structTree_check.set("data",data.result);
+				
+				
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
 	if(!Edo.get("structRule_check_window")){
 		var structPanel_check = Edo.create({
 			 type: 'ct',
@@ -104,19 +148,18 @@ function createStructRule_check(platStructId){
 		
 		Edo.create({
 			id:'structRule_check_window',
-			type:'window',
-			title:'平台规则审批',
+			type:'box',
+//			title:'平台规则审批',
 			width:800,
 			height:400,
-            render: document.body,
-            titlebar: [
-                {                  
-                    cls:'e-titlebar-close',
-                    onclick: function(e){
-                        this.parent.owner.destroy();
-                    } 
-                }
-            ],
+//            titlebar: [
+//                {                  
+//                    cls:'e-titlebar-close',
+//                    onclick: function(e){
+//                        this.parent.owner.destroy();
+//                    } 
+//                }
+//            ],
             layout:'horizontal',
             verticalGap:0,
             padding:0,
@@ -126,15 +169,17 @@ function createStructRule_check(platStructId){
 			
 		});
 	}
-
-	var data = cims201.utils.getData('platform/plat-struct-tree!getPlatStructById.action',{id:platStructId});
-	if(data[0].leaf==0){
-		data[0].__viewicon=true;
-		data[0].expanded=false;
-		data[0].icon='e-tree-folder';
-	}else{
-		data[0].icon='e-tree-folder';
+	this.getBox=function(){
+		return structRule_check_window;
 	}
-	structRule_structTree_check.set('data',data);
-	structRule_check_window.show('center','middle',true);
+//	var data = cims201.utils.getData('platform/plat-struct-tree!getPlatStructById.action',{id:platStructId});
+//	if(data[0].leaf==0){
+//		data[0].__viewicon=true;
+//		data[0].expanded=false;
+//		data[0].icon='e-tree-folder';
+//	}else{
+//		data[0].icon='e-tree-folder';
+//	}
+//	structRule_structTree_check.set('data',data);
+//	structRule_check_window.show('center','middle',true);
 }

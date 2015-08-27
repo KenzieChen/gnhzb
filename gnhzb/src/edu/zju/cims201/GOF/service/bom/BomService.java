@@ -1,5 +1,6 @@
 package edu.zju.cims201.GOF.service.bom;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.zju.cims201.GOF.rs.dto.BomDTO;
@@ -7,7 +8,7 @@ import edu.zju.cims201.GOF.rs.dto.BomDetailDTO;
 
 public interface BomService {
 	
-	public String insertNewBom(long orderId,long platId,String bomName,String info);
+	public HashMap<String, Object> insertNewBom(long orderId,long platId,String bomName,String info);
 
 	public List<BomDTO> getBom2Check();
 

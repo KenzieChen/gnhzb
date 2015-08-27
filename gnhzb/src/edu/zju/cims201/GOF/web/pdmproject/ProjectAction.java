@@ -257,7 +257,8 @@ public class ProjectAction extends CrudActionSupport<CProject> implements
 			if(t.getNexttaskid().equals("0")){
 				t.setIstail(1);
 			}
-			if(String.valueOf(h.get("processpersonid"))!=null && !String.valueOf(h.get("processpersonid")).equals("null")){
+			if(String.valueOf(h.get("processpersonid"))!=null && !String.valueOf(h.get("processpersonid")).equals("null")
+					&& !String.valueOf(h.get("processpersonid")).equals("") ){
 				long carrierid = Long.valueOf(String.valueOf(h.get("processpersonid"))
 						);
 				Employee carrier = new Employee();
@@ -267,7 +268,8 @@ public class ProjectAction extends CrudActionSupport<CProject> implements
 				t.setCarrier(null);
 			}
 			
-			if(String.valueOf(h.get("processcheckpersonid"))!=null && !String.valueOf(h.get("processcheckpersonid")).equals("null")){
+			if(String.valueOf(h.get("processcheckpersonid"))!=null && !String.valueOf(h.get("processcheckpersonid")).equals("null")
+					&& !String.valueOf(h.get("processcheckpersonid")).equals("")){
 				long checkid = Long.valueOf(h.get("processcheckpersonid")
 						.toString());
 				Employee checkperson = new Employee();

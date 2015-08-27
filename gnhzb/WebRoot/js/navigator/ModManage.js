@@ -12,7 +12,7 @@ function createNav_ModManageAccordin(){
             //splitRegion: 'west',
             //splitPlace: 'after',
             layout:'vertical',
-            verticalGap: 0,
+            verticalGap: 1,
            	children:[
 				/*{
 				    type: 'panel',
@@ -208,8 +208,11 @@ function createNav_ModManageAccordin(){
                 {
 		            type: 'panel',
 		            width: '100%',
-		            height: '100%',              
-		            title: '产品编码与结构管理',
+		            height: 160,              
+		            title: '<div class=panel_header_font_mod>产品编码与结构管理</div>',	//
+		            titleIcon:'mytitlebar',
+		            headerHeight:32,											//
+		            
 		            border:[0,0,0,0],
 		            padding:[0,0,0,0],
 		            enableCollapse: true,
@@ -222,11 +225,15 @@ function createNav_ModManageAccordin(){
 		            children:[
 		            	{
 		            		id: 'bmgl', type: 'tree', width: '100%',height: '100%',
+		            		style:'border:0;background-color:#f9f0f9;',//
+		            		rowHeight:30,
+		            		horizontalScrollPolicy:'off',//
+		            		verticalLine: false,
 						    headerVisible: false,  
 						    autoColumns: true,       
 						    horizontalLine: false,  
 						    columns: [   
-						        {dataIndex: 'name'}
+						        {renderer:function(v,r){return '<a class=navurl>'+r.name+'</a>';}}
 						    ],
 					  		onselectionchange: function(e){	
 					        	if(e.selected.index){
@@ -239,11 +246,13 @@ function createNav_ModManageAccordin(){
 		        },
 		        {
 		            type: 'panel',
-		            width: '100%',height: '100%',
+		            width: '100%',height: 190,
 		            enableCollapse: true,
 		            expanded: false,    
 		            onclick: onPanelClick,   
-		            title: '产品模块管理',
+		            title: '<div class=panel_header_font_mod>产品模块管理</div>',	//
+		            titleIcon:'mytitlebar',
+		            headerHeight:32,//
 		            border:[0,0,0,0],
 		            padding:[0,0,0,0],
 		            titlebar:[{
@@ -253,11 +262,14 @@ function createNav_ModManageAccordin(){
 		            children: [
 		                {
 		            		id: 'mkgl', type: 'tree', width: '100%',height: '100%',
+		            		style:'border:0;background-color:#f9f0f9;',//
+		            		rowHeight:30,
+		            		horizontalScrollPolicy:'off',//
 						    headerVisible: false,  
 						    autoColumns: true,       
 						    horizontalLine: false,  
 						    columns: [   
-						        {dataIndex: 'name'}
+						        {renderer:function(v,r){return '<a class=navurl>'+r.name+'</a>';}}
 						    ],
 					  		onselectionchange: function(e){
 					  			if(e.selected.index){
@@ -269,11 +281,13 @@ function createNav_ModManageAccordin(){
 		        },
 		        {
 		            type: 'panel',
-		            width: '100%',height: '100%',
+		            width: '100%',height: 220,
 		            enableCollapse: true,
 		            expanded: false,    
 		            onclick: onPanelClick,   
-		            title: '事物特性管理',
+		            title: '<div class=panel_header_font_mod>事物特性管理</div>',	//
+		            titleIcon:'mytitlebar',
+		            headerHeight:32,//
 		            border:[0,0,0,0],
 		            padding:[0,0,0,0],
 		            titlebar:[{
@@ -283,11 +297,14 @@ function createNav_ModManageAccordin(){
 		            children: [
 		                {
 		            		id: 'smlgl', type: 'tree', width: '100%',height: '100%',
+		            		style:'border:0;background-color:#f9f0f9;',//
+		            		rowHeight:30,
+		            		horizontalScrollPolicy:'off',//
 						    headerVisible: false,  
 						    autoColumns: true,       
 						    horizontalLine: false,  
 						    columns: [   
-						        {dataIndex: 'name'}
+						        {renderer:function(v,r){return '<a class=navurl>'+r.name+'</a>';}}
 						    ],
 					  		onselectionchange: function(e){
 					  			openNewTab(e.selected.id, e.selected.index,"<div class=cims201_tab_font align=center>"+e.selected.name+"</div>",{type:e.selected.index,btIcon:'cims201_myknowledgebase_icon_'+e.selected.index+'_small'});
@@ -297,11 +314,13 @@ function createNav_ModManageAccordin(){
 		        },
 		        {
 		            type: 'panel',
-		            width: '100%',height: '100%',
+		            width: '100%',height: 160,
 		            enableCollapse: true,
 		            expanded: false,    
 		            onclick: onPanelClick,   
-		            title: '配置需求管理',
+		            title: '<div class=panel_header_font_mod>配置需求管理</div>',	//
+		            titleIcon:'mytitlebar',
+		            headerHeight:32,//
 		            border:[0,0,0,0],
 		            padding:[0,0,0,0],
 		            titlebar:[{
@@ -311,11 +330,14 @@ function createNav_ModManageAccordin(){
 		            children: [
 		                {
 		            		id: 'pzxqgl', type: 'tree', width: '100%',height: '100%',
+		            		style:'border:0;background-color:#f9f0f9;',//
+		            		rowHeight:30,
+		            		horizontalScrollPolicy:'off',//
 						    headerVisible: false,  
 						    autoColumns: true,       
 						    horizontalLine: false,  
 						    columns: [   
-						        {dataIndex: 'name'}
+						        {renderer:function(v,r){return '<a class=navurl>'+r.name+'</a>';}}
 						    ],
 					  		onselectionchange: function(e){
 					  			openNewTab(e.selected.id, e.selected.index,"<div class=cims201_tab_font align=center>"+e.selected.name+"</div>",{type:e.selected.index,btIcon:'cims201_myknowledgebase_icon_'+e.selected.index+'_small'});
@@ -329,7 +351,9 @@ function createNav_ModManageAccordin(){
 		            enableCollapse: true,
 		            expanded: false,    
 		            onclick: onPanelClick,   
-		            title: '模块配置设计',
+		            title: '<div class=panel_header_font_mod>模块配置设计</div>',	//
+		            titleIcon:'mytitlebar',
+		            headerHeight:32,//
 		            border:[0,0,0,0],
 		            padding:[0,0,0,0],
 		            titlebar:[{
@@ -339,11 +363,14 @@ function createNav_ModManageAccordin(){
 		            children: [
 		                {
 		            		id: 'mkpzsj', type: 'tree', width: '100%',height: '100%',
+		            		style:'border:0;background-color:#f9f0f9;',//
+		            		rowHeight:30,
+		            		horizontalScrollPolicy:'off',//
 						    headerVisible: false,  
 						    autoColumns: true,       
 						    horizontalLine: false,  
 						    columns: [   
-						        {dataIndex: 'name'}
+						        {renderer:function(v,r){return '<a class=navurl>'+r.name+'</a>';}}
 						    ],
 					  		onselectionchange: function(e){
 					  			if(e.selected.index){

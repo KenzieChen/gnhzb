@@ -1,17 +1,17 @@
-function createCodeClassDefi_check(codeClassId){
+function createCodeClassDefi_check(){
 	if(!Edo.get('createCodeClassDefi_check_Window')){
 		Edo.create({
-			type:'window',
+			type:'box',
 			id:'createCodeClassDefi_check_Window',
-			title:'产品分类定义审批',
-			titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//			title:'产品分类定义审批',
+//			titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        padding:[0,0,0,0],
 	        height:'200',
 	        width:'600',
@@ -59,6 +59,9 @@ function createCodeClassDefi_check(codeClassId){
 	        }]
 		});
 	}
+	this.getBox=function(){
+		return createCodeClassDefi_check_Window;
+	}
 	var inputparam=new Array();
 	var outputparam=new Array();
 	this.initinputparam=function(param){
@@ -70,16 +73,17 @@ function createCodeClassDefi_check(codeClassId){
 		return outputparam;
 
 	}
+	
 	this.submitResult=function(){
 		return outputparam;
 	}
 	this.inittask=function(){
 		var codeClassId=null;
 		var isexist=false;
-		for(var i=0;i<inputparam.length;i++){
-			if(inputparam[i].name == 'codeclassid'){
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'codeclassid'){
 				isexist=true;
-				codeClassId=inputparam[i].value;
+				codeClassId=outputparam[i].value;
 				break;
 			}
 		}
@@ -88,18 +92,12 @@ function createCodeClassDefi_check(codeClassId){
 			console.log(data);
 			if(data.isSuccess == '1'){
 				codeclassdefiTb_check.set('data',data.result);
-			}else{
-				codeclassdefiTb_check.set("data",
-					cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
-				);
 			}
-			Edo.MessageBox.alert(data.message);
+			Edo.MessageBox.alert("提示",data.message);
 		}else{
-			codeclassdefiTb_check.set("data",
-				cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')
-			);
-			Edo.MessageBox.alert("查询任务结果出错，请联系管理员！");
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
-		createCodeClassDefi_check_Window.show('center', 'middle', true);
+		//createCodeClassDefi_check_Window.show('center', 'middle', true);
 	}
+    
 }

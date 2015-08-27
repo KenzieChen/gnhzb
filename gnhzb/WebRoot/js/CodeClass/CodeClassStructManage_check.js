@@ -1,93 +1,42 @@
-function createCodeClassStructManage_check(classficationTreeId){
-	//类别导航
-/*	var LbdhPanel =Edo.create({          
-            type: 'ct',
-            width: '220',
-            height: '100%',
-            collapseProperty: 'width',
-            enableCollapse: true,
-            splitRegion: 'west',
-            splitPlace: 'after',
-            children: [
-                {
-                    type: 'panel',
-                    title:'类别导航',
-                    width: '100%',
-                    height: '100%',
-                    padding:[0,0,0,0],
-		            titlebar:[
-                        {
-                            cls:'e-titlebar-toggle-west',
-                            icon: 'button',
-                            onclick: function(e){
-                                this.parent.owner.parent.toggle();
-                            }
-                        }
-                    ],
-                 	children:[
-                 		{
-                 			type:'tree',
-                 			id:'LbdhTree_check',
-                 			width:'100%',
-                 			height:'100%',
-                 			autoColumns :true,
-                 			horizontalLine : false,
-                 			headerVisible :false,
-                 			cls: 'e-tree-allow',
-                 			columns:[
-                 				{header:'分类结构',dataIndex:'text'}                 				
-                 			],
-                 			onselectionchange:function(e){
-                 				if(e.selected.text=="分类类别"){
-                 					CodeClassStructManageLock.set('enable',false);
-                 					return;
-                 				}
-                 				var fljgTreeData = e.selected;
-                 				if(fljgTreeData.leaf == 0){
-                 					fljgTreeData.__viewicon = true;
-                 					fljgTreeData.expanded = false;
-                 				}else{
-                 					fljgTreeData.icon='ui-module';
-                 				}
-                 				FljgTree.set('data',fljgTreeData);
-                 				var lock = true;
-                 				//1表示解除锁定，默认情况下是锁定状态0
-                 				if(fljgTreeData.lockTree == 1){
-                 					lock = false;
-                 				}
-                 				CodeClassStructManageLock.set('checked',lock);
-                 				CodeClassStructManageLock.set('enable',true);
-                 			}
-                 		}
-                 	]
-              
-                }
-            ]	
-	});*/
-	
-	//luweijiang
-/*	function codeClassStructManageTask(classficationTreeId){
-		var lbdhTreeData =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
-		//console.log(lbdhTreeData);
-		for(var i =0;i<lbdhTreeData.length;i++){
-			lbdhTreeData[i].icon='e-tree-folder';
-		}
-		LbdhTree.set('data',
-				[{text:'分类类别',icon:'e-tree-folder',expanded:true,children:lbdhTreeData}]
-		);
+function createCodeClassStructManage_check(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
 		
-	}*/
-	
-	var fljgTreeData =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
-/*	console.log(fljgTreeData[0]);
-		if(fljgTreeData[0].leaf == 0){
-			fljgTreeData[0].__viewicon = true;
-			fljgTreeData[0].expanded = false;
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var codeclassstructmanageclassificationtreeid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'codeclassstructmanageclassificationtreeid'){
+				isexist=true;
+				codeclassstructmanageclassificationtreeid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:codeclassstructmanageclassificationtreeid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				FljgTree_check.set('data',data.result);;
+			}
+			Edo.MessageBox.alert("提示",data.message);
 		}else{
-			fljgTreeData[0].icon='ui-module';
-		}*/
-		//FljgTree.set('data',fljgTreeData);
-	//分类结构
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
+	
+//	var fljgTreeData =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
+
 	if(!Edo.get('CodeClassStructManage_check_window')){
 		var FljgPanel_check = Edo.create({		
             type: 'panel',
@@ -192,26 +141,28 @@ function createCodeClassStructManage_check(classficationTreeId){
 		
 		Edo.create({
 			id:'CodeClassStructManage_check_window',
-			type:'window',
-			title:'产品结构审批',
+			type:'box',
+//			title:'产品结构审批',
 			height:'400',
 			width:'600',
 			padding:[0,0,0,0],
-			titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//			titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        layout:'horizontal',
 	        children:[FljgPanel_check,FlmclForm_check]
 		})
 	}
-	
-	FljgTree_check.set('data',fljgTreeData);
-	
-	CodeClassStructManage_check_window.show('center','middle',true);
+	this.getBox=function(){
+		return CodeClassStructManage_check_window;
+	}
+//	FljgTree_check.set('data',fljgTreeData);
+//	
+//	CodeClassStructManage_check_window.show('center','middle',true);
 
 }
