@@ -1,5 +1,22 @@
 function createOrdermanage(){
 	//菜单栏
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		return null;
+	}
 	var Menu =Edo.create({
     		    type: 'group',
     		    width: '100%',
@@ -163,10 +180,19 @@ function createOrdermanage(){
 											    type: 'post',
 											    params:o,
 											    onSuccess: function(text){
-											    	if("添加成功！"==text){
+											    	var data=Edo.util.Json.decode(text);
+											    	Edo.MessageBox.alert("提示", data.message);
+											    	if(data.isSuccess=='1'){
+											    		var resultlist=data.resultlist;
+											    		for(var i=0;i<resultlist.length;i++){
+												    		for (var j=0;j<outputparam.length;j++){
+																if(outputparam[j].name == resultlist[i].name){
+																	outputparam[j].value=resultlist[i].value;
+																}
+															}
+											    		}
 											    		ordermanage_AddOrderForm.destroy();
 											    	}
-											    	Edo.MessageBox.alert("提示", text);
 											    	ordermanageTb.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
 											    	Edo.get("ordermanage_addbtn").set('enable',false);
 											    },
@@ -363,7 +389,6 @@ function createOrdermanage(){
 		return Table;
 	};
 	
-	createOrdermanage_check(882);
 }
 	
 	

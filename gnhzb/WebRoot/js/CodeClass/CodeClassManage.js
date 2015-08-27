@@ -13,6 +13,35 @@ function createCodeClassManage(){
 	this.submitResult=function(){
 		return outputparam;
 	}
+	//luweijiang
+	this.inittask=function(){
+		var codeClassId=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'codeclassid'){
+				isexist=true;
+				codeClassId=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			showAddClassForm();
+			var data=cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClassById.action',{id:codeClassId});
+			if(data.isSuccess == '1'){
+				addClassCombo.set('data',data.result);
+			}else{
+				addClassCombo.set('data',
+					cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
+				);
+			}
+			Edo.MessageBox.alert('提示',data.message);
+		}else{
+			addClassCombo.set('data',
+				cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
+			);
+			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
 	 var topBar = Edo.create({
 			type:'group',
 			width:'100%',
@@ -45,35 +74,6 @@ function createCodeClassManage(){
 		 //审批调用测试
 		 //createCodeClassManage_check(601);
 	 });
-	 //luweijiang
-	 this.inittask=function(){
-		 var codeClassId=null;
-		 var isexist=false;
-		 for(var i=0;i<inputparam.length;i++){
-			if(inputparam[i].name == 'codeclassid'){
-				alert('存在输入参数');
-				isexist=true;
-				codeClassId=inputparam[i].value;
-				break;
-			}
- 		}
-		if(isexist){
-			 showAddClassForm();
-			 var data=cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClassById.action',{id:codeClassId});
-			 if(data.isSuccess == '1'){
-				 addClassCombo.set('data',data.result);
-			 }else{
-				 addClassCombo.set('data',
-						 cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
-				 );
-			 }
-			Edo.MessageBox.alert(data.message);
-		}else{
-			addClassCombo.set('data',
-					 cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
-			 );
-		}
-	 }
 	 CodeClassManageDeleBtn.on("click",function(e){
 		 var classcode =ClassTree.selected.classcode;
 		 if(!classcode){
@@ -142,7 +142,18 @@ function createCodeClassManage(){
 										    url: 'codeclass/code-class!addConstructedCodeClass.action?classcode='+o.classcode,
 										    type: 'post',
 										    onSuccess: function(text){
-										    	 Edo.MessageBox.alert("提示", text);
+										    	 var data=Edo.util.Json.decode(text);
+										    	 Edo.MessageBox.alert("提示", data.message);
+										    	 if(data.isSuccess=='1'){
+											    		var resultlist=data.resultlist;
+											    		for(var i=0;i<resultlist.length;i++){
+												    		for (var j=0;j<outputparam.length;j++){
+																if(outputparam[j].name == resultlist[i].name){
+																	outputparam[j].value=resultlist[i].value;
+																}
+															}
+											    		}
+											     }
 										    	 CodeClassManageDeleBtn.set('enable',false);
 										    	 var classTreeData =cims201.utils.getData('codeclass/code-class!findConstructedCodeClass.action');
 										    		for(var i=0;i<classTreeData.length;i++){

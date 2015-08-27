@@ -3,18 +3,23 @@ package edu.zju.cims201.GOF.web.order;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import edu.zju.cims201.GOF.hibernate.pojoA.Status;
 import edu.zju.cims201.GOF.rs.dto.OrderManageDTO;
+import edu.zju.cims201.GOF.rs.dto.PlatformManageDTO;
 import edu.zju.cims201.GOF.service.order.OrderManageService;
 import edu.zju.cims201.GOF.service.status.StatusService;
 import edu.zju.cims201.GOF.util.JSONUtil;
@@ -37,10 +42,10 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 	
 	public void addOrder() throws IOException{
 
-		String msg =orderManageService.addOrder(orderNumber,info);
-
+		HashMap<String, Object> resultmap =orderManageService.addOrder(orderNumber,info);
 		out = response.getWriter();
-		out.print(msg);
+		String jsonString =JSONUtil.write(resultmap);
+		out.print(jsonString);
 	}
 	
 	public void updateOrder() throws IOException{
@@ -65,10 +70,19 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 	}
 	//luweijiang
 	public void getAllOrederById()  throws IOException{
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		List<OrderManageDTO> list = orderManageService.getAllOrderById(id);
-		String listStr = JSONUtil.write(list);
+		if(CollectionUtils.isNotEmpty(list)){
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", list);
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString = JSONUtil.write(resultmap);
 		out = response.getWriter();
-		out.print(listStr);
+		out.print(jsonString);
 	}
 	public void getAllStatus() throws IOException{
 		List<Status> list= statusService.getAllStaus();
@@ -105,11 +119,20 @@ public class OrderManageAction extends ActionSupport implements ServletResponseA
 	 */
 	
 	public void getOrder4ConfiById() throws IOException{
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		List<OrderManageDTO> list=orderManageService.getOrder4ConfiById(orderId);
-		String listStr = JSONUtil.write(list);
-		System.out.println(listStr);
-		out = response.getWriter();
-		out.print(listStr);
+		if (CollectionUtils.isNotEmpty(list)) {
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", list);
+
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out =response.getWriter();
+		out.print(jsonString);
 	}
 	public long getId() {
 		return id;

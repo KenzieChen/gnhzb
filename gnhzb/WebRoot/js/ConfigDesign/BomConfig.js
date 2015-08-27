@@ -1,8 +1,67 @@
 function createBomConfig(){
+	
 	function bomConfigTask(orderId){
 		var data = cims201.utils.getData('order/order-manage!getOrder4ConfiById.action',{orderId:orderId});
 		return data;
 	}
+	function bomConfig_platformTableTask(platformId){
+		BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatformById.action',{id:platformId}));
+	}
+	var BomConfig_platformTabledata=null;
+	var BomConfig_orderTabledata=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var platformmanageid=null;
+		var ordermanageid=null;
+		var isexist1=false;
+		var isexist2=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'platformmanageid'){
+				isexist1=true;
+				platformmanageid=inputparam[i].value;
+				break;
+			}
+		}
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'ordermanageid'){
+				isexist2=true;
+				ordermanageid=inputparam[i].value;
+				break;
+			}
+		}
+		
+		if(isexist1){
+			var data =cims201.utils.getData('platform/platform-manage!getFinishedPlatformById.action',{id:platformmanageid});
+			if(data.isSuccess == '1'){
+				BomConfig_platformTabledata=data.result;
+			}
+			Edo.MessageBox.alert(data.message);
+		}
+		if(isexist2){
+			var data = cims201.utils.getData('order/order-manage!getOrder4ConfiById.action',{orderId:ordermanageid});
+			if(data.isSuccess == '1'){
+				BomConfig_orderTabledata=data.result;
+			}
+			Edo.MessageBox.alert(data.message);
+		}
+		if(!isexist1 || !isexist2){
+			Edo.MessageBox.alert("查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
+	
 	var orderInfo =Edo.create({          
 	        type: 'ct',
 	        width: '250',
@@ -35,8 +94,11 @@ function createBomConfig(){
 			        		children:[
 			        			{type:'button',text:'加载配置项',onclick:function(e){
 			        				var win = showOrderWin();
-			        				var data = bomConfigTask(3121);
-			        				BomConfig_orderTable.set('data',data);
+			        				if(BomConfig_orderTabledata == null){
+			        					BomConfig_orderTabledata=cims201.utils.getData('order/order-manage!getOrder4ConfiById.action',{});
+			        				}
+		        					BomConfig_orderTable.set('data',BomConfig_orderTabledata);
+			        				
 			        			}}
 			        		]
 			        	},
@@ -64,9 +126,6 @@ function createBomConfig(){
 	            }
 	        ]
 	});
-	function bomConfig_platformTableTask(platformId){
-		BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatformById.action',{id:platformId}));
-	}
 	var platForm = Edo.create({	
 			id:'BomConfig_platStructPanel',
 	        type: 'panel',
@@ -86,8 +145,11 @@ function createBomConfig(){
 	        					return;
 	        				}
 	        				var win = showPlatformWin();
-	        				bomConfig_platformTableTask(741);
-	        				//BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatform.action'));
+	        				if(BomConfig_platformTabledata==null){
+	        					BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatform.action'));
+	        				}else{
+	        					BomConfig_platformTable.set('data',BomConfig_platformTabledata);
+	        				}
 	        				
 	        			}},
 	        			{type:'space',width:'100%'},
@@ -275,7 +337,17 @@ function createBomConfig(){
 										    type: 'post',
 										    params:o,
 										    onSuccess: function(text){
-										    	if("成功提交BOM信息"==text){
+										     	var data=Edo.util.Json.decode(text);
+										    	Edo.MessageBox.alert("提示", data.message);
+										    	if(data.isSuccess=='1'){
+										    		var resultlist=data.resultlist;
+										    		for(var i=0;i<resultlist.length;i++){
+											    		for (var j=0;j<outputparam.length;j++){
+															if(outputparam[j].name == resultlist[i].name){
+																outputparam[j].value=resultlist[i].value;
+															}
+														}
+										    		}
 										    		//订单选择窗口和平台选择窗口销毁
 										    		BomConfig_orderWin.destroy();
 										    		BomConfig_platformWin.destroy();
@@ -290,7 +362,6 @@ function createBomConfig(){
 										    		//自身销毁
 										    		BomConfig_BomSubmitWin.destroy();
 										    	}
-										    	Edo.MessageBox.alert("提示", text);						    	
 										    },
 										    onFail: function(code){
 										        //code是网络交互错误码,如404,500之类

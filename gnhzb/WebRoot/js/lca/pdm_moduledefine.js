@@ -307,7 +307,7 @@ function getmoduleprocessdefinebox(cell) {
 																	height : '50%',
 																	autoColumns : true,
 																	padding : [0,0,0,0 ],
-																	rowSelectMode : 'single',
+																	rowSelectMode : 'multi',
 																	columns : [
 																			{
 																				headerText : '',
@@ -321,6 +321,7 @@ function getmoduleprocessdefinebox(cell) {
 																					return i + 1;
 																				}
 																			},
+																			Edo.lists.Table.createMultiColumn(),
 																			{
 																				header : '前置流程模块名称',
 																				dataIndex : 'processname',
@@ -343,11 +344,25 @@ function getmoduleprocessdefinebox(cell) {
 											var func = function() {
 
 												var row1 = Edo.get('prevmoduletable')
-														.getSelected();
+														.getSelecteds();
+												var premoduleids='';
+												var premodulenames=''
+												for(var i=0 ; i <row1.length ;i++){
+													premoduleids=premoduleids+row1[i].moduleid+';';
+													premodulenames=premodulenames+row1[i].processname+';';
+													if(row1[i].moduleid == 0 && row1.length > 1){
+														Edo.MessageBox.alert("提示", '前置不能同时选择为空和其他的任务');
+														return;
+													}
+												}
+												premoduleids = premoduleids
+														.substr(0,premoduleids.length - 1);
+												premodulenames = premodulenames
+												.substr(0,premodulenames.length - 1);
 												Edo.get('prevmoduleid')
-														.set('text', row1.moduleid);
+														.set('text', premoduleids);
 												Edo.get('prevmodulename')
-												.set('text', row1.processname);
+												.set('text', premodulenames);
 											}
 											var toolbar = new gettoolbar(null,
 													func);
@@ -404,7 +419,7 @@ function getmoduleprocessdefinebox(cell) {
 																height : '100%',
 																autoColumns : true,
 																padding : [0,0,0,0 ],
-																rowSelectMode : 'single',
+																rowSelectMode : 'multi',
 																columns : [
 																		{
 																			headerText : '',
@@ -418,6 +433,7 @@ function getmoduleprocessdefinebox(cell) {
 																				return i + 1;
 																			}
 																		},
+																		Edo.lists.Table.createMultiColumn(),
 																		{
 																			header : '后置流程模块名称',
 																			dataIndex : 'processname',
@@ -438,13 +454,26 @@ function getmoduleprocessdefinebox(cell) {
 															} ]
 												})
 										var func = function() {
-
 											var row2 = Edo.get('nextmoduletable')
-											.getSelected();
+											.getSelecteds();
+											var nextmoduleids='';
+											var nextmodulenames=''
+											for(var i=0 ; i <row2.length ;i++){
+												nextmoduleids=nextmoduleids+row2[i].moduleid+';';
+												nextmodulenames=nextmodulenames+row2[i].processname+';';
+												if(row2[i].moduleid == 0 && row2.length > 1){
+													Edo.MessageBox.alert("提示", '后置任务不能同时选择为空和其他的任务');
+													return;
+												}
+											}
+											nextmoduleids = nextmoduleids
+													.substr(0,nextmoduleids.length - 1);
+											nextmodulenames = nextmodulenames
+											.substr(0,nextmodulenames.length - 1);
 											Edo.get('nextmoduleid')
-											 .set('text', row2.moduleid);
+													.set('text', nextmoduleids);
 											Edo.get('nextmodulename')
-											.set('text', row2.processname);
+											.set('text', nextmodulenames);
 											
 										}
 										var toolbar = new gettoolbar(null,
@@ -575,7 +604,6 @@ function getmoduleprocessdefinebox(cell) {
 																categorynames.length - 1)
 												Edo.get('categorynames').set(
 														'text', categorynames);
-												alert(catgorylist)
 												levelmodule.levelmoduleobject.knowledgecategorylist = catgorylist;
 												levelmodule.levelmoduleobject.categorynames = categorynames;
 											}

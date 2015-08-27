@@ -3,6 +3,7 @@ package edu.zju.cims201.GOF.web.classificationtree;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ActionSupport;
 
 import edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree;
+import edu.zju.cims201.GOF.hibernate.pojoA.CodeClass;
 import edu.zju.cims201.GOF.service.classificationtree.ClassificationTreeService;
 import edu.zju.cims201.GOF.service.classificationtree.ClassificationTreeServiceImpl;
 import edu.zju.cims201.GOF.util.JSONUtil;
@@ -71,18 +73,46 @@ public class ClassificationTreeAction extends ActionSupport implements
 
 	// luweijiang
 	public String getClassStructById()throws IOException {
-		//此id是ClassificationTree中的id不是codeClass中的id
+		//此id是classification中的id
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
 		ClassificationTree tree=classificationTreeService.getNode(id);
-		if (tree!=null) {
+		if (tree != null) {
 			List<ClassificationTree> treeList=new ArrayList<ClassificationTree>();
 			treeList.add(tree);
-			String treeStr =JSONUtil.write(treeList);
-			out =response.getWriter();
-			out.print(treeStr);
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", treeList);
+
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
 		}
+		String jsonString =JSONUtil.write(resultmap);
+		out =response.getWriter();
+		out.print(jsonString);
 		return null;
 	}
-
+	
+	public String findCodeClassByClassTreeId() throws IOException{
+		//该id为classClassificationTree 
+		ClassificationTree tree=classificationTreeService.getNode(id);
+		CodeClass cc=tree.getCodeClass();
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
+		if(cc!=null){
+			List<CodeClass> cclist =new ArrayList<CodeClass>();
+			cclist.add(cc);
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", cc);
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询任务结果出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
+		return null;
+	}
 	public String getChildrenNode() throws IOException {
 		List<ClassificationTree> treeList = classificationTreeService
 				.getChildrenNode(pid);

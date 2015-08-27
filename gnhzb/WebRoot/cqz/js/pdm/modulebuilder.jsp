@@ -42,14 +42,11 @@
 	</script>
 	<!-- Loads and initializes the library -->
 	<script type="text/javascript" src="<%=basePath%>js/lca/flow/mxclient1.8goo.js"></script>
-	<link rel="stylesheet" type="text/css"
-			href="<%=basePath%>css/welcome.css">
-		<link href="<%=basePath%>js/edo/res/css/edo-all.css" rel="stylesheet"
-			type="text/css" />
-		<link href="<%=basePath%>css/icon.css" rel="stylesheet"
-			type="text/css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/welcome.css">
+		<link href="<%=basePath%>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
+		<link href="<%=basePath%>css/icon.css" rel="stylesheet" type="text/css" />
 
-		<script src="<%=basePath%>js/edo/edo.js" type="text/javascript"></script>
+		<script src="<%=basePath%>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
 		<script src="<%=basePath %>js/cims201.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/utils.js" type="text/javascript"></script>
 		<%-- <script src="<%=basePath%>js/lca/lca_moduledefine_builder.js" type="text/javascript"></script> --%>
@@ -922,16 +919,16 @@
 			    }
 			}
 		   // var data= cims201.utils.getData(basepathh+'node/node!getnodelist.action',{});
-		    addSidebarIcon(null,graph, sidebar, null, 'img/start.png','start','开始');
+		 /*    addSidebarIcon(null,graph, sidebar, null, 'img/start.png','start','开始');
 		    var br = document.createElement('br');
-			sidebar.appendChild(br);
+			sidebar.appendChild(br); */
 			addSidebarIcon(null,graph, sidebar, '模块节点', 'img/cell.png','process','模块节点');
 			var br = document.createElement('br');
 			sidebar.appendChild(br);
 			/* addSidebarIcon(null,graph, sidebar, '执行节点', 'img/cell.png','taskprocess','执行节点');
 			var br = document.createElement('br');
 			sidebar.appendChild(br); */
-			addSidebarIcon(null,graph, sidebar, null, 'img/stop.png','end','结束');
+			//addSidebarIcon(null,graph, sidebar, null, 'img/stop.png','end','结束');
 			  /*  editor.setToolbarContainer(sidebar);
                  editor.toolbar.addMode('ss', 'img/earth.png', null, null);
                   var combo=editor.toolbar.addCombo();

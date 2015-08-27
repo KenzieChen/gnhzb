@@ -1,4 +1,39 @@
-function createSMLEdit_check(classficationTreeId){
+function createSMLEdit_check(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var smleditclassificationtreeid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'smleditclassificationtreeid'){
+				isexist=true;
+				smleditclassificationtreeid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:smleditclassificationtreeid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				SMLEditTree_check.set('data',data.result);;
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
 	if(!Edo.get('SMLEdit_check_window')){
 		var CodeClassChoose_check = Edo.create({
 			type:'panel',
@@ -71,19 +106,19 @@ function createSMLEdit_check(classficationTreeId){
 		
 		Edo.create({
 			id:'SMLEdit_check_window',
-			type:'window',
-			title:'事物特性表编辑审批',
+			type:'box',
+//			title:'事物特性表编辑审批',
 			height:'500',
 			width:'900',
 			padding:[0,0,0,0],
-			titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//			titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        layout:'horizontal',
 	        children:[CodeClassChoose_check,smlEditCt_check]
 		})
@@ -134,9 +169,11 @@ function createSMLEdit_check(classficationTreeId){
 		});
 		return table;
 	}
-	
-	var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
-	SMLEditTree_check.set('data',data);
-	
-	SMLEdit_check_window.show('center','middle',true);
+	this.getBox=function(){
+		return SMLEdit_check_window;
+	}
+//	var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
+//	SMLEditTree_check.set('data',data);
+//	
+//	SMLEdit_check_window.show('center','middle',true);
 }

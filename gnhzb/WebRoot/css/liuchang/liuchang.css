@@ -1,0 +1,53 @@
+/* liuchang */
+ .e-title-collapse .e-panel-header
+{
+  cursor:pointer;
+}        
+.mytitlebar
+{
+    background:url(images/panel_icon.png) no-repeat 0px 6px;
+}
+.navurl
+{
+    background:url(images/trangle.png) no-repeat 4px 4px;
+	font-size:13.5px;
+    padding-left:20px;color:black;cursor:pointer;margin-top:5px;display:block;
+}
+.panel_header_font_pdm, .panel_header_font_mod{
+	font-size:15px;
+	color: white;
+	font-weight: bolder;
+	padding-left:2px;
+}
+.panel_header_font_pdm:hover{
+	height:30;
+	width:205;
+	background: green;
+}
+.panel_header_font_mod:hover{
+	height:30;
+	width:150;
+	background: pink;
+}
+.panel_nav_font_pdm{
+	font-size:15px;
+	color: #dddddd;
+	font-weight: bolder;
+	padding-left:2px;
+	background: green;
+	height:30;
+	width:260;
+}
+.panel_nav_font_mod{
+	font-size:15px;
+	color: #dddddd;
+	font-weight: bolder;
+	padding-left:2px;
+	background: #812d2d;
+	height:30;
+	width:260;
+}
+
+.topbar_bg_mod{
+	 background:url(images/topbar_mod.png)
+}

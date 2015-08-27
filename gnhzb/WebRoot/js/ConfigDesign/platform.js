@@ -1,4 +1,29 @@
 function createPlatform(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].value == '' || outputparam[i].value == null ||outputparam[i].value == 'null'){
+				Edo.MessageBox.alert("提示",'输出参数值不完整');
+				return null;
+			}
+				
+		}
+		
+		return outputparam;
+	}
+	this.inittask=function(){
+		return null;
+	}
 	var panel=Edo.create({
 		type: 'panel', id:'', title:'<h3><font color="blue">平台类型</font></h3>', padding: [0,0,0,0],
 		width:'100%', height:'100%', verticalGap: 0,
@@ -138,13 +163,23 @@ function createPlatform(){
 										    type: 'post',
 										    params:o,
 										    onSuccess: function(text){
-										    	if('平台创建成功！'==text){
+										    	var data=Edo.util.Json.decode(text);
+										    	Edo.MessageBox.alert("提示", data.message);
+										    	if(data.type == 'create'){
+										    		if(data.isSuccess == '1'){
+											    		var resultlist=data.resultlist;
+											    		for(var i=0;i<resultlist.length;i++){
+												    		for (var j=0;j<outputparam.length;j++){
+																if(outputparam[j].name == resultlist[i].name){
+																	outputparam[j].value=resultlist[i].value;
+																}
+															}
+											    		}
+											    		platform_CreatePlatForm.destroy();				
+											    	}
+										    	}else{
 											    	 platform_CreatePlatForm.destroy();										    		
 										    	}
-										    	if('平台修改成功！'==text){
-											    	 platform_CreatePlatForm.destroy();										    		
-										    	}
-										    	 Edo.MessageBox.alert('提示',text);
 										    	 platform_platTable.set('data',cims201.utils.getData('platform/platform-manage!getAllPlatform.action'));
 										    	 Edo.get("paltform_createPlatForm").set('enable',false);
 										    },
@@ -175,7 +210,5 @@ function createPlatform(){
 	this.getPanel =function(e){
 		return panel;
 	};
-	//审批测试
-	createPlatform_check(741);
 
 }

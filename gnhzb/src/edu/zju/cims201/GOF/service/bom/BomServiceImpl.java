@@ -81,7 +81,7 @@ public class BomServiceImpl implements BomService {
 		return "成功提交审核信息";
 	}
 	
-	public String insertNewBom(long orderId, long platId, String bomName,
+	public HashMap<String, Object> insertNewBom(long orderId, long platId, String bomName,
 			String info) {
 		// TODO Auto-generated method stub
 		
@@ -136,10 +136,22 @@ public class BomServiceImpl implements BomService {
 		//保存BOM
 		bomDao.save(bom);
 		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("isSuccess", "1");
+		map.put("message", "成功提交BOM信息");
+		map.put("isSuccess", "1");
+		map.put("message", "添加成功！");
+		List<HashMap<String, String>> resultlist=new ArrayList<HashMap<String,String>>();
+		HashMap<String, String> resultitem=new HashMap<String, String>();
+		resultitem.put("name", "bomid");
+		resultitem.put("value", String.valueOf(bom.getId()));
+		resultlist.add(resultitem);
+		map.put("resultlist", resultlist);
+		
+		
 		//删除bomTemp中的相关信息。
 		bomTempDao.batchExecute("delete from BomTemp bt where bt.order.id=? and bt.plat.id=?", orderId,platId);
-		
-		return "成功提交BOM信息";
+		return map;
 	}
 
 	

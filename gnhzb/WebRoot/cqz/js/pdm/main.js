@@ -367,10 +367,10 @@ Edo.build(
 			                        {
 			                        	id:'leftPanel',
 			                        	type: 'panel',
-			                            title: '导航列表',
+			                            title: '<div class=panel_nav_font_pdm>　　　　导航列表</div>',
 			                            width: '260',
 			                            height: '100%',
-			                            verticalGap:'0',
+			                            verticalGap:1,
 			        				    padding:[0,0,0,0],
 			                            collapseProperty: 'width',
 			                            enableCollapse: true,
@@ -388,12 +388,13 @@ Edo.build(
 			                                    
 			                                      {			         	                                    	 	                                    	
 			                                    	    type: 'panel',
-			                                    	    title: '个人信息管理',
+			                                    	    title: '<div class=panel_header_font_pdm>个人信息管理</div>',
+			                                    	    titleIcon:'mytitlebar',
 				  			                            width: '100%',
-				  			                            height: '100%',
+				  			                            height: 190,
 				  			                            enableCollapse: true,
 				  			                            onclick: onPanelClick,  
-				  			                            expanded:false,
+				  			                            expanded:true,
 				  			                            titlebar:[{
 				  			                            cls:'e-titlebar-accordion',
 				  			                            onclick: toggle}],
@@ -403,16 +404,19 @@ Edo.build(
 					  			                                      autoColumns: true, 
 					  			                                      headerVisible: false,
 					  			                                      width: '100%', height: '100%',
-					  			                                      style:'border:0;',
+					  			                                      style:'border:0;background-color:#f9f0f9;',
+					  			                                      horizontalScrollPolicy:'off',
 					  			                                      verticalLine: false, 
 					  			                                      horizontalLine: false, 
-					  			                                      rowHeight: 25,
+					  			                                      rowHeight: 30,
+					  			                                      
 					  			                                      columns: [
-								                                                {								                                                	header: '导航树',
+								                                                {								                                                	
+								                                                	header: '导航树',
 								                                                    dataIndex: 'url',
 								                                                    renderer: function(v, r){
 								                                                    	//return '<a href="javascript:mainModule.load(\"'+r.url+'\")">'+r.name+'</a>';
-								                                                        return r.name;	}
+								                                                        return '<a class=navurl>'+r.name+'</a>';	}
 								                                                }],
 								                                    data:[{id: 'myjob', url: 'module2.htm', name: '我的任务'},
 						                                    	             {id: 'clerk', url: 'module3.htm', name: '人员管理'},
@@ -435,9 +439,10 @@ Edo.build(
 					                                  
 							                                       {			         	                                    	 	                                    	
 							                                    	    type: 'panel',
-							                                    	    title: '特定模型管理',
+							                                    	    title: '<div class=panel_header_font_pdm>特定模型管理</div>',
+							                                    	    titleIcon:'mytitlebar',
 								  			                            width: '100%',
-								  			                            height: '100%',
+								  			                            height: 160,
 								  			                            enableCollapse: true,
 								  			                            onclick: onPanelClick,  
 								  			                            expanded:false,
@@ -450,16 +455,17 @@ Edo.build(
 									  			                                      autoColumns: true, 
 									  			                                      headerVisible: false,
 									  			                                      width: '100%', height: '100%',
-									  			                                      style:'border:0;',
+									  			                                      style:'border:0;background-color:#f9f0f9;',
 									  			                                      verticalLine: false, 
+									  			                                      horizontalScrollPolicy:'off',
 									  			                                      horizontalLine: false, 
-									  			                                      rowHeight: 25,
+									  			                                      rowHeight: 30,
 									  			                                      columns: [
 												                                                {	header: '导航树',
 												                                                    dataIndex: 'url',
 												                                                    renderer: function(v, r){
 												                                                    	//return '<a href="javascript:mainModule.load(\"'+r.url+'\")">'+r.name+'</a>';
-												                                                        return r.name;	}
+												                                                        return '<a class=navurl>'+r.name+'</a>';	}
 												                                                }],
 												                                    data:[{id: 'tasktree', url: 'module3.htm', name: '创建功能模块'},
 												                                          {id: 'modulebuilderCT', url: '', name: '创建特定模型'},
@@ -478,9 +484,10 @@ Edo.build(
 									                                       },
 									                                       {			         	                                    	 	                                    	
 									                                    	    type: 'panel',
-									                                    	    title: '项目管理',
+									                                    	    title: '<div class=panel_header_font_pdm>项目管理</div>',
+									                                    	    titleIcon:'mytitlebar',
 										  			                            width: '100%',
-										  			                            height: '100%',
+										  			                            height: 100,
 										  			                            enableCollapse: true,
 										  			                            onclick: onPanelClick,  
 										  			                            expanded:false,
@@ -493,16 +500,17 @@ Edo.build(
 											  			                                      autoColumns: true, 
 											  			                                      headerVisible: false,
 											  			                                      width: '100%', height: '100%',
-											  			                                      style:'border:0;',
+											  			                                      style:'border:0;background-color:#f9f0f9;',
 											  			                                      verticalLine: false, 
+											  			                                      horizontalScrollPolicy:'off',
 											  			                                      horizontalLine: false, 
-											  			                                      rowHeight: 25,
+											  			                                      rowHeight: 30,
 											  			                                      columns: [
 														                                                {	 header: '导航树',
 														                                                    dataIndex: 'url',
 														                                                    renderer: function(v, r){
 														                                                    	//return '<a href="javascript:mainModule.load(\"'+r.url+'\")">'+r.name+'</a>';
-														                                                        return r.name;	}
+														                                                        return '<a class=navurl>'+r.name+'</a>';	}
 														                                                }],
 														                                    data:[{id: 'projectbuilderCT', url: 'module8.htm', name: '项目创建'},
 												                                    	             {id: 'projectmanage', url: 'module8.htm', name: '任务分配'},
@@ -520,7 +528,8 @@ Edo.build(
 											                                       },
 											                                       {
 											                                    	   type: 'panel',
-											                                    	    title: '知识推送',
+											                                    	    title: '<div class=panel_header_font_pdm>知识推送</div>',
+											                                    	    titleIcon:'mytitlebar',
 												  			                            width: '100%',
 												  			                            height: '100%',
 												  			                            enableCollapse: true,
@@ -535,8 +544,9 @@ Edo.build(
       autoColumns: true, 
       headerVisible: false,
       width: '100%', height: '100%',
-      style:'border:0;',
+      style:'border:0;background-color:#f9f0f9;',
       verticalLine: false, 
+      horizontalScrollPolicy:'off',
       horizontalLine: false, 
       rowHeight: 25,
       columns: [
@@ -544,7 +554,7 @@ Edo.build(
                   dataIndex: 'url',
                   renderer: function(v, r){
                   	//return '<a href="javascript:mainModule.load(\"'+r.url+'\")">'+r.name+'</a>';
-                      return r.name;	}
+                      return '<a class=navurl>'+r.name+'</a>';	}
               }],
   data:[{id: 'Ksubmit', url: 'module8.htm', name: '知识上传'},
            {id: 'Kcheck', url: 'module8.htm', name: '知识查询'},

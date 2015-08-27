@@ -34,4 +34,7 @@ public interface TaskService {
 	public PdmTask getTaskByparentTaskId(String parenttaskid, long projectid);
 	public void savePdmProjectValuePool(List<PdmProjectValuePool> items);
 	public List<PdmProjectValuePool> getPdmProjectValuePools(Long id);
+	
+	public List<PdmTask> getTaskByNextTaskId(String nextidsstring, Long id);
+	public int checkTasksIsFinished(String pretaskids1string, Long id);
 }

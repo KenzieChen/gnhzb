@@ -1,4 +1,4 @@
-function createCodeClassManage_check(codeClassId){
+function createCodeClassManage_check(){
 	var inputparam=new Array();
 	var outputparam=new Array();
 	this.initinputparam=function(param){
@@ -13,21 +13,45 @@ function createCodeClassManage_check(codeClassId){
 	this.submitResult=function(){
 		return outputparam;
 	}
+	this.inittask=function(){
+		var classificationtreeid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'classificationtreeid'){
+				isexist=true;
+				classificationtreeid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData("classificationtree/classification-tree!findCodeClassByClassTreeId.action",{id:classificationtreeid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				for(var i=0;i<data.result.length;i++){
+					data.result[i].icon ='e-tree-folder';
+				}
+				ClassTree_check.set("data",data.result);
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
 	if(!Edo.get('CodeClassMange_check_window')){
 		Edo.create({
 		 	id:'CodeClassMange_check_window',
-	 		type:'window',
-	 		title:'已建立分类结构审批',
+	 		type:'box',
+//	 		title:'已建立分类结构审批',
 	 		width:'300',
 	 		height:'200',
-	 		titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//	 		titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        padding:[0,0,0,0],
 	        children:[{
 	        	type:'tree',id:"ClassTree_check",width:'100%',height:'100%',
@@ -40,15 +64,15 @@ function createCodeClassManage_check(codeClassId){
 	        }]
 		});
 	}
-
-
-
-	var classTreeData = cims201.utils.getData('codeclass/code-class!findById.action',{id:codeClassId});
-	console.log(classTreeData);
-	for(var i=0;i<classTreeData.result.length;i++){
-		classTreeData.result[i].icon ='e-tree-folder';
+	this.getBox=function(){
+		return CodeClassMange_check_window;
 	}
-	ClassTree_check.set("data",classTreeData.result);
+//	var classTreeData = cims201.utils.getData("classificationtree/classification-tree!findCodeClassByClassTreeId.action",{id:classificationtreeid});
+//	console.log(classTreeData);
+//	for(var i=0;i<classTreeData.result.length;i++){
+//		classTreeData.result[i].icon ='e-tree-folder';
+//	}
+//	ClassTree_check.set("data",classTreeData.result);
 	 
-	 CodeClassMange_check_window.show('center','middle',true);
+//	CodeClassMange_check_window.show('center','middle',true);
 }

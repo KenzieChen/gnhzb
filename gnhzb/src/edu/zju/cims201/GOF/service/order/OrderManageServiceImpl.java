@@ -3,6 +3,7 @@ package edu.zju.cims201.GOF.service.order;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,31 @@ public class OrderManageServiceImpl implements OrderManageService {
 	
 	
 	
-	public String addOrder(String orderNumber, String info){
-		
+	public HashMap<String, Object> addOrder(String orderNumber, String info){
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		OrderManage omExist =orderManageDao.findUniqueBy("orderNumber", orderNumber);
 		if(omExist !=null){
-			return "需求号已存在，请重新添加";
+			map.put("isSuccess", "0");
+			map.put("message", "需求号已存在，请重新添加");
+			return map;
 		}
-
 		OrderManage om = new OrderManage();
 		om.setBeginDate(new Date());
 		om.setInfo(info);
 		om.setOrderNumber(orderNumber);
-
 		Status stts = new Status();
 		stts.setId(1);
 		om.setStatus(stts);
 		orderManageDao.save(om);
-		return "添加成功！";
+		map.put("isSuccess", "1");
+		map.put("message", "添加成功！");
+		List<HashMap<String, String>> resultlist=new ArrayList<HashMap<String,String>>();
+		HashMap<String, String> resultitem=new HashMap<String, String>();
+		resultitem.put("name", "ordermanageid");
+		resultitem.put("value", String.valueOf(om.getId()));
+		resultlist.add(resultitem);
+		map.put("resultlist", resultlist);
+		return map;
 	}
 	
 	public String updateOrder(long id, String info, long statusId){

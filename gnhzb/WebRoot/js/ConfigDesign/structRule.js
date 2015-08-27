@@ -101,6 +101,62 @@ function createStructRule(){
 	function structRuleTask(platStructTreeId){
 		structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platStructTreeId}));
 	}
+	
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'platstructtreeid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'structruleplatstructtreeid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert("提示",'对应的编码结构树不存在');
+			return null;
+		}
+		return outputparam;
+	}
+	this.inittask=function(){
+		var platstructtreeid=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'platstructtreeid'){
+				isexist=true;
+				platstructtreeid=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data =cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platstructtreeid});
+			if(data.isSuccess == '1'){
+				var resultdata=data.result;
+				structRule_combo.set('data',resultdata);
+			}else{
+				structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
+			Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
 	var structRulePanel = Edo.create({
 		type: 'panel', id:'', title:'<h3><font color="blue">配置规则处理</font></h3>', padding: [0,0,0,0],
 		width:'100%', height:'100%', verticalGap: 0,
@@ -410,7 +466,5 @@ function createStructRule(){
 	this.getStructRulePanel = function(){
 		return structRulePanel;
 	};
-	//structRuleTask(3148);
 	//审批测试
-	createStructRule_check(742);
 }

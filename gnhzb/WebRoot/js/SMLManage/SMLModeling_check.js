@@ -1,4 +1,39 @@
-function createSMLModeling_check(classficationTreeId){
+function createSMLModeling_check(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var smlmodelingclassificationtreeid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'smlmodelingclassificationtreeid'){
+				isexist=true;
+				smlmodelingclassificationtreeid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:smlmodelingclassificationtreeid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				SMLModelingTree_check.set('data',data.result);;
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
 	
 	if(!Edo.get("SMLModeling_check_window")){
 		
@@ -109,27 +144,29 @@ function createSMLModeling_check(classficationTreeId){
 		
 		Edo.create({
 			id:'SMLModeling_check_window',
-			type:'window',
-			title:'事物特性表建模审批',
+			type:'box',
+//			title:'事物特性表建模审批',
 			height:'500',
 			width:'600',
 			padding:[0,0,0,0],
-			titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//			titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        layout:'horizontal',
 	        children:[CodeClassChoose_check,smlModeling_check]
 		})
 		
 	}
-	
-	var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
-	SMLModelingTree_check.set('data',data);
-	SMLModeling_check_window.show('center','middle',true);
+	this.getBox=function(){
+		return SMLModeling_check_window;
+	}
+//	var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId});
+//	SMLModelingTree_check.set('data',data);
+//	SMLModeling_check_window.show('center','middle',true);
 
 }

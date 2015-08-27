@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import edu.zju.cims201.GOF.hibernate.pojoA.ClassificationTree;
 import edu.zju.cims201.GOF.hibernate.pojoA.CodeClass;
 import edu.zju.cims201.GOF.service.codeclass.CodeClassService;
 import edu.zju.cims201.GOF.util.JSONUtil;
@@ -49,7 +51,7 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		CodeClass nameFlag =codeClassService.findUniqueByClassName(classname);
 		if(nameFlag!=null){
 			HashMap<String, String> map=new HashMap<String, String>();
-			map.put("isSuccess", "1");
+			map.put("isSuccess", "0");
 			map.put("message", "类别名称已存在！");
 			String jsonString =JSONUtil.write(map);
 			out.print(jsonString);
@@ -58,7 +60,7 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		CodeClass codeFlag =codeClassService.findUniqueByClassCode(classcode);
 		if(codeFlag!=null){
 			HashMap<String, String> map=new HashMap<String, String>();
-			map.put("isSuccess", "1");
+			map.put("isSuccess", "0");
 			map.put("message", "类别代号已存在！");
 			String jsonString =JSONUtil.write(map);
 			out.print(jsonString);
@@ -67,7 +69,7 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		CodeClass ruleFlag =codeClassService.findUniqueByRule(codehead);
 		if(ruleFlag!=null){
 			HashMap<String, String> map=new HashMap<String, String>();
-			map.put("isSuccess", "1");
+			map.put("isSuccess", "0");
 			map.put("message", "类别码首字段已存在！");
 			String jsonString =JSONUtil.write(map);
 			out.print(jsonString);
@@ -164,11 +166,47 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		out.print(jsonString);
 		return null;
 	}
+	//审批用
+	public String getRuleByCodeClassId() throws IOException{
+		HashMap<String,Object> codelClassRule = codeClassService.getRuleByCodeClassId(id);
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
+		if (codelClassRule != null) {
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			resultmap.put("result", codelClassRule);
+
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out =response.getWriter();
+		out.print(jsonString);
+		return null;
+	}
 	
 	public String addConstructedCodeClass() throws IOException{
-		codeClassService.addConstructedByCodeClass(classcode);
+		HashMap<String, Object> resultmap=new HashMap<String, Object>();
+		ClassificationTree ctree=codeClassService.addConstructedByCodeClass(classcode);
 		out=response.getWriter();
-		out.print("新增成功");
+		if (ctree!=null) {
+			resultmap.put("isSuccess", "1");
+			resultmap.put("message", "成功");
+			List<HashMap<String, String>> resultlist=new ArrayList<HashMap<String,String>>();
+			HashMap<String, String> resultitem=new HashMap<String, String>();
+			resultitem.put("name", "classificationtreeid");
+			resultitem.put("value", String.valueOf(ctree.getId()));
+			resultlist.add(resultitem);
+			resultmap.put("resultlist", resultlist);
+
+
+		}else{
+			resultmap.put("isSuccess", "0");
+			resultmap.put("message", "查询出错，请联系管理员！");
+		}
+		String jsonString =JSONUtil.write(resultmap);
+		out=response.getWriter();
+		out.print(jsonString);
 		return null;
 	}
 	public String deleteConstructedCodeClass() throws IOException{
@@ -203,7 +241,6 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		out.print(jsonString);
 		return null;
 	}
-	
 	public String updateById() throws IOException{
 		codeClassService.updateById(id, classname, classcode, codehead);
 		out=response.getWriter();
@@ -218,15 +255,6 @@ public class CodeClassAction extends ActionSupport implements ServletResponseAwa
 		out.print(ruleStr);
 		return null;
 	}
-	//审批用
-	public String getRuleByCodeClassId() throws IOException{
-		HashMap<String,Object> codelClassRule = codeClassService.getRuleByCodeClassId(id);
-		String ruleStr = JSONUtil.write(codelClassRule);
-		out = response.getWriter();
-		out.print(ruleStr);
-		return null;
-	}
-	
 	public String updateRule() throws IOException{
 		codeClassService.updateRuleByClassCode(classcode, encodetype, codelength);
 		out =response.getWriter();

@@ -308,15 +308,32 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 	}
 	
 	public void getNextTasks(PdmTask task,List<PdmTask> alltaskList,List<TaskIOParam> params){
-		List<PdmTask> nextTasks=taskService.getTaskByPreTaskId(task.getTaskid(), task.getPdmProject().getId());
-	    if(nextTasks.isEmpty()){
+	    if(task.getIstail() == 1){
 	    	String parenttaskid=task.getParenttaskid();
 	    	Long projectid=task.getPdmProject().getId();
 	    	PdmTask parenttask=taskService.getTaskByparentTaskId(parenttaskid,projectid);
 	    	parenttask.setStatus(Constants.TASK_STATUS_FINISH);
 	    	alltaskList.add(parenttask);
-	    	List<PdmTask> nextparentTasks=taskService.getTaskByPreTaskId(parenttask.getTaskid(), parenttask.getPdmProject().getId());
+	    	String nexttaskids=parenttask.getNexttaskid();
+	    	String[] nexttaskarray=nexttaskids.split(";");
+	    	String nextidsstring="";
+	    	for(String nexttaskid:nexttaskarray){
+	    		nextidsstring=nextidsstring+nexttaskid+",";
+	    	}
+	    	nextidsstring=nextidsstring.substring(0,nextidsstring.length()-1);
+	    	//nextidsstring=nextidsstring+")"; 
+	    	if(parenttask.getIstail() == 1){
+	    		return;
+	    	}
+	    	List<PdmTask> nextparentTasks=taskService.getTaskByNextTaskId(nextidsstring, parenttask.getPdmProject().getId());
 	    	for(PdmTask task2:nextparentTasks){
+	    		if(!task2.getPrevtaskid().equals(parenttask.getTaskid())){
+	    			String pretaskids=task2.getPrevtaskid();
+	    			int result=checkTasksIsFinished(pretaskids,task);
+	    			if(result > 0){
+	    	    		continue;
+	    	    	}
+	    		}
 	    		task2.setStatus(Constants.TASK_STATUS_ACTIVE);
 				alltaskList.add(task2);
 				List<PdmTask> tasksList=taskService.getTaskByParentLevelModule(1,task2.getTaskid(),projectid);
@@ -326,17 +343,29 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 				}
 			}
 	    }else{
+	    	String nexttaskids=task.getNexttaskid();
+	    	String[] nexttaskarray=nexttaskids.split(";");
+	    	String nextidsstring="";
+	    	for(String nexttaskid:nexttaskarray){
+	    		nextidsstring=nextidsstring+nexttaskid+",";
+	    	}
+	    	nextidsstring=nextidsstring.substring(0,nextidsstring.length()-1);
+//	    	nextidsstring=nextidsstring+")"; 
+	    	List<PdmTask> nextTasks=taskService.getTaskByNextTaskId(nextidsstring, task.getPdmProject().getId());
 	    	for(PdmTask t:nextTasks){
 	    		
+	    		if(!t.getPrevtaskid().equals(task.getTaskid())){
+	    			String pretaskids1=t.getPrevtaskid();
+	    			int result=checkTasksIsFinished(pretaskids1,task);
+	    	    	if(result > 0){
+	    	    		continue;
+	    	    	}
+	    			
+	    		}
 	        	t.setStatus(Constants.TASK_STATUS_ACTIVE);
 	        	alltaskList.add(t);
 	        	if(params != null){
 	        		List<TaskIOParam> inputparams=taskService.getTaskParamsByTask(t.getId(),1);
-	        /*		for(TaskIOParam param:ioparams){
-		        		if(param.getIotype() == 1){
-		        			inputparams.add(param);
-		        		}
-		        	}*/
 	        		List<TaskIOParam> updateparams=new ArrayList<TaskIOParam>();
 	        		for(TaskIOParam param:params){
 	        			for(TaskIOParam inputparam:inputparams){
@@ -353,6 +382,18 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 	        	
 	        }	
 	    }
+	}
+	public int checkTasksIsFinished(String pretaskids,PdmTask task){
+		String[] pretaskids1array=pretaskids.split(";");
+		String pretaskids1string="(";
+    	for(String pretaskid:pretaskids1array){
+    		pretaskids1string=pretaskids1string+pretaskid+",";
+    	}
+    	pretaskids1string=pretaskids1string.substring(0,pretaskids1string.length()-1);
+    	pretaskids1string=pretaskids1string+")"; 
+    	int result=taskService.checkTasksIsFinished(pretaskids1string,task.getPdmProject().getId());
+    	return result;
+		
 	}
 	public void getkeywordidsbyprocess() throws IOException{
     	PdmProcessTemplate p=moduleService.getprocesstemplate(processtemplateid);
@@ -383,7 +424,7 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 		map.put("id", node.getId());
 		map.put("name", p.getName());	
 		map.put("des", node.getNodeDescription());	
-		map.put("url", node.getUrl());
+		map.put("url", node.getUrl().trim());
 		map.put("status", t.getStatus());
 		map.put("processtemplateid", p.getId());
 		map.put("code", node.getCode());	
@@ -391,6 +432,7 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 		List<HashMap<String, String>> Outparamlist=new ArrayList<HashMap<String, String>>();
 		List<TaskIOParam> params=taskService.getTaskParamsByTask(Long.valueOf(taskid),-1);
 		List<PdmProjectValuePool> items=taskService.getPdmProjectValuePools(t.getPdmProject().getId());
+		List<TaskIOParam> updateparams=new ArrayList<TaskIOParam>();
 		for(TaskIOParam param:params){
 			HashMap<String, String> parammap=new HashMap<String, String>();
 			parammap.put("descri", param.getDescri());
@@ -398,7 +440,7 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 			if(param.getIotype()==1){
 				parammap.put("type", "1");
 				if(StringUtils.isEmpty(param.getValue())){
-					updateparamvalue(param,items);
+					updateparamvalue(param,items,updateparams);
 				}
 				parammap.put("value", param.getValue());
 				Inparamlist.add(parammap);
@@ -409,16 +451,18 @@ public class TaskAction extends CrudActionSupport<LcaTask> implements
 			}
 			
 		}
+		taskService.saveIoPrams(updateparams);
 		map.put("Inparamlist", Inparamlist);
 		map.put("Outparamlist", Outparamlist);
     	ObjectMapper objectMapper = new ObjectMapper();	
 	    objectMapper.writeValue(response.getWriter(),map);
     }
-    public void updateparamvalue(TaskIOParam param,List<PdmProjectValuePool> items){
+    public void updateparamvalue(TaskIOParam param,List<PdmProjectValuePool> items,List<TaskIOParam> updateparams){
     	PdmProject project=param.getTask().getPdmProject();
     	for(PdmProjectValuePool item : items){
     		if(item.getName().equals(param.getName()) && !StringUtils.isEmpty(item.getValue())){
     			param.setValue(item.getValue());
+    			updateparams.add(param);
         	}
     	}
     }

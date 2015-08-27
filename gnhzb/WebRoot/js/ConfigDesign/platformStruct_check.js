@@ -1,21 +1,66 @@
-function createPlatformStruct_check(platStructId){
+function createPlatformStruct_check(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var platformstructplatformstructtreeid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'platformstructplatformstructtreeid'){
+				isexist=true;
+				platformstructplatformstructtreeid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('platform/plat-struct-tree!getPlatStructById.action',{id:platformstructplatformstructtreeid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				if(data.result[0].leaf==0){
+					data.result[0].__viewicon=true;
+					data.result[0].expanded=false;
+					data.result[0].icon='e-tree-folder';
+				}else{
+					data.result[0].icon='e-tree-folder';
+				}
+				
+				platformStruct_gridtree_check.set("data",data.result);
+				
+				
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
+	
 
 	if(!Edo.get("platformStruct_check_window")){
 		Edo.create({
 			id:'platformStruct_check_window',
-			type:'window',
-			title:'平台结构审批',
+			type:'box',
+//			title:'平台结构审批',
 			width:700,
 			height:300,
-            render: document.body,
-            titlebar: [
-                {                  
-                    cls:'e-titlebar-close',
-                    onclick: function(e){
-                        this.parent.owner.destroy();
-                    } 
-                }
-            ],
+//            titlebar: [
+//                {                  
+//                    cls:'e-titlebar-close',
+//                    onclick: function(e){
+//                        this.parent.owner.destroy();
+//                    } 
+//                }
+//            ],
             layout:'vertical',
             verticalGap:0,
             padding:0,
@@ -85,16 +130,19 @@ function createPlatformStruct_check(platStructId){
 			
 		});
 	}
-	var data = cims201.utils.getData('platform/plat-struct-tree!getPlatStructById.action',{id:platStructId});
-	if(data[0].leaf==0){
-		data[0].__viewicon=true;
-		data[0].expanded=false;
-		data[0].icon='e-tree-folder';
-	}else{
-		data[0].icon='e-tree-folder';
+	this.getBox=function(){
+		return platformStruct_check_window;
 	}
-	
-	platformStruct_gridtree_check.set("data",data);
-	platformStruct_check_window.show('center','middle',true);
+//	var data = cims201.utils.getData('platform/plat-struct-tree!getPlatStructById.action',{id:platStructId});
+//	if(data[0].leaf==0){
+//		data[0].__viewicon=true;
+//		data[0].expanded=false;
+//		data[0].icon='e-tree-folder';
+//	}else{
+//		data[0].icon='e-tree-folder';
+//	}
+//	
+//	platformStruct_gridtree_check.set("data",data);
+//	platformStruct_check_window.show('center','middle',true);
 	
 }

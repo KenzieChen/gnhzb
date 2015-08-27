@@ -3,6 +3,60 @@ function createNeworder(){
 	function neworderTask(orderManageId){
 		neworder_NewOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderManageId}));
 	}
+	var neworder_NewOrderChooseTabledata=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'ordermanageid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'neworderordermanageid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert('提示','对应的需求不存在');
+			return null;
+		}
+		return outputparam;
+	}
+	//luweijiang
+	this.inittask=function(){
+		var ordermanageid=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'ordermanageid'){
+				isexist=true;
+				ordermanageid=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data=cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:ordermanageid});
+			if(data.isSuccess == '1'){
+				neworder_NewOrderChooseTabledata=data.result;
+			}
+			Edo.MessageBox.alert('提示',data.message);
+		}else{
+			
+			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
 	var panel =Edo.create({
 			id:'neworder_topPanel',
 			type:'panel',
@@ -22,9 +76,11 @@ function createNeworder(){
 				        {type: 'button',id:'neworder_OrderChooseButton',text: '选择配置需求',onclick:function(e){
 				        	if(neworder_OrderChooseButton.text=='选择配置需求'){
 				        		showNewOrderChooseWin();
-				        		//neworderTask(orderManageId);
-				        		//neworderTask(3121);
-					        	neworder_NewOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
+				        		if(neworder_NewOrderChooseTabledata == null)
+			        			{
+				        			neworder_NewOrderChooseTabledata=cims201.utils.getData('order/order-manage!getAllOrder.action');
+			        			}
+				        		neworder_NewOrderChooseTable.set('data',neworder_NewOrderChooseTabledata);
 					        	neworder_NewOrderChooseTable.data.filter(function(o, i){
 					                if(o.statusName =='待录入') return true;
 					                else return false;
@@ -431,5 +487,4 @@ function createNeworder(){
 	this.getPanel = function(){
 		return panel;
 	};
-	createNewOrder_check(3484);
 }

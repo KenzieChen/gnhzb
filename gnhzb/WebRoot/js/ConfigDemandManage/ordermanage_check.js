@@ -1,4 +1,39 @@
-function createOrdermanage_check(orderId){
+function createOrdermanage_check(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		return outputparam;
+	}
+	this.inittask=function(){
+		var ordermanageid=null;
+		var isexist=false;
+		for(var i=0;i<outputparam.length;i++){
+			if(outputparam[i].name == 'ordermanageid'){
+				isexist=true;
+				ordermanageid=outputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data = cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:ordermanageid});
+			console.log(data);
+			if(data.isSuccess == '1'){
+				ordermanageTb_check.set("data",data.result);
+			}
+			Edo.MessageBox.alert("提示",data.message);
+		}else{
+			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
+		}
+	}
 	//表格	
 	if(!Edo.get('ordermanage_check_window')){
 		var Table = Edo.create({
@@ -54,30 +89,32 @@ function createOrdermanage_check(orderId){
 		    
 		});
 		
-		ordermanageTb_check.set('data',
-				cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderId}));
+//		ordermanageTb_check.set('data',
+//				cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderId}));
 		
 		Edo.create({
 			id:'ordermanage_check_window',
-			type:'window',
-			title:'配置需求审批',
+			type:'box',
+//			title:'配置需求审批',
 			height:'250',
 			width:'900',
 			padding:[0,0,0,0],
-			titlebar:[
-	            {
-	                cls: 'e-titlebar-close',
-	                onclick: function(e){
-	                    this.parent.owner.hide();       //hide方法
-	                }
-	            }
-	        ],
+//			titlebar:[
+//	            {
+//	                cls: 'e-titlebar-close',
+//	                onclick: function(e){
+//	                    this.parent.owner.hide();       //hide方法
+//	                }
+//	            }
+//	        ],
 	        layout:'horizontal',
 	        children:[Table]
 		})
 	}
-	
-	ordermanage_check_window.show('center','middle',true);
+	this.getBox=function(){
+		return ordermanage_check_window;
+	}
+//	ordermanage_check_window.show('center','middle',true);
 }
 	
 	
