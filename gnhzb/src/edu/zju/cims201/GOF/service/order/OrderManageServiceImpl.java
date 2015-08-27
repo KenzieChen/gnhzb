@@ -65,8 +65,7 @@ public class OrderManageServiceImpl implements OrderManageService {
 
 		return "删除成功！";
 	}
-	
-	
+
 	public List<OrderManageDTO> getAllOrder(){
 		List<OrderManage> omList = orderManageDao.getAll();
 		List<OrderManageDTO> omDTOList = new ArrayList<OrderManageDTO>();

@@ -1,8 +1,6 @@
 package edu.zju.cims201.GOF.dao.draft;
 
-import javax.annotation.Resource;
 
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
