@@ -1,6 +1,6 @@
 function createCodeClassRuleManage_check(){
 	
-//	var ruleData = cims201.utils.getData('classificationtree/classification-tree!getRuleByClassificationTreeId.action',{id:codeClassId});
+//	var ruleData = cims201.utils.getData('classificationtree/classification-tree!getRuleByClassificationTreeId.action',{id:codeclassrulemanagecodeclassid});
 //	var ruleObj =  Edo.util.JSON.decode(ruleData.rule);
 	var inputparam=new Array();
 	var outputparam=new Array();
@@ -28,12 +28,13 @@ function createCodeClassRuleManage_check(){
 		}
 		if(isexist){
 			var data = cims201.utils.getData('codeclass/code-class!getRuleByCodeClassId.action',{id:codeclassrulemanagecodeclassid});
-			console.log(data);
+			//设置标题
+			CodeClassRuleManageTree_check_className.set('text',data.result.className+"的规则审批");
 			if(data.isSuccess == '1'){
 				var ruleObj =  Edo.util.JSON.decode(data.result.rule);
 				CodeClassRuleManageTree_check.set("data",ruleObj);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -42,8 +43,8 @@ function createCodeClassRuleManage_check(){
 		Edo.create({
 			id:'CodeClassRuleManageTree_check_window',
 			type:'box',
-			height:'300',
-			width:'500',
+			height:'100%',
+			width:'100%',
 //			title:ruleData.className+"的规则审批",
 			padding:[0,0,0,0],
 //			titlebar:[
@@ -54,7 +55,17 @@ function createCodeClassRuleManage_check(){
 //	                }
 //	            }
 //	        ],
-			children:[{
+			children:[
+			    {
+			    	 type: 'group',
+	        		    width: '100%',
+					    layout: 'horizontal',
+					    cls: 'e-toolbar',
+					    children: [
+					        {type: 'label', id:'CodeClassRuleManageTree_check_className'}
+					    ]
+			    },
+			    {
 				type:'tree',id:'CodeClassRuleManageTree_check',width:'100%',height:'100%',
 				headerVisible:false,
 			    autoColumns: true,

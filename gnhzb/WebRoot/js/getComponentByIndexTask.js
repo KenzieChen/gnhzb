@@ -2598,6 +2598,7 @@ function getComponentByIndex(id,index,params){
 				};
 			}
 		}
+		
 		else if('SMLEditcheck'==index){
 			var existcomponent = iscomponentexist(id,'SMLEditcheck234');
 			if(null!=existcomponent){
@@ -2625,6 +2626,174 @@ function getComponentByIndex(id,index,params){
 					myComponent:myComponent,
 					realComponent:mySMLEditcheck
 			};
+		}
+		else if('checkorder'==index){
+			var existcomponent = iscomponentexist(id,'checkorder');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myCheckorder = new createCheckorder();
+
+				enterEventList[enterEventList.length] = myCheckorder;
+				enterEventIDList[enterEventIDList.length] = 'checkorder';
+				myComponent = Edo.create({
+					id: id?id:'checkorder234',   
+				    type: 'box',                 
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+			               myCheckorder.getPanel()
+				    ]
+				});
+				  resultComponent={
+							myComponent:myComponent,
+							realComponent:myCheckorder
+					};
+			}
+		}
+		else if('checkplatform'==index){
+			var existcomponent = iscomponentexist(id,'checkplatform');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myCheckplatform = new createCheckplatform();
+
+				enterEventList[enterEventList.length] = myCheckplatform;
+				enterEventIDList[enterEventIDList.length] = 'checkplatform';
+				myComponent = Edo.create({
+					id: id?id:'checkplatform234',   
+				    type: 'box',                 
+				    layout: 'horizontal',  
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+			               myCheckplatform.getPanel()
+				    ]
+				});
+				  resultComponent={
+							myComponent:myComponent,
+							realComponent:myCheckplatform
+					};
+			}
+		}
+		else if('BomCheck' == index){
+			var existcomponent = iscomponentexist(id,'BomCheck');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myBomCheck = new createBomCheck();
+
+				enterEventList[enterEventList.length] = myBomConfig;
+				enterEventIDList[enterEventIDList.length] = 'BomCheck';
+				myComponent = Edo.create({
+					id: id?id:'BomCheck234',   
+				    type: 'box',                 
+				    layout: 'horizontal',  
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+				               myBomCheck.getPanel()
+				    ]
+				});
+				  resultComponent={
+							myComponent:myComponent,
+							realComponent:myBomCheck
+					};
+			}
+		}
+		else if('VariantDesignBuild'==index){
+			var existcomponent = iscomponentexist(id,'VariantDesignBuild123');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myVariantDesignBuild = new VariantDesignBuild();
+
+				enterEventList[enterEventList.length] = myVariantDesignBuild;
+				enterEventIDList[enterEventIDList.length] = 'VariantDesignBuild';
+			
+				myComponent = Edo.create({
+					id: id?id:'VariantDesignBuild123',   
+				    type: 'box',                 
+				    layout: 'horizontal',  
+				    horizontalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+		               myVariantDesignBuild.getCodeClassChoose(),
+		               myVariantDesignBuild.getVariantDesignCt()
+				    ]
+				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:myVariantDesignBuild
+				};
+			}
+		}
+		else if('VariantDesignBuildcheck'==index){
+
+			var existcomponent = iscomponentexist(id,'VariantDesignBuidl_check123');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var VariantDesignBuildcheck = new createVariantDesignBuidl_check();
+
+				enterEventList[enterEventList.length] = VariantDesignBuildcheck;
+				enterEventIDList[enterEventIDList.length] = 'VariantDesignBuildcheck';
+			
+				myComponent = Edo.create({
+					id: id?id:'VariantDesignBuidl_check123',   
+				    type: 'box',                 
+				    layout: 'horizontal',  
+				    horizontalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+				    ]
+				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:VariantDesignBuildcheck
+				};
+			}
+		}
+		else if('variantDesign'==index){
+			var existcomponent = iscomponentexist(id,'variantDesign123');
+			if(null!=existcomponent){
+				myComponent=existcomponent;
+			}else{
+				var myVariantDesign = new createVariantDesign();
+
+				enterEventList[enterEventList.length] = myVariantDesign;
+				enterEventIDList[enterEventIDList.length] = 'variantDesign';
+			
+				myComponent = Edo.create({
+					id: id?id:'variantDesign123',   
+				    type: 'box',                 
+				    layout: 'horizontal',  
+				    horizontalGap:0,
+				    width: '100%',
+				    height: '100%',
+				    border:[0,0,0,0],
+				    padding: [0,0,0,0],
+				    children: [
+				               	myVariantDesign.getPanel()
+				    ]
+				});
+				resultComponent={
+						myComponent:myComponent,
+						realComponent:myVariantDesign
+				};
+			}
 		}
 		else if('SMLEdit_view'==index){
 

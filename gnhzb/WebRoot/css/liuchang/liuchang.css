@@ -7,6 +7,27 @@
 {
     background:url(images/panel_icon.png) no-repeat 0px 6px;
 }
+a,a:hover{
+	text-decoration:none;
+}
+a:hover img{
+	filter:alpha(Opacity=140);
+	-moz-opacity:0.18;
+	opacity: 0.48;
+}
+.topbar_icon{
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 1px;
+	margin-top:1px;
+	backgroud-color: silver;
+	font-size: 11px;
+	font-weight:bolder;
+	font-style:inherit;
+	color: black;
+	line-height: 16px;
+}
+
 .navurl
 {
     background:url(images/trangle.png) no-repeat 4px 4px;
@@ -21,20 +42,20 @@
 }
 .panel_header_font_pdm:hover{
 	height:30;
-	width:205;
-	background: green;
+	width:150;
+	background: #c0624b;
 }
 .panel_header_font_mod:hover{
 	height:30;
 	width:150;
-	background: pink;
+	background: #c0624b;
 }
 .panel_nav_font_pdm{
 	font-size:15px;
 	color: #dddddd;
 	font-weight: bolder;
 	padding-left:2px;
-	background: green;
+	background: #d6765d;
 	height:30;
 	width:260;
 }
@@ -43,11 +64,14 @@
 	color: #dddddd;
 	font-weight: bolder;
 	padding-left:2px;
-	background: #812d2d;
+	background: #d6765d;
 	height:30;
 	width:260;
 }
 
 .topbar_bg_mod{
 	 background:url(images/topbar_mod.png)
+}
+.topbar_bg_mod_progress{
+	 background:url(images/topbar_mod_process.png)
 }

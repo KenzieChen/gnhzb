@@ -34,7 +34,7 @@ function createCodeClassManage(){
 					cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
 				);
 			}
-			Edo.MessageBox.alert('提示',data.message);
+			//Edo.MessageBox.alert('提示',data.message);
 		}else{
 			addClassCombo.set('data',
 				cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')

@@ -1,5 +1,5 @@
 //定义lca模型
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 function getlcamoduledefine(){
 	var componentTree=new getcomponentTree();
     var toolbar=new getnextbar();

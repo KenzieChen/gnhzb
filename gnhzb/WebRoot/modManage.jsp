@@ -20,7 +20,8 @@
 </body>
 </html>
 
-<link href="<%=basePath%>js/edo/res/css/edo-all.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
+<%-- <link href="<%=basePath%>js/edo/res/css/edo-all.css" rel="stylesheet" type="text/css" /> --%>
 
 <!-- 组件样式  陈谦庄-->
 <link href="<%=basePath %>js/edo/res/css/edo-ide-index.css" rel="stylesheet"type="text/css" />	
@@ -336,15 +337,22 @@
 	                },
 	                
 	                {
-	                	type: 'label', height:76, style: 'font-size:13px;padding-left:2px; padding-right:2px;padding-top:50px;font-weight:bold;', text: '欢迎您，'+currentUser.name+'!'
+	                	type: 'label', height:76, style: 'font-size:13px;padding-left:2px; padding-right:2px;padding-top:25px;font-weight:bold;', 
+	                	text: '欢迎您，'+currentUser.name+'!'
 	                },
 	               
 	                {
-	                    type: 'label', height:76, style: 'padding-left:2px; padding-right:2px;padding-top:5px;', text: '<a href=""><div class="cims201_topbar_icon">&nbsp;<image height=45 width=45 src=css/images/home2.png><br>&nbsp;系统主页</div></a>'
+	                    type: 'label', height:76, style: 'padding-left:2px; padding-right:2px;padding-top:5px;', 
+	                    text: '<a href=""><div class="topbar_icon">&nbsp;<image style="padding-left:6;" width=48 height=48 src=css/liuchang/images/topbarIcons/home.png><br>&nbsp;系统主页</div></a>'
 	                },
 	                //陈谦庄 模块化
+	                /* {
+	                	type:'label',height:76,style:'padding-left:2px;pading-right:2px;padding-top:5px;',
+	                	text:'<a href=javascript:navManager("ModManage")><div class="topbar_icon">&nbsp;<img style=height:45px  src=css/liuchang/images/topbarIcons/mod.png><br>模块化管理</div></a>'
+	                }, */
 	                {
-	                	type:'label',height:76,style:'padding-left:2px;pading-right:2px;padding-top:5px;',text:'<a href=javascript:navManager("ModManage")><div class="cims201_topbar_icon">&nbsp;<img style=height:45px  src=css/images/creatkgroup.gif><br>模块化管理</div></a>'
+	                	type:'label',height:76,style:'padding-left:2px;pading-right:2px;padding-top:5px;',
+	                	text:'<a href=javascript:openNewPage("<%=basePath%>cqz/js/pdm/main.jsp")><div class="topbar_icon">&nbsp;<img style="padding-left:20;" width=48 height=48 src=css/liuchang/images/topbarIcons/mod.png><br>模块化过程管理</div></a>'
 	                },
 	                /* {
 
@@ -364,7 +372,7 @@
 	            
 	                
 	                {
-	                    type: 'label', height:76, style: 'padding-left:2px; padding-right:2px;padding-top:5px;', text: '<a href="<%=basePath%>j_spring_security_logout"><div class="cims201_topbar_icon">&nbsp;<image style=height:45px  src="css/images/exit.png"><br>&nbsp;&nbsp;&nbsp;退出&nbsp;</div></a>'
+	                    type: 'label', height:76, style: 'padding-left:2px; padding-right:2px;padding-top:5px;', text: '<a href="<%=basePath%>j_spring_security_logout"><div class="topbar_icon">&nbsp;<image width=48 height=48 src="css/images/exit.png"><br>&nbsp;&nbsp;&nbsp;退出&nbsp;</div></a>'
 	                }
                 ]
             },
@@ -658,6 +666,9 @@
 					.setcdtreeselected(componentid, selectedcdtree);
 		}
 
+	}
+	function openNewPage(url){
+		window.open(url);
 	}
 	navManager("ModManage");
 </script>

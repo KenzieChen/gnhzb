@@ -50,7 +50,7 @@ function createCodeClassRuleManage(){
 					cims201.utils.getData('codeclass/code-class!findUnConstructedCodeClass.action')
 				);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			ClassNameCombo.set('data',
 				cims201.utils.getData('codeclass/code-class!findAllCodeClass.action')

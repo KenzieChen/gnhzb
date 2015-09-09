@@ -32,7 +32,7 @@ function createCodeClassManage_check(){
 				}
 				ClassTree_check.set("data",data.result);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -42,8 +42,8 @@ function createCodeClassManage_check(){
 		 	id:'CodeClassMange_check_window',
 	 		type:'box',
 //	 		title:'已建立分类结构审批',
-	 		width:'300',
-	 		height:'200',
+	 		width:'100%',
+	 		height:'100%',
 //	 		titlebar:[
 //	            {
 //	                cls: 'e-titlebar-close',

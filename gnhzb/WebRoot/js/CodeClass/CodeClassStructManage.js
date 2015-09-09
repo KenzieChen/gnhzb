@@ -77,7 +77,7 @@ function createCodeClassStructManage(){
 					children : lbdhTreeData
 				} ]);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			var lbdhTreeData = cims201.utils
 				.getData('classificationtree/classification-tree!getClassStruct.action');
@@ -232,7 +232,8 @@ function createCodeClassStructManage(){
 			                        		data[i].icon='ui-module';
 			                        	}
 			                        	dataTree.insert(i, data[i], row);
-			                        };                    
+			                        };     
+			                        console.log(data);
 			                        dataTree.endChange();    
 			                    }
 			                });
@@ -541,7 +542,57 @@ function createCodeClassStructManage(){
 	                	layout:'horizontal',
 	                	children:[
 	                		{type:'space',width:'40'},
-	                		{type:'button',text:'提交并继续添加'},
+	                		{type:'button',text:'提交并继续添加',onclick:function(e){
+	                			var row = FljgTree.selected; 	
+                				if(codeClassStructAddChildForm.valid()){
+                					var formData=codeClassStructAddChildForm.getForm();
+	                					Edo.util.Ajax.request({
+	                						url:'classificationtree/classification-tree!insertTreeNode.action',
+	                						type:'post',
+	                						params:formData,
+	                						onSuccess:function(text){								
+	                							if("添加子节点成功！"==text){
+	                								Edo.MessageBox.alert("提示",text);
+	                								Edo.util.Ajax.request({
+									                    url: 'classificationtree/classification-tree!getChildrenNode.action?pid='+formData.pid,
+									                    onSuccess: function(text){
+									                    	var row = FljgTree.selected; 	
+									                    	row.icon="e-tree-folder";
+									                    	var dataTree = FljgTree.data;
+									                        var data = Edo.util.Json.decode(text);			                        
+									                        dataTree.beginChange();
+									                        dataTree.removeRange (dataTree.getChildren(row,true));
+									                        if(!(data instanceof Array)) data = [data]; //必定是数组
+									                        for(var i=0;i<data.length;i++){
+									                        	if(data[i].leaf==0){
+									                        		data[i].__viewicon=true,
+														    		data[i].icon='e-tree-folder',	  //data[i].icon='ui-module',
+														    		data[i].expanded=false;			                       		
+									                        	}else{
+									                        		data[i].icon='ui-module';
+									                        	}
+									                        	
+									                        	dataTree.insert(i, data[i], row);
+									                        };                    
+									                        dataTree.endChange();  
+									                        FljgTree.selected = row;
+									                    },
+									                    onFail:function(code){
+									                    	alert(code);
+									                    }
+									                });	
+	                							}else{
+	                								Edo.MessageBox.alert("提示",text);
+	                							}       							
+	                						},
+	                						onFail:function(code){
+	                							alert(code);
+	                						}
+	                					});
+	                				
+                				}		
+                			
+	                		}},
 	                		{type:'space',width:'10'},
 	                		{type:'button',text:'提交',
 	                			onclick:function(e){
@@ -595,7 +646,7 @@ function createCodeClassStructManage(){
 	                			}
 	                		},
 	                		{type:'space',width:'10'},
-	                		{type:'button',text:'取消',
+	                		{type:'button',text:'关闭',
 	                			onclick:function(e){
 	                				codeClassStructAddChildForm.reset();
 	                				codeClassStructAddChildForm.hide();

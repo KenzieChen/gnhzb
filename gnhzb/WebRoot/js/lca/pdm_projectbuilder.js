@@ -1,4 +1,4 @@
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 function getPDMprojectdefine(){
 	var func=function(id){
 		projectobject.projecttype='PDM';
@@ -40,7 +40,8 @@ function getprojectdef(){
        	
        	}
 function savepdmproject(){
-   alert('sss')
+   //alert('ssss');
+	Edo.MessageBox.alert("提示","保存成功！");
    var alllevels=wholelevel.alllevels;
    if(alllevels.length==0){
 	   

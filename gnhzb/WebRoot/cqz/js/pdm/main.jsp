@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>main</title>
+    <title>模块化设计过程平台</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,13 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link href="<%=basePath %>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath %>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath %>css/liuchang/liuchang.css" rel="stylesheet" type="text/css" />
   </head>
   
   <body>
     
   </body>
-  <script src="<%=basePath %>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
+  <script src="<%=basePath %>css/liuchang/edo_orange_theme/edo.js" type="text/javascript"></script>
   <script src="<%=basePath %>cqz/js/pdm/main.js" type="text/javascript"></script>
 </html>

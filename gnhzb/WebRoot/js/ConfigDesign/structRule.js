@@ -151,7 +151,7 @@ function createStructRule(){
 			}else{
 				structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			structRule_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
 			Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
@@ -175,7 +175,9 @@ function createStructRule(){
 				        {type: 'split'},
 				        {type: 'button',id:'',text: '接口查看'},
 				        {type: 'split'},
-				        {type: 'button',id:'',text: '刷新'}			        
+				        {type: 'button',id:'',text: '刷新'},
+				        {type: 'space',width:'100%'},
+				        {type: 'button',id:'structRule_checkStruct',text:'提交审核'}
 				    ]
 	        	},
 	      		{
@@ -219,6 +221,35 @@ function createStructRule(){
 	    hideDelay: 100,             //隐藏延迟            
 	    mouseOffset:[15,18]         //显示的偏移坐标
 	});*/
+	
+	structRule_checkStruct.on('click',function(e){
+		var platName = structRule_combo.selectedItem.classText;
+		Edo.MessageBox.confirm('提示','是否提交名称为：<br><span style="color:red">'+platName+'</span><br>的产品平台进行审核？',function(action){
+			if(action=='yes'){
+				var platId = structRule_combo.selectedItem.plat.id;			
+				Edo.util.Ajax.request({
+				    url: 'platform/platform-manage!changePlat2CheckStatus.action',
+				    type: 'post',
+				    params:{id:platId},
+				    onSuccess: function(text){
+				    	if("提交审核成功！"==text){
+				    		//platformStruct_combo.set('data',cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStruct.action'));
+				    		//platformStruct_combo.set('selectedIndex',0);
+				    		//platformStruct_gridtree.set('data',[]);
+				    		Edo.MessageBox.alert('提示',text);
+				    	}else{
+				    		Edo.MessageBox.alert('提示','未知错误，请与管理员联系');
+				    	}					    	
+				    },
+				    onFail: function(code){
+				        //code是网络交互错误码,如404,500之类
+				        Edo.MessageBox.alert("提示", "操作失败"+code);
+				    }
+				});
+			}
+		});
+	});
+	
 	structRule_addYesBtn.on('click',function(e){
 		if(structRule_partRuleTable.selecteds.length==0){
 			Edo.MessageBox.alert('提示','请选择编辑项');

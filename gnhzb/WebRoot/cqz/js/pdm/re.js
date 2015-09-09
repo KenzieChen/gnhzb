@@ -1,4 +1,5 @@
 var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 //var tasktreedataTable = new Edo.data.DataTree()
 //.set({
 //    fields: [
@@ -27,7 +28,7 @@ function init ()
 //	var i=0;
 	var data= cims201.utils.getData(url,param);
 	if(data.status == '等待审查'){
-		alert('等待审查');
+		//alert('等待审查');
 		tasktype=2;
 	}
 	if(tasktype == 1){
@@ -158,10 +159,10 @@ Edo.build(
 			        	              type:   'label',width:'100%',height: '100%',
 			      		              style:  'font-size:20px;padding:5px;padding-top:8px;font-family:微软雅黑, 宋体, Verdana;font-weight:bold; ',
 			      		             text: '模块执行平台 '
-			        	            },
+			        	            }/*,
 			        	            { 
 			        	            	type: 'label', text: '您好, admin <a href="#" style="color:black;text-decoration:none;">退出</a>'
-			        	            }
+			        	            }*/
 			        	            ]
 			          },
 			         

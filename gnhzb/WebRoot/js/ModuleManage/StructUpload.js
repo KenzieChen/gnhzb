@@ -533,10 +533,10 @@ function createStructUpload(){
 			        	  id:'StructUpload_UploadSelfDefiDoc',
 			        	  width:'200',
 			              swfUploadConfig: {              
-			                  upload_url: 'draft/upload-self!uploadSelf.action', 
-			                  flash_url : 'js/swfupload/swfupload.swf',
-			                  flash9_url : "js/swfupload/swfupload_fp9.swf",
-			                  button_image_url : 'js/swfupload/XPButtonNoText_61x22.png',     
+			                  upload_url: '/gnhzb/draft/upload-self!uploadSelf.action', 
+			                  flash_url : '/gnhzb/js/swfupload/swfupload.swf',
+			                  flash9_url : "/gnhzb/js/swfupload/swfupload_fp9.swf",
+			                  button_image_url : '/gnhzb/js/swfupload/XPButtonNoText_61x22.png',     
 			                  button_text : '<span class="browseButton">浏&nbsp;览</span>',       
 			                  button_text_style : '.browseButton {text-align: center;font-weight: bold; font-size: 12pt;}', 
 			                  file_types: '*',                       
@@ -651,10 +651,10 @@ function createStructUpload(){
 			        	  id:'StructUpload_UploadModelPic',
 			        	  width:'100%',
 			              swfUploadConfig: {              
-			                  upload_url: 'draft/upload-img!uploadImg.action', 
-			                  flash_url : 'js/swfupload/swfupload.swf',
-			                  flash9_url : "js/swfupload/swfupload_fp9.swf",
-			                  button_image_url : 'js/swfupload/XPButtonNoText_61x22.png',     
+			                  upload_url: '/gnhzb/draft/upload-img!uploadImg.action', 
+			                  flash_url : '/gnhzb/js/swfupload/swfupload.swf',
+			                  flash9_url : "/gnhzb/js/swfupload/swfupload_fp9.swf",
+			                  button_image_url : '/gnhzb/js/swfupload/XPButtonNoText_61x22.png',     
 			                  button_text : '<span class="browseButton">浏&nbsp;览</span>',       
 			                  button_text_style : '.browseButton {text-align: center;font-weight: bold; font-size: 12pt;}', 
 			                  file_types: '*.jpg;*.bmp;*.png,;*.gif',                       
@@ -755,5 +755,4 @@ function createStructUpload(){
 	this.getUploadPanel =function(){
 		return uploadPanel;
 	};
-	structUploadTask(3041);
 }

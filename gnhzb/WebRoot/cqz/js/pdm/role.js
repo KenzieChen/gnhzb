@@ -1,5 +1,6 @@
 var Role={};
-var basepathh='http://localhost:8080/gnhzb';
+//var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 var roledataTable = new Edo.data.DataTable()
 .set({
     fields: [

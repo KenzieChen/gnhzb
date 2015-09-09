@@ -1,7 +1,57 @@
 function createCheckplatform(){
-	//luweijiang
-	function checkplatformTask(platformManageId){
-		checkplatform_CheckPlatChooseTable.set('data',cims201.utils.getData('platform/platform-manage!getPlatform2CheckById.action',{id:platformManageId}));  	 
+	var checkplatform_CheckPlatChooseTabledata=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			
+			if(inputparam[i].name == 'platformmanageid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'checkplatformplatformmanageid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert('提示','对应的平台不存在');
+			return null;
+		}
+		return outputparam;
+	}
+	this.inittask=function(){
+		var platformmanageid=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'platformmanageid'){
+				//alert("成功");
+				isexist=true;
+				platformmanageid=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data =cims201.utils.getData('platform/platform-manage!getPlatform2CheckById.action',{id:platformmanageid});
+			//alert(data.length)
+			checkplatform_CheckPlatChooseTabledata=data;
+			//Edo.MessageBox.alert('提示',data.message);
+		}else{
+			
+			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
+		}
 	}
 	var panel =Edo.create({
 		id:'checkplatform_topPanel',
@@ -19,8 +69,12 @@ function createCheckplatform(){
 			        {type:'button',id:'checkplatform_platChooseBtn',text:'选择配置平台',onclick:function(e){
 			        	if(checkplatform_platChooseBtn.text=='选择配置平台'){
 				        	 showPlat2CheckWin();	
-				        	 checkplatformTask(3511);
-				        	 //checkplatform_CheckPlatChooseTable.set('data',cims201.utils.getData('platform/platform-manage!getPlatform2Check.action'));  	 
+				        	 if(checkplatform_CheckPlatChooseTabledata != null){
+				        		 checkplatform_CheckPlatChooseTable.set('data',checkplatform_CheckPlatChooseTabledata);
+				        	 }else{
+					        	 checkplatform_CheckPlatChooseTable.set('data',cims201.utils.getData('platform/platform-manage!getPlatform2Check.action'));  	 
+
+				        	 }
 			        	}
 			        	if(checkplatform_platChooseBtn.text=='取消该配置平台审核'){
 			        		checkplatform_plat2CheckWin.destroy();

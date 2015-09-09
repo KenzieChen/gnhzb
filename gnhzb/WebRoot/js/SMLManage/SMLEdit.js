@@ -151,8 +151,13 @@ function createSMLEdit(){
 		var isexist=false;
 		for(var i=0;i<inputparam.length;i++){
 			if(inputparam[i].name == 'classificationtreeid'){
-				isexist=true;
-				classificationtreeid=inputparam[i].value;
+				if(inputparam[i].value == null){
+					isexist=false;
+				}else{
+					isexist=true;
+					classificationtreeid=inputparam[i].value;
+				}
+				
 				break;
 			}
 		}
@@ -162,13 +167,13 @@ function createSMLEdit(){
 				var resultdata=data.result;
 				SMLEditClassNameCombo.set('data',resultdata);
 			}else{
-				SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+				SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeid}));
 			}
 			Edo.MessageBox.alert("提示",data.message);
-		}else{
-			SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeId}));
+		}/*else{
+			SMLEditClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classficationTreeid}));
 			Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
-		}
+		}*/
 	}
 	function createSMLTable(tableName){
 		if(Edo.get('SMLEdit_SMLTable')){
@@ -204,7 +209,29 @@ function createSMLEdit(){
 		    	}else{
 		    		SMLEdit_ct.set('enable',true);
 		    		var tableData = cims201.utils.getData('sml/sml-table-field!getSmlTableByTableName.action?tableName='+tableName);
+		    		/*var raw = [
+		    		           {'id':'null','partname':'前缸VB_25','partnumber':'VB_25','partId':'12','SD8':'','SD17':'','SD44':'','SD45':'','SD221':'','SD225':'','output':'SD8,SD17,SD44,SD45,SD221,SD225'},
+		    		           {'id':'null','partname':'前缸VB_32','partnumber':'VB_32','partId':'13','SD8':'','SD17':'','SD44':'','SD45':'','SD221':'','SD225':'','output':'SD8,SD17,SD44,SD45,SD221,SD225'},
+		    		           {'id':'null','partname':'前缸VB_40','partnumber':'VB_40','partId':'14','SD8':'','SD17':'','SD44':'','SD45':'','SD221':'','SD225':'','output':'SD8,SD17,SD44,SD45,SD221,SD225'},
+		    		           {'id':'null','partname':'前缸VB_50','partnumber':'VB_50','partId':'15','SD8':'','SD17':'','SD44':'','SD45':'','SD221':'','SD225':'','output':'SD8,SD17,SD44,SD45,SD221,SD225'},
+		    		           {'id':'null','partname':'前缸VB_63','partnumber':'VB_63','partId':'16','SD8':'','SD17':'','SD44':'','SD45':'','SD221':'','SD225':'','output':'SD8,SD17,SD44,SD45,SD221,SD225'}
+		    		           ];*/
+		    		//var tableData = Edo.util.Json.decode(raw);
+		    		//console.log(tableData);
 		    		table.set('data',tableData);
+		    		/*Edo.util.Ajax.request({
+		    			url:'sml/sml-table-field!getSmlTableByTableName.action?tableName='+tableName,
+		    			type:'post',
+		    			onSuccess:function(text){
+		    				console.log(text);
+		    				table.set('data',text);
+		    			},
+		    			onFail:function(code){
+		    				 Edo.MessageBox.alert("提示", "操作失败"+code);
+		    			}
+		    		});*/
+		    		
+		    		
 		    	}
 		    },
 		    onFail: function(code){

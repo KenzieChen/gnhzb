@@ -43,10 +43,10 @@
 	<!-- Loads and initializes the library -->
 	<script type="text/javascript" src="<%=basePath%>js/lca/flow/mxclient1.8goo.js"></script>
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/welcome.css">
-		<link href="<%=basePath%>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
+		<link href="<%=basePath%>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
 		<link href="<%=basePath%>css/icon.css" rel="stylesheet" type="text/css" />
 
-		<script src="<%=basePath%>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
+		<script src="<%=basePath%>css/liuchang/edo_orange_theme/edo.js" type="text/javascript"></script>
 		<script src="<%=basePath %>js/cims201.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/utils.js" type="text/javascript"></script>
 		<%-- <script src="<%=basePath%>js/lca/lca_moduledefine_builder.js" type="text/javascript"></script> --%>
@@ -58,7 +58,8 @@
 		// Program starts here. Creates a sample graph in the
 		// DOM node with the specified ID. This function is invoked
 		// from the onLoad event handler of the document (see below).
-		var basepathh='http://localhost:8080/gnhzb/'
+		//var basepathh='http://localhost:8080/gnhzb/'
+		var basepathh='/gnhzb/';
 		
 		//
 		var moduleobject={
@@ -1765,9 +1766,9 @@
 		var v06 = addnewprocess('标准模块设计和模块接口定义',250, 850,180, 100,'process','#00CCFF');
 		var v07 =addnewprocess('模块化产品及平台总体构建',250, 1000, 180, 100,'process','#00CCFF'); 
 		var v08 =  addnewprocess('产品结构及系列化设计',250, 1150, 180, 100,'process','#00CCFF');
-		var v09 =  addnewprocess('产品模块化平台',250, 1300, 180, 100,'process','#00CCFF');
-		var v10 = addnewprocess('产品配置设计',250, 1450,180, 100,'process','#00CCFF');
-		var v11 =addnewprocess('产品变型设计',250, 1600,180, 100,'process','#00CCFF'); 
+		//var v09 =  addnewprocess('产品模块化平台',250, 1300, 180, 100,'process','#00CCFF');
+		var v10 = addnewprocess('产品配置设计',250, 1300,180, 100,'process','#00CCFF');
+		var v11 =addnewprocess('产品变型设计',250, 1450,180, 100,'process','#00CCFF'); 
 		
 	
 		var e014=graph.insertEdge(parent, null, '', v014, v05 );    
@@ -1776,8 +1777,8 @@
 		var e05=graph.insertEdge(parent, null, '', v05, v06 );    
 		var e06=graph.insertEdge(parent, null, '', v06, v07 );    
 		var e07=graph.insertEdge(parent, null, '', v07, v08 );    
-		var e08=graph.insertEdge(parent, null, '', v08, v09 );    
-		var e09=graph.insertEdge(parent, null, '', v09, v10 );    
+		var e08=graph.insertEdge(parent, null, '', v08, v10 );    
+		//var e09=graph.insertEdge(parent, null, '', v09, v10 );    
 		var e10=graph.insertEdge(parent, null, '', v10, v11 );    
 	/* 	var levelmodulev011=wholelevel.addlevelmodule(v011);
 		var levelmodulev012=wholelevel.addlevelmodule(v012);

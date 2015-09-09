@@ -159,6 +159,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 	public int checkTasksIsFinished(String taskids1string, Long projectid) {
 		
-		return (Integer)sessionFactory.getCurrentSession().createQuery("count(*) from PdmTask task where task.taskid in ? and and task.status !='"+Constants.TASK_STATUS_FINISH+"'"+"and task.pdmProject.id=?").setParameter(0,taskids1string).setParameter(1, projectid).uniqueResult();
+		Integer count=(Integer)sessionFactory.getCurrentSession().createQuery("count(*) from PdmTask task where task.taskid in ? and task.status !='"+Constants.TASK_STATUS_FINISH+"'"+"and task.pdmProject.id=?").setParameter(0,taskids1string).setParameter(1, projectid).uniqueResult();
+		return 0;
 	}
 }

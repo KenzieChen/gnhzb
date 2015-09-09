@@ -29,7 +29,9 @@ function createPlatform_check(){
 			if(data.isSuccess == '1'){
 				platform_platTable_check.set('data',data.result);;
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			
+			
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -40,8 +42,8 @@ function createPlatform_check(){
 			id:'platform_check_window',
 			type:'BOX',
 //			title:'平台类型审批',
-			width:600,
-			height:200,
+			width:'100%',
+			height:'100%',
 //            titlebar: [
 //                {                  
 //                    cls:'e-titlebar-close',

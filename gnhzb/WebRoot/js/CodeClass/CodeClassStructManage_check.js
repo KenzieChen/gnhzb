@@ -25,11 +25,25 @@ function createCodeClassStructManage_check(){
 		}
 		if(isexist){
 			var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:codeclassstructmanageclassificationtreeid});
-			console.log(data);
 			if(data.isSuccess == '1'){
-				FljgTree_check.set('data',data.result);;
+//				var dataTree = FljgTree_check.data;
+//				 dataTree.beginChange();
+                 if(!(data.result instanceof Array)) data = [data]; //必定是数组
+                 for(var i=0;i<data.result.length;i++){
+                 	if(data.result[i].leaf==0){
+                 		data.result[i].__viewicon=true,
+                 		data.result[i].icon='e-tree-folder',
+                 		data.result[i].expanded=false;		
+                 	}else{
+                 		data.result[i].icon='ui-module';
+                 	}
+                 };     
+                 console.log(data.result);
+               //  dataTree.endChange();
+				
+				FljgTree_check.set('data',data.result);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -143,8 +157,8 @@ function createCodeClassStructManage_check(){
 			id:'CodeClassStructManage_check_window',
 			type:'box',
 //			title:'产品结构审批',
-			height:'400',
-			width:'600',
+			height:'100%',
+			width:'100%',
 			padding:[0,0,0,0],
 //			titlebar:[
 //	            {

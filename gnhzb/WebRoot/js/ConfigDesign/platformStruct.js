@@ -30,9 +30,9 @@ function createPlatformStruct(){
 						break;
 					}
 				}
-				}
 				break;
 			}
+		}
 		if(!isexist){
 			Edo.MessageBox.alert('提示','对应的平台结构树不存在');
 			return null;
@@ -68,14 +68,15 @@ function createPlatformStruct(){
 				}
 				lbdhTreeData=resultdata;
 			}
-			Edo.MessageBox.alert('提示',data.message);
+			
+			//Edo.MessageBox.alert('提示',data.message);
 		}
 		if(isexist2){
 			var data =cims201.utils.getData('platform/plat-struct-tree!getUnfinishedPlatStructById.action',{id:platstructtreeid});
 			if(data.isSuccess == '1'){
 				platformStruct_combo.set('data',data.result);
 			}
-			Edo.MessageBox.alert('提示',data.message);
+			//Edo.MessageBox.alert('提示',data.message);
 		}
 		if(!isexist1 || !isexist2){
 			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
@@ -101,7 +102,7 @@ function createPlatformStruct(){
 						    onselectionchange: function(e){	
 						    	platformStruct_addNode.set("enable",true);
 						    	platformStruct_deleteNode.set("enable",true);
-						    	platformStruct_checkStruct.set("enable",true);
+						    	//platformStruct_checkStruct.set("enable",true);
 						    	platformStruct_updateNode.set("enable",true);
 						    	
 						    	if(e.selectedItem.leaf==0){
@@ -123,7 +124,7 @@ function createPlatformStruct(){
 				        {type: 'split'},
 				        {type: 'button',id:'platformStruct_updateNode',text: '修改属性',enable:false},
 				        {type: 'split'},
-				        {type: 'button',id:'platformStruct_checkStruct',text: '提交审核',enable:false}
+				        //{type: 'button',id:'platformStruct_checkStruct',text: '提交审核',enable:false}
 				    ]
 	        	},
 	      		{
@@ -276,7 +277,7 @@ function createPlatformStruct(){
 	});
 	
 	//提交审核按钮的事件
-	platformStruct_checkStruct.on('click',function(e){
+/*	platformStruct_checkStruct.on('click',function(e){
 		var platName = platformStruct_combo.selectedItem.classText;
 		Edo.MessageBox.confirm('提示','是否提交名称为：<br><span style="color:red">'+platName+'</span><br>的产品平台进行审核？',function(action){
 			if(action=='yes'){
@@ -302,7 +303,7 @@ function createPlatformStruct(){
 				});
 			}
 		});
-	});
+	});*/
 	function showAddNodeWin(){
 		if(!Edo.get("platformStruct_addNodeWin")){
 			Edo.create({
@@ -420,7 +421,7 @@ function createPlatformStruct(){
 	                      {
 	                    	  type:'box',layout:'horizontal',width:'100%',height:'7%',children:[
 	                    	      {type:'space',width:'100%'},
-	                    	      {type:'button',text:'提交',onclick:function(e){
+	                    	      {type:'button',text:'添加',onclick:function(e){
 	                    	    	  if(platformStruct_FljgTree.selecteds.length!=1){
 	                    	    		  Edo.MessageBox.alert('提示','未选择模块');
 	                    	    		  return;
@@ -500,7 +501,7 @@ function createPlatformStruct(){
 	                							}else{
 	                								Edo.MessageBox.alert("提示",text);
 	                							}       							
-	                							platformStruct_addNodeWin.destroy();
+	                							//platformStruct_addNodeWin.destroy();
 	                						},
 	                						onFail:function(code){
 	                							alert(code);
@@ -509,7 +510,7 @@ function createPlatformStruct(){
 	                    	    	  
 	                    	      }},
 	                    	      {type:'space',width:'10'},
-	                    	      {type:'button',text:'取消',onclick:function(e){
+	                    	      {type:'button',text:'关闭',onclick:function(e){
 	                    	    	  platformStruct_addNodeWin.destroy();
 	                    	      }}
 	                    	  ]
@@ -519,9 +520,9 @@ function createPlatformStruct(){
 		}
 		
 
-		if(lbdhTreeData == null){
+		//if(lbdhTreeData == null){
 			initlbdhTreeData();
-		}
+		//}
 		console.log(lbdhTreeData);
 		for(var i=0;i<lbdhTreeData.length;i++){
 			lbdhTreeData[i].icon ='e-tree-folder';
@@ -532,7 +533,7 @@ function createPlatformStruct(){
 	}
 	
 	function initlbdhTreeData(){
-		lbdhTreeData=cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
+		lbdhTreeData = cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action');
 		for(var i=0;i<lbdhTreeData.length;i++){
 			lbdhTreeData[i].icon ='e-tree-folder';
 		}

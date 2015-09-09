@@ -1,7 +1,61 @@
 function createVariantDesign(){
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+	}
+	this.submitResult=function(){
+//		isexist=false;
+//		for(var i=0;i<inputparam.length;i++){
+//			if(inputparam[i].name == 'classificationtreeid'){
+//				for(var j=0;j<outputparam.length;j++){
+//					if(outputparam[j].name == 'smlmodelingclassificationtreeid'){
+//						outputparam[j].value=inputparam[i].value;
+//						isexist=true;
+//						break;
+//					}
+//				}
+//				}
+//				break;
+//			}
+//		if(!isexist){
+//			Edo.MessageBox.alert("提示",'对应的编码结构树不存在');
+//			return null;
+//		}
+		return outputparam;
+	}
+	this.inittask=function(){
+//		var classificationtreeid=null;
+//		var isexist=false;
+//		for(var i=0;i<inputparam.length;i++){
+//			if(inputparam[i].name == 'classificationtreeid'){
+//				isexist=true;
+//				classificationtreeid=inputparam[i].value;
+//				break;
+//			}
+//		}
+//		if(isexist){
+//			var data =cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:classificationtreeid});
+//			if(data.isSuccess == '1'){
+//				var resultdata=data.result;
+//				SMLModelingClassNameCombo.set('data',resultdata);
+//			}else{
+//				SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+//			}
+//			Edo.MessageBox.alert("提示",data.message);
+//		}else{
+//			SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
+//			Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
+//		}
+	}
 	var VariantDesignPanel = Edo.create({
 		type:'panel',
-		title:'变形设计任务列表',
+		title:'变型设计任务列表',
 		layout:'vertical',
 		verticalGap:0,
 		width:'100%',

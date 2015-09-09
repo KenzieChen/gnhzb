@@ -1,5 +1,6 @@
 var employee={};
-var basepathh='http://localhost:8080/gnhzb/';
+//var basepathh='http://localhost:8080/gnhzb/';
+var basepathh='/gnhzb/';
 var employdataTable = new Edo.data.DataTree()
 .set({
     fields: [

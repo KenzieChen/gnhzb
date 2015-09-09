@@ -18,8 +18,13 @@ function createSMLEdit_check(){
 		var isexist=false;
 		for(var i=0;i<outputparam.length;i++){
 			if(outputparam[i].name == 'smleditclassificationtreeid'){
-				isexist=true;
-				smleditclassificationtreeid=outputparam[i].value;
+				if(outputparam[i].value ==null){
+					isexist=false;
+				}else{
+					isexist=true;
+					smleditclassificationtreeid=outputparam[i].value;
+				}
+
 				break;
 			}
 		}
@@ -27,12 +32,19 @@ function createSMLEdit_check(){
 			var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:smleditclassificationtreeid});
 			console.log(data);
 			if(data.isSuccess == '1'){
+				
+				for(var i=0;i<data.result.length;i++){
+					data.result[i].__viewicon=true;
+					data.result[i].expanded=false;
+					data.result[i].icon='e-tree-folder';
+				}
+				
 				SMLEditTree_check.set('data',data.result);;
 			}
 			Edo.MessageBox.alert("提示",data.message);
-		}else{
+		}/*else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
-		}
+		}*/
 	}
 	if(!Edo.get('SMLEdit_check_window')){
 		var CodeClassChoose_check = Edo.create({
@@ -108,8 +120,8 @@ function createSMLEdit_check(){
 			id:'SMLEdit_check_window',
 			type:'box',
 //			title:'事物特性表编辑审批',
-			height:'500',
-			width:'900',
+			height:'100%',
+			width:'100%',
 			padding:[0,0,0,0],
 //			titlebar:[
 //	            {

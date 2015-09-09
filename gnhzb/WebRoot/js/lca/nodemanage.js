@@ -1,4 +1,4 @@
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 function showfunctiontable(){
 	var data= cims201.utils.getData(basepathh+'/function/function!getfunctiondatartee.action',{});
 	var dataTree = new Edo.data.DataTree(data);

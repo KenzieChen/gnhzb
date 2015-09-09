@@ -39,7 +39,7 @@ function createStructRule_check(){
 				
 				
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -150,8 +150,8 @@ function createStructRule_check(){
 			id:'structRule_check_window',
 			type:'box',
 //			title:'平台规则审批',
-			width:800,
-			height:400,
+			width:'100%',
+			height:'100%',
 //            titlebar: [
 //                {                  
 //                    cls:'e-titlebar-close',

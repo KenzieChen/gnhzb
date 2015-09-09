@@ -73,7 +73,8 @@ var ImageMenu = new Class({
 				}
 				if(i == 1) {
 					//navManager("resource");
-					window.parent.location.href = "http://localhost:8080/gnhzb/modManage.jsp";
+					//window.parent.location.href = "http://localhost:8080/gnhzb/modManage.jsp";
+					window.parent.location.href = "/gnhzb/modManage.jsp";
 				}
 			});
 			
@@ -123,6 +124,5 @@ var ImageMenu = new Class({
 
 ImageMenu.implement(new Options);
 ImageMenu.implement(new Events);
-
-
+localhost
 /*************************************************************/

@@ -1,7 +1,7 @@
 var qiche1Data = new Edo.data.DataTable().set('data', Qiche1);
 var positionData = new Edo.data.DataTree(Positions);
 var moduleid=null;
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 var moduledata= cims201.utils.getData(basepathh+'/lca/lcamodule!getModuletree.action',{componentid:null});
 Edo.build(
 		{

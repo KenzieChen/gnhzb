@@ -51,7 +51,7 @@ function createNeworder(){
 			if(data.isSuccess == '1'){
 				neworder_NewOrderChooseTabledata=data.result;
 			}
-			Edo.MessageBox.alert('提示',data.message);
+			//Edo.MessageBox.alert('提示',data.message);
 		}else{
 			
 			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");

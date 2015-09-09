@@ -33,8 +33,8 @@ function createHistoryBomView(){
 	        { header: 'BOM名称', enableSort: true, dataIndex: 'bomName', headerAlign: 'center',align: 'center'},
 	        { header: '使用订单', enableSort: true, dataIndex: 'orderName', headerAlign: 'center',align: 'center'},
 	        { header: '使用平台', enableSort: true, dataIndex: 'platName', headerAlign: 'center',align: 'center'},
-	        { header: '创建人', enableSort: true,dataIndex: 'bomCreator', headerAlign: 'center',align: 'center' },
-	        { header: '审核人', enableSort: true, dataIndex: 'bomChecker', headerAlign: 'center',align: 'center'},
+	        //{ header: '创建人', enableSort: true,dataIndex: 'bomCreator', headerAlign: 'center',align: 'center' },
+	        //{ header: '审核人', enableSort: true, dataIndex: 'bomChecker', headerAlign: 'center',align: 'center'},
 	        { header: '创建时间', enableSort: true, dataIndex: 'createTime', headerAlign: 'center',align: 'center'},
 	        { header: 'BOM状态', enableSort: true, dataIndex: 'bomStatus', headerAlign: 'center',align: 'center'}
 	    ]

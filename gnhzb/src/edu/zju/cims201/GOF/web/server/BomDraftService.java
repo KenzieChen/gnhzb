@@ -49,11 +49,11 @@ public class BomDraftService {
 		
 		DataHandler fileZip =classificationTreeService.getFileZip(treeNodes);
 		try{
-			 String wsdlUrl= "http://localhost:8080/gnhzb/services/moduleService?wsdl";
-             String nameSpaceUri= "http://localhost:8080/gnhzb/services/moduleService";
+			 //String wsdlUrl= "http://localhost:8080/gnhzb/services/moduleService?wsdl";
+            // String nameSpaceUri= "http://localhost:8080/gnhzb/services/moduleService";
             	//马步青
-			 	//String wsdlUrl= "http://10.11.112.74:8080/gdksp/services/moduleService?wsdl";
-			 	//String nameSpaceUri= "http://10.11.112.74:8080/gdksp/services/moduleService";  
+			 	String wsdlUrl= "http://10.15.43.43:8080/gdksp/services/moduleService?wsdl";
+			 	String nameSpaceUri= "http://10.15.43.43:8080/gdksp/services/moduleService";  
           //屈鹏飞
 		 	//String wsdlUrl= "http://172.22.156.3:8080/gdksp/services/moduleService?wsdl";
 		 	// nameSpaceUri= "http://172.22.156.3:8080/gdksp/services/moduleService";
@@ -115,8 +115,8 @@ public class BomDraftService {
 			//String wsdlUrl= "http://localhost:8080/gnhzb/services/moduleService?wsdl";
 			//String nameSpaceUri= "http://localhost:8080/gnhzb/services/moduleService";
            	//马步青
-			String wsdlUrl= "http://10.11.112.74:8080/gdksp/services/moduleService?wsdl";
-			String nameSpaceUri= "http://10.11.112.74:8080/gdksp/services/moduleService";  
+			String wsdlUrl= "http://10.15.43.43:8080/gdksp/services/moduleService?wsdl";
+			String nameSpaceUri= "http://10.15.43.43:8080/gdksp/services/moduleService";  
 			//屈鹏飞
 		 	//String wsdlUrl= "http://172.22.156.3:8080/gdksp/services/moduleService?wsdl";
 		 	//String nameSpaceUri= "http://172.22.156.3:8080/gdksp/services/moduleService";
@@ -180,8 +180,8 @@ public class BomDraftService {
 			//String wsdlUrl= "http://localhost:8080/gnhzb/services/moduleService?wsdl";
 			//String nameSpaceUri= "http://localhost:8080/gnhzb/services/moduleService";
            	//马步青
-			String wsdlUrl= "http://10.11.112.74:8080/gdksp/services/moduleService?wsdl";
-			String nameSpaceUri= "http://10.11.112.74:8080/gdksp/services/moduleService";  
+			String wsdlUrl= "http://10.15.43.43:8080/gdksp/services/moduleService?wsdl";
+			String nameSpaceUri= "http://10.15.43.43:8080/gdksp/services/moduleService";  
 			//屈鹏飞
 		 	//String wsdlUrl= "http://172.22.156.3:8080/gdksp/services/moduleService?wsdl";
 		 	//String nameSpaceUri= "http://172.22.156.3:8080/gdksp/services/moduleService";

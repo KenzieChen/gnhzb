@@ -20,7 +20,7 @@ String taskid=request.getParameter("taskid");
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	 <link href="<%=basePath%>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet"
+	 <link href="<%=basePath%>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet"
 			type="text/css" />
 		<link href="<%=basePath%>css/icon.css" rel="stylesheet"
 			type="text/css" />
@@ -34,7 +34,7 @@ String taskid=request.getParameter("taskid");
   		
   	</script>
   </body>
-		<script src="<%=basePath%>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
+		<script src="<%=basePath%>css/liuchang/edo_orange_theme/edo.js" type="text/javascript"></script>
 		<script src="<%=basePath %>js/cims201.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/utils.js" type="text/javascript"></script>
 	    <!-- 知识搜索 -->
@@ -43,6 +43,9 @@ String taskid=request.getParameter("taskid");
 	    <script src="<%=basePath %>js/knowledge/knowledge-list-fulltext.js" type="text/javascript"></script>
 	    <script src="<%=basePath %>js/systemevent.js" type="text/javascript"></script>
 	    <script src="<%=basePath %>js/getComponentByIndexTask.js" type="text/javascript"></script>
+<!-- 组件样式  陈谦庄-->
+<link href="<%=basePath %>js/edo/res/css/edo-ide-index.css" rel="stylesheet"type="text/css" />	
+<link href="<%=basePath %>css/modManage.css" rel="stylesheet"type="text/css" />		
 		<!-- 编码管理系统 陈谦庄 -->
 <script src="<%=basePath%>js/CodeClass/codeclassdefi.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/CodeClass/codeclassdefi_check.js" type="text/javascript"></script>
@@ -79,12 +82,16 @@ String taskid=request.getParameter("taskid");
 <script src="<%=basePath%>js/SMLManage/SMLParamPool.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLPoolManage_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/SMLManage/SMLPoolManage.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/SMLManage/VariantDesignBuild.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/SMLManage/VariantDesignBuild_check.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/SMLManage/VariantDesign.js" type="text/javascript"></script>
 
 <!-- 配置需求管理 陈谦庄 -->
 <script src="<%=basePath%>js/ConfigDemandManage/checkorder.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/demandmanage.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/neworder.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/neworder_check.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDemandManage/checkorder.js" type="text/javascript"></script>
 
 <script src="<%=basePath%>js/ConfigDemandManage/newtemplate.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDemandManage/ordermanage.js" type="text/javascript"></script>
@@ -100,10 +107,11 @@ String taskid=request.getParameter("taskid");
 <script src="<%=basePath%>js/ConfigDesign/platform_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platform.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platform_check.js" type="text/javascript"></script>
-
+<script src="<%=basePath%>js/ConfigDesign/checkplatform.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platformStruct_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platformStruct.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/platformStruct_check.js" type="text/javascript"></script>
+<script src="<%=basePath%>js/ConfigDesign/BomCheck.js" type="text/javascript"></script>
 
 <script src="<%=basePath%>js/ConfigDesign/structRule_view.js" type="text/javascript"></script>
 <script src="<%=basePath%>js/ConfigDesign/structRule.js" type="text/javascript"></script>

@@ -4,7 +4,7 @@
 <link href="<%= request.getContextPath() %>/scripts/frontpage/imageMenu.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/scripts/frontpage/mootools.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/scripts/frontpage/imageMenu.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/scripts/frontpage/imageMenu.js"></script> 
 <div align="center">
 <table  border="0" cellspacing="0" cellpadding="0" align="center">   <!-- width="100%" -->
              
@@ -30,3 +30,4 @@
 	</tr>
 </table>
 </div>
+ 

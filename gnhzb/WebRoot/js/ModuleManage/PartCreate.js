@@ -320,5 +320,4 @@ function createPartCreate(){
 	this.getCreatePartPanel =function(){
 		return createPartPanel;
 	};
-	partCreateTask(3041);
 }

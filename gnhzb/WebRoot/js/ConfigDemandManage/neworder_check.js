@@ -32,7 +32,7 @@ function createNewOrder_check(){
 			if(data.isSuccess == '1'){
 				newOrderTb_check.set("data",data.result);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -106,8 +106,8 @@ function createNewOrder_check(){
 			id:'newOrder_check_window',
 			type:'box',
 //			title:'配置需求录入审批；<span style="color:red;">双击配置需求可查看详细信息</span>',
-			height:'250',
-			width:'900',
+			height:'100%',
+			width:'100%',
 			padding:[0,0,0,0],
 //			titlebar:[
 //	            {
@@ -117,8 +117,18 @@ function createNewOrder_check(){
 //	                }
 //	            }
 //	        ],
-	        layout:'horizontal',
-	        children:[Table]
+	        layout:'vertical',
+	        children:[
+	        {
+		    	 type: 'group',
+     		    width: '100%',
+				    layout: 'horizontal',
+				    cls: 'e-toolbar',
+				    children: [
+				        {type: 'label', id:'newOrder_check_titlebar',text:'配置需求录入审批；<span style="color:red;">双击配置需求可查看详细信息</span>'}
+				    ]
+		    }
+	        ,Table]
 		})
 	}
 	

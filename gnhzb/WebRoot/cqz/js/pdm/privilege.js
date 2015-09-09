@@ -1,5 +1,6 @@
 var privilege={};
-var basepathh='http://localhost:8080/gnhzb';
+//var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 var addnewprivilege=new Array();
 var removeprivilege=new Array();
 var prividataTable = new Edo.data.DataTree()
@@ -113,21 +114,29 @@ Edo.build({
 	        verticalGap:'0',
 			padding:[0,0,0,0],
 	        children:[
-                {
-	        	type: 'button',
-	        	text: '删除',
-	        	onclick: function(e){
-	        		var r = ownrole.getSelecteds();
-					var r2=privi.getSelected();
-					if(r2&&r.length>0){
-						var data= cims201.utils.getData(basepathh+'/department/department!deletePrivilegeOperationRoles.action',{id:r2.id,rolearray:r});
-						/*for(var i=0;i<r.length;i++){
-						ownrole.data.remove(r[i]);
-						}*/
-						new priviSelect();
-					}else{
-        				alert("请选择行");}}
-                },       	
+				{
+				    type: 'group',
+				    width: '100%',
+				    layout: 'horizontal',
+				    cls: 'e-toolbar',
+				    children: [
+				        {
+					    	type: 'button',
+					    	text: '删除',
+					    	onclick: function(e){
+					    		var r = ownrole.getSelecteds();
+								var r2=privi.getSelected();
+								if(r2&&r.length>0){
+									var data= cims201.utils.getData(basepathh+'/department/department!deletePrivilegeOperationRoles.action',{id:r2.id,rolearray:r});
+									/*for(var i=0;i<r.length;i++){
+									ownrole.data.remove(r[i]);
+									}*/
+									new priviSelect();
+								}else{
+									alert("请选择行");}}
+				        }
+				    ]
+				}, 
 	            {
 	        	id: 'ownrole',
 	        	type: 'table', 
@@ -160,29 +169,37 @@ Edo.build({
 	        height: '100%',
 	        verticalGap:'0',
 			padding:[0,0,0,0],
-	        children:[
+	        children:[     
 				{
-				type: 'button',
-				text: '添加',
-				onclick: function(e){
-					var r = unownrole.getSelecteds();
-					var r2=privi.getSelected();
-					alert(r2.id);
-
-					if(r2&&r.length>0){
-						var data= cims201.utils.getData(basepathh+'/department/department!addPrivilegeOperationRoles.action',{id:r2.id,rolearray:r});
-					/*	for(var i=0;i<r.length;i++){
-							 var r3=r[i];
-							 r3.num=ownrole.data.length+1
-							ownrole.data.insert(ownrole.data.length,r3);
-							};
-						for(var i=0;i<r.length;i++){
-							unownrole.data.remove(r[i]);
-							}*/
-						new priviSelect();
-					}else{
-        				alert("请选择行");}}
-				},       	
+				    type: 'group',
+				    width: '100%',
+				    layout: 'horizontal',
+				    cls: 'e-toolbar',
+				    children: [
+				        {
+							type: 'button',
+							text: '添加',
+							onclick: function(e){
+								var r = unownrole.getSelecteds();
+								var r2=privi.getSelected();
+								alert(r2.id);
+				
+								if(r2&&r.length>0){
+									var data= cims201.utils.getData(basepathh+'/department/department!addPrivilegeOperationRoles.action',{id:r2.id,rolearray:r});
+								/*	for(var i=0;i<r.length;i++){
+										 var r3=r[i];
+										 r3.num=ownrole.data.length+1
+										ownrole.data.insert(ownrole.data.length,r3);
+										};
+									for(var i=0;i<r.length;i++){
+										unownrole.data.remove(r[i]);
+										}*/
+									new priviSelect();
+								}else{
+				    				alert("请选择行");}}
+						}
+					]
+				},      	
 			    {
 				id: 'unownrole',
 				type: 'table', 

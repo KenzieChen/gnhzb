@@ -326,6 +326,9 @@ function openNewTab(r){
   mainTabBar.set('selectedItem', c);
     
 };*/
+function openNewPage(url){
+	window.open(url);
+}
 Edo.build(
 		{
 			id:'main',
@@ -334,24 +337,32 @@ Edo.build(
 			height: '100%',
 			layout: 'vertical',
 			render: document.body,	
-			style:'background:#B5E3E0',
+			verticalGap:0,
+			//style:'background:#B5E3E0',
 			padding:0,
 			children:[
                       //顶栏描述欢迎您
 			          {
-			        	  type: 'ct',
-			        	  width: '100%',
-			        	  height: '40', 
-			        	  layout: 'horizontal',			        	  
+			        	  type: 'box',headerHeight:32,border:[0,0,0,0],padding: [0,0,0,0],width: '100%',height: '76', layout: 'horizontal',titleIcon:'',
+			              bodyCls: 'topbar_bg_mod_progress',			        	  
 			        	  children:[
+			        	             {
+									    type: 	'label',width: 	'100%', height: '100%',
+									    //style:	'font-size:20px;padding:5px;padding-top:8px;font-family:微软雅黑, 宋体, Verdana;font-weight:bold; ',    
+									    text: '<div class="topbar_bg_mod_progress"></div>'
+					                },
+/*					                {
+					                	type: 'label', height:76, style: 'font-size:13px;padding-left:2px; padding-right:2px;padding-top:25px;font-weight:bold;', 
+					                	text: '欢迎您，陈谦庄!'
+					                },*/
+			        	            
 			        	            {
-			        	              type:   'label',width:'100%',height: '100%',
-			      		              style:  'font-size:20px;padding:5px;padding-top:8px;font-family:微软雅黑, 宋体, Verdana;font-weight:bold; ',
-			      		             text: '产品模块化设计平台 '
-			        	            },
-			        	            { 
-			        	           type: 'label', text: '您好, admin <a href="#" style="color:black;text-decoration:none;">退出</a>'
-			        	            }
+			    	                	type:'label',height:76,style:'padding-left:2px;pading-right:2px;padding-top:5px;',
+			    	                	text:'<a href=javascript:openNewPage("modManage.jsp")><div class="topbar_icon">&nbsp;<img style="padding-left:5;" width=48 height=48 src=css/liuchang/images/topbarIcons/design.png><br>模块化设计</div></a>'
+			    	                },
+			        	            {
+			    	                    type: 'label', height:76, style: 'padding-left:2px; padding-right:2px;padding-top:5px;', text: '<a href="#"><div class="topbar_icon">&nbsp;<image width=48 height=48 src="css/images/exit.png"><br>&nbsp;&nbsp;&nbsp;退出&nbsp;</div></a>'
+			    	                }
 			        	            ]
 			          },
 			         
@@ -368,10 +379,10 @@ Edo.build(
 			                        	id:'leftPanel',
 			                        	type: 'panel',
 			                            title: '<div class=panel_nav_font_pdm>　　　　导航列表</div>',
-			                            width: '260',
+			                            width: '200',
 			                            height: '100%',
-			                            verticalGap:1,
-			        				    padding:[0,0,0,0],
+			                            verticalGap:2,
+			        				    padding:[0,0,0,0],border:[0,0,0,0],
 			                            collapseProperty: 'width',
 			                            enableCollapse: true,
 			                            splitRegion: 'west',
@@ -391,7 +402,7 @@ Edo.build(
 			                                    	    title: '<div class=panel_header_font_pdm>个人信息管理</div>',
 			                                    	    titleIcon:'mytitlebar',
 				  			                            width: '100%',
-				  			                            height: 190,
+				  			                            height: 200,headerHeight:32,border:[0,0,0,0],
 				  			                            enableCollapse: true,
 				  			                            onclick: onPanelClick,  
 				  			                            expanded:true,
@@ -442,7 +453,7 @@ Edo.build(
 							                                    	    title: '<div class=panel_header_font_pdm>特定模型管理</div>',
 							                                    	    titleIcon:'mytitlebar',
 								  			                            width: '100%',
-								  			                            height: 160,
+								  			                            height: 170,headerHeight:32,border:[0,0,0,0],
 								  			                            enableCollapse: true,
 								  			                            onclick: onPanelClick,  
 								  			                            expanded:false,
@@ -484,10 +495,10 @@ Edo.build(
 									                                       },
 									                                       {			         	                                    	 	                                    	
 									                                    	    type: 'panel',
-									                                    	    title: '<div class=panel_header_font_pdm>项目管理</div>',
+									                                    	    title: '<div class=panel_header_font_pdm>过程执行管理</div>',
 									                                    	    titleIcon:'mytitlebar',
 										  			                            width: '100%',
-										  			                            height: 100,
+										  			                            height: 110,headerHeight:32,border:[0,0,0,0],
 										  			                            enableCollapse: true,
 										  			                            onclick: onPanelClick,  
 										  			                            expanded:false,
@@ -512,7 +523,7 @@ Edo.build(
 														                                                    	//return '<a href="javascript:mainModule.load(\"'+r.url+'\")">'+r.name+'</a>';
 														                                                        return '<a class=navurl>'+r.name+'</a>';	}
 														                                                }],
-														                                    data:[{id: 'projectbuilderCT', url: 'module8.htm', name: '项目创建'},
+														                                    data:[{id: 'projectbuilderCT', url: 'module8.htm', name: '执行过程创建'},
 												                                    	             {id: 'projectmanage', url: 'module8.htm', name: '任务分配'},
 												                                    	           ],
 												                                    	             onselectionchange: function(e){  
@@ -527,7 +538,8 @@ Edo.build(
 										  			                                      ]			                              			                                    
 											                                       },
 											                                       {
-											                                    	   type: 'panel',
+											                                    	   type: 'panel',headerHeight:32,border:[0,0,0,0],
+											                                    	   
 											                                    	    title: '<div class=panel_header_font_pdm>知识推送</div>',
 											                                    	    titleIcon:'mytitlebar',
 												  			                            width: '100%',

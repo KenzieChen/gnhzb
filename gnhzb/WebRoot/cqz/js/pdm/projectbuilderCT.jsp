@@ -40,12 +40,12 @@ String path = request.getContextPath();
   	</script>
      	<link rel="stylesheet" type="text/css"
 			href="<%=basePath%>css/welcome.css">
-		<link href="<%=basePath%>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet"
+		<link href="<%=basePath%>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet"
 			type="text/css" />
 		<link href="<%=basePath%>css/icon.css" rel="stylesheet"
 			type="text/css" />
 
-		<script src="<%=basePath%>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
+		<script src="<%=basePath%>css/liuchang/edo_orange_theme/edo.js" type="text/javascript"></script>
 		<script src="<%=basePath %>js/cims201.js" type="text/javascript"></script>
 		<script src="<%=basePath%>js/utils.js" type="text/javascript"></script>	
 		<%-- <script src="<%=basePath%>js/lca/moduledefine.js" type="text/javascript"></script> --%>
@@ -61,7 +61,8 @@ String path = request.getContextPath();
 	
 	<script type="text/javascript">
 	//传递模型对象到iframe aa,即构建页面中
-	var basepathh='http://localhost:8080/gnhzb';
+	//var basepathh='http://localhost:8080/gnhzb';
+	var basepathh='/gnhzb';
 	function delivermoduleobject(){
 		aa.initmodule(moduleobj);
 	

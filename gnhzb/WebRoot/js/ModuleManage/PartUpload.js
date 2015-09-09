@@ -358,10 +358,10 @@ function createPartUpload(){
 			        	  id:'PartUpload_UploadPartPic',
 			        	  width:'100%',
 			              swfUploadConfig: {              
-			                  upload_url: 'partdraft/upload-part-img!uploadPartImg.action', 
-			                  flash_url : 'js/swfupload/swfupload.swf',
-			                  flash9_url : "js/swfupload/swfupload_fp9.swf",
-			                  button_image_url : 'js/swfupload/XPButtonNoText_61x22.png',     
+			                  upload_url: '/gnhzb/partdraft/upload-part-img!uploadPartImg.action', 
+			                  flash_url : '/gnhzb/js/swfupload/swfupload.swf',
+			                  flash9_url : "/gnhzb/js/swfupload/swfupload_fp9.swf",
+			                  button_image_url : '/gnhzb/js/swfupload/XPButtonNoText_61x22.png',     
 			                  button_text : '<span class="browseButton">浏&nbsp;览</span>',       
 			                  button_text_style : '.browseButton {text-align: center;font-weight: bold; font-size: 12pt;}', 
 			                  file_types: '*.jpg;*.bmp;*.png,;*.gif',                       
@@ -472,10 +472,10 @@ function createPartUpload(){
 			        	  id:'PartUpload_UploadPartModel',
 			        	  width:'200',
 			              swfUploadConfig: {              
-			                  upload_url: 'partdraft/upload-part-model!uploadPartModel.action', 
-			                  flash_url : 'js/swfupload/swfupload.swf',
-			                  flash9_url : "js/swfupload/swfupload_fp9.swf",
-			                  button_image_url : 'js/swfupload/XPButtonNoText_61x22.png',     
+			                  upload_url: '/gnhzb/partdraft/upload-part-model!uploadPartModel.action', 
+			                  flash_url : '/gnhzb/js/swfupload/swfupload.swf',
+			                  flash9_url : "/gnhzb/js/swfupload/swfupload_fp9.swf",
+			                  button_image_url : '/gnhzb/js/swfupload/XPButtonNoText_61x22.png',     
 			                  button_text : '<span class="browseButton">浏&nbsp;览</span>',       
 			                  button_text_style : '.browseButton {text-align: center;font-weight: bold; font-size: 12pt;}', 
 			                  file_types: '*',                       
@@ -584,10 +584,10 @@ function createPartUpload(){
 			        	  id:'PartUpload_UploadPartSelfDefiDoc',
 			        	  width:'200',
 			              swfUploadConfig: {              
-			                  upload_url: 'partdraft/upload-part-self!uploadPartSelf.action', 
-			                  flash_url : 'js/swfupload/swfupload.swf',
-			                  flash9_url : "js/swfupload/swfupload_fp9.swf",
-			                  button_image_url : 'js/swfupload/XPButtonNoText_61x22.png',     
+			                  upload_url: '/gnhzb/partdraft/upload-part-self!uploadPartSelf.action', 
+			                  flash_url : '/gnhzb/js/swfupload/swfupload.swf',
+			                  flash9_url : "/gnhzb/js/swfupload/swfupload_fp9.swf",
+			                  button_image_url : '/gnhzb/js/swfupload/XPButtonNoText_61x22.png',     
 			                  button_text : '<span class="browseButton">浏&nbsp;览</span>',       
 			                  button_text_style : '.browseButton {text-align: center;font-weight: bold; font-size: 12pt;}', 
 			                  file_types: '*',                       
@@ -683,5 +683,4 @@ function createPartUpload(){
 	this.getUploadPanel =function(){
 		return uploadPanel;
 	};
-	partUploadTask(3041);
 }

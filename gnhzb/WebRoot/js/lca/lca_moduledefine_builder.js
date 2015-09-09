@@ -1,4 +1,4 @@
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 function lcaProcessDefine(cell,graph){
 	var box=Edo.create(
 			{type: 'box',width: '100%',height:'70%',border: [0,0,0,0],padding: [30,0,0,0],layout: 'vertical',

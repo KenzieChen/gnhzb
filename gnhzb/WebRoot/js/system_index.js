@@ -341,7 +341,7 @@ function createSystemIndex(){
 		layout: 'horizontal',
 		children: [
 	        //leftPanel_index	, middlePanel_index,rightPanel_index
-			{type: 'module', width: '100%', height: '100%',style: "border: 0;", src: 'http://localhost:8080/gnhzb/login_new.jsp'}
+			{type: 'module', width: '100%', height: '100%',style: "border: [0,0,0,0];padding:[0,0,0,0]; background-color: #efdacd;", src: '/gnhzb/mod_desc.jsp'}
 		]
 	});
 	
@@ -358,7 +358,6 @@ function createSystemIndex(){
 		layout: 'horizontal',
 		children: [
 	        leftPanel_index	, middlePanel_index,rightPanel_index
-			//{type: 'module', width: '100%', height: '100%',style: "border: 0;", src: 'http://localhost:8080/gnhzb/login_new.jsp'}
 		]
 	});
 	

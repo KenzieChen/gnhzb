@@ -145,7 +145,12 @@ public class SmlTableFieldServiceImpl implements SmlTableFieldService {
 		StringBuffer sb = new StringBuffer("[");
 		for(int i =0;i<list.size();i++){
 			Map map =(Map)list.get(i); 
-			sb.append("{'id':'"+map.get("ID")+"','partname':'"+map.get("PART_NAME")+"','partnumber':'"+map.get("PART_NUMBER")+"','partId':'"+map.get("PART_ID")+"',");
+			//读出来有换行符??
+			String PART_NAME = (String)map.get("PART_NAME");
+			PART_NAME = PART_NAME.endsWith("\r\n")?PART_NAME.substring(0, PART_NAME.lastIndexOf("\r\n")):PART_NAME;
+			String PART_NUMBER = (String)map.get("PART_NUMBER");
+			PART_NUMBER = PART_NUMBER.endsWith("\r\n")?PART_NUMBER.substring(0, PART_NUMBER.lastIndexOf("\r\n")):PART_NUMBER;
+			sb.append("{'id':'"+map.get("ID")+"','partname':'"+PART_NAME+"','partnumber':'"+PART_NUMBER+"','partId':'"+map.get("PART_ID")+"',");
 			 for(int j=0;j<stf.size();j++){
 					if(stf.get(j).getTableHead().equals("partname") ||stf.get(j).getTableHead().equals("partnumber")||stf.get(j).getTableHead().equals("partname")){
 						continue;

@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	</body>
 </html>
-	<link href="<%=basePath %>css/liuchang/edo_green_theme/res/css/edo-all.css" rel="stylesheet"type="text/css" />
+	<link href="<%=basePath %>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet"type="text/css" />
 	<!-- 各种图片样式by JCCBZ -->
 	<link href="<%=basePath %>js/edo/res/css/edo-ide-index.css" rel="stylesheet"type="text/css" />	
 
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath %>css/cims201.css" rel="stylesheet"
 			type="text/css" />
 	<script src="<%=basePath %>js/knowledge/keep/keeputils.js" type="text/javascript"></script>
-	<script src="<%=basePath %>css/liuchang/edo_green_theme/edo.js" type="text/javascript"></script>
+	<script src="<%=basePath %>css/liuchang/edo_orange_theme/edo.js" type="text/javascript"></script>
 	<script src="<%=basePath %>js/thirdlib/ckeditor/ckeditor.js" type="text/javascript"></script>
 	<script src="<%=basePath %>js/commontools/boxText.js" type="text/javascript"></script>
 	<script src="<%=basePath %>js/commontools/Window.js" type="text/javascript"></script>

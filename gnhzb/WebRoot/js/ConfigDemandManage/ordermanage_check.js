@@ -29,7 +29,7 @@ function createOrdermanage_check(){
 			if(data.isSuccess == '1'){
 				ordermanageTb_check.set("data",data.result);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -96,8 +96,8 @@ function createOrdermanage_check(){
 			id:'ordermanage_check_window',
 			type:'box',
 //			title:'配置需求审批',
-			height:'250',
-			width:'900',
+			height:'100%',
+			width:'100%',
 			padding:[0,0,0,0],
 //			titlebar:[
 //	            {

@@ -5,7 +5,7 @@ function createBomConfig(){
 		return data;
 	}
 	function bomConfig_platformTableTask(platformId){
-		BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatformById.action',{id:platformId}));
+		BomConfig_platformTable.set('data',cims201.utils.getData('platform/platform-manage!getFinishedPlatformById.action',{platId:platformId}));
 	}
 	var BomConfig_platformTabledata=null;
 	var BomConfig_orderTabledata=null;
@@ -30,15 +30,27 @@ function createBomConfig(){
 		var isexist2=false;
 		for(var i=0;i<inputparam.length;i++){
 			if(inputparam[i].name == 'platformmanageid'){
-				isexist1=true;
-				platformmanageid=inputparam[i].value;
+				if(inputparam[i].value=='' ||inputparam[i].value=='null'||inputparam[i].value==null){
+					isexist1=false;
+				}else{
+					isexist1=true;
+					platformmanageid=inputparam[i].value;
+					
+				}
 				break;
 			}
 		}
 		for(var i=0;i<inputparam.length;i++){
 			if(inputparam[i].name == 'ordermanageid'){
-				isexist2=true;
-				ordermanageid=inputparam[i].value;
+				if(inputparam[i].value=='' ||inputparam[i].value=='null'||inputparam[i].value==null){
+					
+					isexist2=false;
+				}else{
+					isexist2=true;
+					ordermanageid=inputparam[i].value;
+					
+				}
+				
 				break;
 			}
 		}
@@ -48,18 +60,18 @@ function createBomConfig(){
 			if(data.isSuccess == '1'){
 				BomConfig_platformTabledata=data.result;
 			}
-			Edo.MessageBox.alert(data.message);
+			//Edo.MessageBox.alert(data.message);
 		}
 		if(isexist2){
 			var data = cims201.utils.getData('order/order-manage!getOrder4ConfiById.action',{orderId:ordermanageid});
 			if(data.isSuccess == '1'){
 				BomConfig_orderTabledata=data.result;
 			}
-			Edo.MessageBox.alert(data.message);
+			//Edo.MessageBox.alert(data.message);
 		}
-		if(!isexist1 || !isexist2){
+/*		if(!isexist1 || !isexist2){
 			Edo.MessageBox.alert("查询前置任务输出结果出错，请联系管理员！");
-		}
+		}*/
 	}
 	
 	var orderInfo =Edo.create({          
@@ -95,7 +107,7 @@ function createBomConfig(){
 			        			{type:'button',text:'加载配置项',onclick:function(e){
 			        				var win = showOrderWin();
 			        				if(BomConfig_orderTabledata == null){
-			        					BomConfig_orderTabledata=cims201.utils.getData('order/order-manage!getOrder4ConfiById.action',{});
+			        					BomConfig_orderTabledata=cims201.utils.getData('order/order-manage!getOrder4Confi.action',{});
 			        				}
 		        					BomConfig_orderTable.set('data',BomConfig_orderTabledata);
 			        				
@@ -129,7 +141,7 @@ function createBomConfig(){
 	var platForm = Edo.create({	
 			id:'BomConfig_platStructPanel',
 	        type: 'panel',
-	        title:'产品主结构',
+	        title:'产品平台',
 	        width: '100%',
 	        height: '100%',
 	        padding:[0,0,0,0],
@@ -139,7 +151,7 @@ function createBomConfig(){
 	        	{
 	        		type:'group',width: '100%',cls: 'e-toolbar',layout:'horizontal',horizontalGap:0,
 	        		children:[
-	        			{type:'button',text:'加载产品主结构',onclick:function(e){
+	        			{type:'button',text:'加载产品平台',onclick:function(e){
 	        				if(BomConfig_orderDetailPanel.title=='订单信息'){
 	        					Edo.MessageBox.alert('提示','<span style="color:red">没有加载订单项！</span>');
 	        					return;
@@ -317,10 +329,10 @@ function createBomConfig(){
 					    type: 'formitem',padding:[20,0,10,0],labelWidth :'70',label: 'BOM编号:',
 					    children:[{type: 'text',width:'195',name: 'bomName',valid:noEmpty}]
 					},
-					{
+/*					{
 					    type: 'formitem',padding:[10,0,10,0],labelWidth :'70',label: '审核人员:',
 					    children:[{type: 'combo',width:'195',name: 'checkerId',displayField:'checkerName',valueField:'checkerId',readOnly:true}]
-					},
+					},*/
 					{
 					    type: 'formitem',padding:[10,0,10,0],labelWidth :'70',label: '备注:',
 					    children:[{type: 'textarea', height:'100',width:'195',name: 'info',valid:noEmpty}]
@@ -470,7 +482,7 @@ function createBomConfig(){
 	                {
 	                    cls: 'e-titlebar-close',
 	                    onclick: function(e){
-	                    this.parent.owner.destroy();
+	                    	this.parent.owner.destroy();
 	                    }
 	                }
 	            ],
@@ -568,9 +580,6 @@ function createBomConfig(){
 	                    	    	  
 	                    	    	  BomConfig_platStructPanel.set('title','使用：<span style="color:red">'+platName+'</span>平台进行选配');
 	                    	    	  BomConfig_platformWin.hide();
-	                    	    	  
-	                    	    	  
-	                    	    	  
 	                    	      }},
 	                    	      {type:'space',width:'10'},
 	                    	      {type:'button',text:'取消',onclick:function(e){
@@ -678,8 +687,31 @@ function createBomConfig(){
 										    		//显示结果BOM
 										    		BomConfig_bomResutlGridTree.set('data',cims201.utils.getData('bom/bom-temp!getBomTempByPlatIdAndOrderId.action',{platId:platId,orderId:orderId}));
 										    	}else if(text=="配置完成（不选）"){
+										    		
+										    		
+										    		 var platStructId = BomConfig_platStructTable.selected.id;
+					                            		//设置状态为已配置
+					                            		Edo.util.Ajax.request({
+														    url: "bom/module-config-status!moduleConfiged.action",
+														    type: 'post',
+														    params:{platStructId:platStructId,orderId:orderId},
+														    onSuccess: function(text){
+														    	if(text=="已配置"){
+														    		Edo.MessageBox.alert("提示","配置完成（不选）");
+								                            		BomConfig_configPartCountForm.destroy();
+								                            		//还要将产品树节点的table刷新
+								                            		BomConfig_platStructTable.set('data',cims201.utils.getData('platform/plat-struct-tree!getModulesByPlatId.action',{platId:platId,orderId:orderId}));
+														    	}
+														  
+														    },
+														    onFail: function(code){
+														        //code是网络交互错误码,如404,500之类
+														        Edo.MessageBox.alert("提示", "操作失败"+code);
+														    }
+														});
+										    		
 										    		//直接显示配置完成提示，不用配置数量，因为没有选择任何零件。
-										    		Edo.MessageBox.alert("提示",text);
+										    		//Edo.MessageBox.alert("提示",text);
 										    		//隐藏该窗口
 										    		BomConfig_configTableWin.destroy();
 										    		//显示结果BOM

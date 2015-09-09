@@ -17,6 +17,10 @@ public class Part {
 	private Date createTime;
 	private String partBigVersion;
 	private String partSmallVersion;
+	/**
+	 * 0 代表未分类
+	 * 1 代表已经分类
+	 */
 	private int isarranged;
 	private String description;
 	private String state;

@@ -417,5 +417,4 @@ function createPartInstanceRg(){
 	this.getRgPanel = function(){
 		return rgPanel;
 	};
-	partInstanceRgTask(3041);
 }

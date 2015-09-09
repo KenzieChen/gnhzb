@@ -1,4 +1,4 @@
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 function buildFunctionWin(graph,cell){
 	var tasktreeTable = new Edo.data.DataTree()
 		.set({

@@ -1,8 +1,57 @@
 function createBomCheck(){
-	//luweijiang
-	function bomCheckTask(bomId){
-		checkBom_CheckBomChooseTable.set('data',cims201.utils.getData('bom/bom!getBom2CheckById.action',{bomId:bomId}));  
+	var checkBom_CheckBomChooseTabledata=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
 	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			
+			if(inputparam[i].name == 'bomid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'bomcheckbomid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert('提示','对应的bom不存在');
+			return null;
+		}
+		return outputparam;
+	}
+	this.inittask=function(){
+		var bomid=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'bomid'){
+				isexist=true;
+				bomid=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data =cims201.utils.getData('bom/bom!getBom2CheckById.action',{bomId:bomid});
+			checkBom_CheckBomChooseTabledata=data;
+			//Edo.MessageBox.alert('提示',data.message);
+		}else{
+			
+			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
+		}
+	}
+	
 	var panel =Edo.create({
 		id:'checkBom_topPanel',
 		type:'panel',title:'<span style="color:red;">请先选择待审核的BOM</span>',width:'100%',height:'100%',
@@ -20,8 +69,11 @@ function createBomCheck(){
 			        	if(checkBom_bomChooseBtn.text=='选择BOM'){
 				        	 showBom2CheckWin();	
 				        	 //加载BOM的数据
-				        	 //checkBom_CheckBomChooseTable.set('data',cims201.utils.getData('bom/bom!getBom2Check.action'));
-				        	 bomCheckTask(1644);
+				        	 if(checkBom_CheckBomChooseTabledata != null){
+				        		 checkBom_CheckBomChooseTable.set('data',checkBom_CheckBomChooseTabledata);
+				        	 }else{
+					        	 checkBom_CheckBomChooseTable.set('data',cims201.utils.getData('bom/bom!getBom2Check.action'));
+				        	 }
 			        	}
 			        	if(checkBom_bomChooseBtn.text=='取消该BOM审核'){
 			        		
@@ -141,8 +193,8 @@ function createBomCheck(){
             			        { header: 'BOM名称', enableSort: true, dataIndex: 'bomName', headerAlign: 'center',align: 'center'},
             			        { header: '使用订单', enableSort: true, dataIndex: 'orderName', headerAlign: 'center',align: 'center'},
             			        { header: '使用平台', enableSort: true, dataIndex: 'platName', headerAlign: 'center',align: 'center'},
-            			        { header: '创建人', enableSort: true,dataIndex: 'bomCreator', headerAlign: 'center',align: 'center' },
-            			        { header: '审核人', enableSort: true, dataIndex: 'bomChecker', headerAlign: 'center',align: 'center'},
+            			        //{ header: '创建人', enableSort: true,dataIndex: 'bomCreator', headerAlign: 'center',align: 'center' },
+            			        //{ header: '审核人', enableSort: true, dataIndex: 'bomChecker', headerAlign: 'center',align: 'center'},
             			        { header: '创建时间', enableSort: true, dataIndex: 'createTime', headerAlign: 'center',align: 'center'},
             			        { header: 'BOM状态', enableSort: true, dataIndex: 'bomStatus', headerAlign: 'center',align: 'center'}
             			    ]

@@ -1,4 +1,5 @@
-var basepathh='http://localhost:8080/gnhzb';
+//var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 function getmytask(){
 var taskid;
 var myPager = Edo.create({

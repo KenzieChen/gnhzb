@@ -1,7 +1,58 @@
 function createCheckorder(){
+	var checkorder_CheckOrderChooseTabledata=null;
+	var inputparam=new Array();
+	var outputparam=new Array();
+	this.initinputparam=function(param){
+		inputparam=param;
+		return inputparam;
+	}
+	this.initresultparam=function(param){
+		outputparam=param;
+		return outputparam;
+		
+	}
+	this.submitResult=function(){
+		isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			
+			if(inputparam[i].name == 'ordermanageid'){
+				for(var j=0;j<outputparam.length;j++){
+					if(outputparam[j].name == 'checkorderordermanageid'){
+						outputparam[j].value=inputparam[i].value;
+						isexist=true;
+						break;
+					}
+				}
+				}
+				break;
+			}
+		if(!isexist){
+			Edo.MessageBox.alert('提示','对应的需求不存在');
+			return null;
+		}
+		return outputparam;
+	}
 	//luweijiang
-	function checkorderTask(orderManageId){
-		checkorder_CheckOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:orderManageId}));
+	this.inittask=function(){
+		var ordermanageid=null;
+		var isexist=false;
+		for(var i=0;i<inputparam.length;i++){
+			if(inputparam[i].name == 'ordermanageid'){
+				isexist=true;
+				ordermanageid=inputparam[i].value;
+				break;
+			}
+		}
+		if(isexist){
+			var data =cims201.utils.getData('order/order-manage!getAllOrederById.action',{id:ordermanageid});
+			if(data.isSuccess == '1'){
+				checkorder_CheckOrderChooseTabledata=data.result;
+			}
+			//Edo.MessageBox.alert('提示',data.message);
+		}else{
+			
+			Edo.MessageBox.alert('提示',"查询前置任务输出结果出错，请联系管理员！");
+		}
 	}
 	var panel =Edo.create({
 		id:'checkorder_topPanel',
@@ -20,9 +71,13 @@ function createCheckorder(){
 			        	if(checkorder_OrderChooseBtn.text=='选择配置需求'){
 				        	 showOrder2CheckWin();	
 				        	 
-				        	 checkorderTask(3121);
-				        	 //checkorder_CheckOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
-				        	
+				        	 //checkorderTask(3121);
+				        	 if(checkorder_CheckOrderChooseTabledata != null){
+				        		 checkorder_CheckOrderChooseTable.set('data',checkorder_CheckOrderChooseTabledata);
+				        	 }else{
+					        	 checkorder_CheckOrderChooseTable.set('data',cims201.utils.getData('order/order-manage!getAllOrder.action'));
+
+				        	 }
 				        	 checkorder_CheckOrderChooseTable.data.filter(function(o, i){
 				                if(o.statusName =='待审核') return true;
 				                else return false;

@@ -39,7 +39,7 @@ function createPlatformStruct_check(){
 				
 				
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
@@ -51,8 +51,8 @@ function createPlatformStruct_check(){
 			id:'platformStruct_check_window',
 			type:'box',
 //			title:'平台结构审批',
-			width:700,
-			height:300,
+			width:'100%',
+			height:'100%',
 //            titlebar: [
 //                {                  
 //                    cls:'e-titlebar-close',

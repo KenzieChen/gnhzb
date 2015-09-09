@@ -1,5 +1,5 @@
 //定义流程数组
-var basepathh = 'http://localhost:8080/gnhzb';
+var basepathh = '/gnhzb';
 var cellcollection = new Array();
 function getPDMmoduledefine(isdefined) {
 	var func = function(id) {
@@ -28,7 +28,7 @@ function savepdmmodule() {
 			});
 			var moduledata={};
 			var alllevelscopy=new Array();
-			alert(moduleid);
+			//alert(moduleid);
 			for ( var j = 0; j < alllevels.length; j++) {
 				var newlevel={};
 				var level = alllevels[j];
@@ -83,7 +83,8 @@ function savepdmmodule() {
 		return null;
 	}
 	if (data == null) {
-		alert('保存成功！');
+		//alert('保存成功！');
+		Edo.MessageBox.alert("提示","保存成功！");
 	}
 	cellcollection = new Array;
 }

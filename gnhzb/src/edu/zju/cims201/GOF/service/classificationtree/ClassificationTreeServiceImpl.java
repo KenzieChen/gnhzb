@@ -283,6 +283,10 @@ public class ClassificationTreeServiceImpl implements ClassificationTreeService{
 	public ClassificationTree getNode(Long id) {
 		// TODO Auto-generated method stub
 		ClassificationTree cTree =classificationTreeDao.findUniqueBy("id", id);
+		classificationTreeDao.getSession().evict(cTree);
+		cTree.setChildren(null);
+		cTree.setParent(null);
+		//cTree.setCodeClass(null);
 		return cTree;
 	}
 	/**

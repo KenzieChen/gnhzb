@@ -1,5 +1,6 @@
 var taskid;
-var basepathh='http://localhost:8080/gnhzb';
+//var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 var myPager = Edo.create({
 	id: 'paging',
 	type: 'pagingbar',
@@ -31,7 +32,7 @@ Edo.build({
         children:[
             {
 			type: 'group',
-		    width: 210,
+		    width: "100%",
 		    layout: 'horizontal',
 		    cls: 'e-toolbar',
 		    children: [
@@ -81,9 +82,10 @@ Edo.build({
 	            	}
 	            },
 	            {header:'任务名称',dataIndex: 'name', headerAlign: 'center',align: 'center',width: 250,height:80},
-	            {header:'创建时间',dataIndex: 'jobtime',headerAlign: 'center',align: 'center',width: 200,height:80,renderer: function(v, r, c, i, data, t){
+/*	            {header:'创建时间',dataIndex: 'jobtime',headerAlign: 'center',align: 'center',width: 200,height:80,renderer: function(v, r, c, i, data, t){
 	                return v;
-	        	}},
+	        	}},*/
+	            
 	            {header:'要求开始时间',dataIndex: 'starttime',headerAlign: 'center',align: 'center',width: 200,height:80,
 	            },
 	            {header:'要求完成时间',dataIndex: 'endtime', headerAlign: 'center',width: 200,height:80,align: 'center'},

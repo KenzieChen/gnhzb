@@ -1,5 +1,6 @@
 var department={};
-var basepathh='http://localhost:8080/gnhzb/';
+//var basepathh='http://localhost:8080/gnhzb/';
+var basepathh='/gnhzb/';
 //设置数据源
 var depdataTable = new Edo.data.DataTree()
 .set({

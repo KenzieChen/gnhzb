@@ -20,7 +20,7 @@
 </body>
 </html>
 
-<link href="<%=basePath%>js/edo/res/css/edo-all.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/liuchang/edo_orange_theme/res/css/edo-all.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/wenku.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/cims201.css" rel="stylesheet" type="text/css" />
 

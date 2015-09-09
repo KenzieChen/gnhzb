@@ -27,7 +27,13 @@ function createSMLModeling_check(){
 			var data = cims201.utils.getData('classificationtree/classification-tree!getClassStructById.action',{id:smlmodelingclassificationtreeid});
 			console.log(data);
 			if(data.isSuccess == '1'){
-				SMLModelingTree_check.set('data',data.result);;
+				for(var i=0;i<data.result.length;i++){
+					data.result[i].__viewicon=true;
+					data.result[i].expanded=false;
+					data.result[i].icon='e-tree-folder';
+				}
+				
+				SMLModelingTree_check.set('data',data.result);
 			}
 			Edo.MessageBox.alert("提示",data.message);
 		}else{
@@ -146,8 +152,8 @@ function createSMLModeling_check(){
 			id:'SMLModeling_check_window',
 			type:'box',
 //			title:'事物特性表建模审批',
-			height:'500',
-			width:'600',
+			height:'100%',
+			width:'100%',
 			padding:[0,0,0,0],
 //			titlebar:[
 //	            {

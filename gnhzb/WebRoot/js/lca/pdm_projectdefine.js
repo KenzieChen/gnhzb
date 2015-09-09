@@ -10,7 +10,7 @@ var projectobj={
 		Version:null,
 		createuserid:null
 		}
-var basepathh='http://localhost:8080/gnhzb';
+var basepathh='/gnhzb';
 var cell=null;
 var levelmodule=null;
 var currentmoduleid=null;

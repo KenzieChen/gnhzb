@@ -143,8 +143,13 @@ function createSMLModeling(){
 		var isexist=false;
 		for(var i=0;i<inputparam.length;i++){
 			if(inputparam[i].name == 'classificationtreeid'){
-				isexist=true;
-				classificationtreeid=inputparam[i].value;
+				if(classificationtreeid=inputparam[i].value == null){
+					isexist=false;
+				}else{
+					isexist=true;
+					classificationtreeid=inputparam[i].value;
+				}
+				
 				break;
 			}
 		}
@@ -156,10 +161,10 @@ function createSMLModeling(){
 			}else{
 				SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			SMLModelingClassNameCombo.set('data',cims201.utils.getData('classificationtree/classification-tree!getClassStruct.action'));
-			Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
+			//Edo.MessageBox.alert("提示","查询前置任务输出结果出错，请联系管理员！");
 		}
 	}
 	var smlModeling =Edo.create({

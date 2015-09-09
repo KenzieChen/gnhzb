@@ -5,7 +5,8 @@ var moduleobj = {
 	moduletype : null,
 	style : null
 }
-var basepathh = 'http://localhost:8080/gnhzb';
+//var basepathh = '/gnhzb';
+var basepathh = '/gnhzb';
 var cell = null;
 var levelmodule = null;
 var levelallmodules = null;

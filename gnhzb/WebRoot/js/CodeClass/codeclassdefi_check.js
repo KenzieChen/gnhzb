@@ -13,8 +13,8 @@ function createCodeClassDefi_check(){
 //	            }
 //	        ],
 	        padding:[0,0,0,0],
-	        height:'200',
-	        width:'600',
+	        height:'100%',
+	        width:'100%',
 	        children:[{
 			    id: 'codeclassdefiTb_check', type: 'table', width: '100%', height: '100%',autoColumns: true,
 			    padding:[0,0,0,0],
@@ -93,7 +93,7 @@ function createCodeClassDefi_check(){
 			if(data.isSuccess == '1'){
 				codeclassdefiTb_check.set('data',data.result);
 			}
-			Edo.MessageBox.alert("提示",data.message);
+			//Edo.MessageBox.alert("提示",data.message);
 		}else{
 			Edo.MessageBox.alert("提示","查询任务结果出错，请联系管理员！");
 		}
